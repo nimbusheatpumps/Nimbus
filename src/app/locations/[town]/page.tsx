@@ -2,10 +2,12 @@ import Breadcrumbs from '../../../../components/Breadcrumbs';
 import { getLiveGoogleReviews } from '../../../lib/live-google-reviews';
 import TrustBar from '../../../../components/TrustBar';
 
+export const dynamicParams = false;
+
 const towns = ['scunthorpe', 'grimsby', 'hull', 'brigg', 'barton-upon-humber', 'winterton', 'epworth', 'crowle', 'gainsborough', 'louth'];
 
 export async function generateStaticParams() {
-  return towns.map(town => ({ town }));
+  return towns.map(town => ({ town: town }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ town: string }> }) {
@@ -58,7 +60,7 @@ export default async function Page({ params }: { params: Promise<{ town: string 
     "@type": "Review",
     "author": {
       "@type": "Person",
-      "name": review.author_name
+      "name": review.authorName
     },
     "reviewRating": {
       "@type": "Rating",
@@ -105,7 +107,7 @@ export default async function Page({ params }: { params: Promise<{ town: string 
           "@type": "Review",
           "author": {
             "@type": "Person",
-            "name": review.author_name
+            "name": review.authorName
           },
           "reviewRating": {
             "@type": "Rating",

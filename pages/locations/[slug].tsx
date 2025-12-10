@@ -100,7 +100,7 @@ const LocationPage: React.FC<LocationPageProps> = ({ location, data }) => {
           "@type": "Review",
           "author": {
             "@type": "Person",
-            "name": review.author_name
+            "name": review.authorName
           },
           "reviewRating": {
             "@type": "Rating",

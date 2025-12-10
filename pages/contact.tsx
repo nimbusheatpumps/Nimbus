@@ -60,7 +60,7 @@ const ContactPage = ({ data }: ContactPageProps) => {
     "@type": "Review",
     "author": {
       "@type": "Person",
-      "name": review.author_name
+      "name": review.authorName
     },
     "reviewRating": {
       "@type": "Rating",

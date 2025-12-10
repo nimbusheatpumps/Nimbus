@@ -53,7 +53,7 @@ export default async function ReviewsPage() {
     "@type": "Review",
     "author": {
       "@type": "Person",
-      "name": review.author_name
+      "name": review.authorName
     },
     "reviewRating": {
       "@type": "Rating",
@@ -78,7 +78,7 @@ export default async function ReviewsPage() {
           {data.reviews.map((review: LiveReview, index: number) => (
             <Card key={index}>
               <CardHeader>
-                <CardTitle>{review.author_name}</CardTitle>
+                <CardTitle>{review.authorName}</CardTitle>
                 <div className="flex items-center">
                   {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
                   <span className="ml-2">{review.rating}/5</span>
@@ -87,7 +87,7 @@ export default async function ReviewsPage() {
               <CardContent>
                 <p>{review.text}</p>
                 <p className="text-sm text-gray-500 mt-2">
-                  {review.relative_time_description}
+                  {review.relativeTimeDescription}
                 </p>
               </CardContent>
             </Card>

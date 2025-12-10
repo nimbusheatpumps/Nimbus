@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 interface Review {
-  author_name: string;
+  authorName: string;
   rating: number;
   text: string;
   time: number;

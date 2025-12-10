@@ -4,18 +4,10 @@ import * as React from "react"
 import Autoplay from "embla-carousel-autoplay"
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 import { cn } from "@/lib/utils"
-import { getLiveGoogleReviews } from "../src/lib/live-google-reviews"
-
-interface Review {
-  author_name: string
-  rating: number
-  text: string
-  relative_time_description: string
-  profile_photo_url: string
-}
+import { getLiveGoogleReviews, LiveReview } from "../src/lib/live-google-reviews"
 
 export default function Testimonials() {
-  const [reviews, setReviews] = React.useState<Review[]>([])
+  const [reviews, setReviews] = React.useState<LiveReview[]>([])
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<string | null>(null)
 
@@ -72,12 +64,12 @@ export default function Testimonials() {
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <div className="flex items-center mb-4">
                   <img
-                    src={review.profile_photo_url}
-                    alt={review.author_name}
+                    src={review.authorPhotoUri}
+                    alt={review.authorName}
                     className="w-10 h-10 rounded-full mr-3"
                   />
                   <div>
-                    <h4 className="font-semibold">{review.author_name}</h4>
+                    <h4 className="font-semibold">{review.authorName}</h4>
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
                         <span
@@ -94,7 +86,7 @@ export default function Testimonials() {
                   </div>
                 </div>
                 <p className="text-gray-700 italic">"{review.text}"</p>
-                <p className="text-sm text-gray-500 mt-2">{review.relative_time_description}</p>
+                <p className="text-sm text-gray-500 mt-2">{review.relativeTimeDescription}</p>
               </div>
             </div>
           </CarouselItem>

@@ -1,9 +1,9 @@
 export interface LiveReview {
-  author_name: string;
+  authorName: string;
   rating: number;
   text: string;
-  relative_time_description: string;
-  profile_photo_url: string;
+  relativeTimeDescription: string;
+  authorPhotoUri: string;
 }
 
 export interface LiveGoogleReviews {
@@ -18,9 +18,14 @@ export async function getLiveGoogleReviews(): Promise<LiveGoogleReviews> {
     throw new Error('GOOGLE_PLACES_API_KEY not set');
   }
 
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=yk7F28G9VpVstANKx&fields=name,rating,user_ratings_total,reviews&key=${apiKey}`;
+  const url = `https://places.googleapis.com/v1/places/yk7F28G9VpVstANKx?key=${apiKey}&fields=reviews,rating,user_ratings_total`;
 
-  const res = await fetch(url, { next: { revalidate: 86400 } });
+  const res = await fetch(url, {
+    headers: {
+      'X-Goog-FieldMask': 'reviews,rating,userRatingsTotal'
+    },
+    next: { revalidate: 86400 }
+  });
 
   if (!res.ok) {
     throw new Error('Failed to fetch reviews');
@@ -28,23 +33,25 @@ export async function getLiveGoogleReviews(): Promise<LiveGoogleReviews> {
 
   const data = await res.json();
 
-  if (data.status !== 'OK') {
-    throw new Error(`API error: ${data.status}`);
+  if (!res.ok) {
+    throw new Error(`API error: ${res.status}`);
   }
 
-  const { rating, user_ratings_total, reviews } = data.result;
+  const { rating, userRatingsTotal, reviews } = data;
 
   const recentReviews: LiveReview[] = reviews.map((review: any) => ({
-    author_name: review.author_name,
+    authorName: review.author_name,
     rating: review.rating,
     text: review.text,
-    relative_time_description: review.relative_time_description,
-    profile_photo_url: review.profile_photo_url,
+    relativeTimeDescription: review.relative_time_description,
+    authorPhotoUri: review.profile_photo_url,
   }));
+
+  console.log(`Fetched ${reviews.length} reviews from Google`);
 
   return {
     rating,
-    totalReviews: user_ratings_total,
+    totalReviews: userRatingsTotal,
     reviews: recentReviews,
   };
 }

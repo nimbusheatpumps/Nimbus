@@ -9,12 +9,12 @@ interface Service {
 }
 
 const services: Service[] = [
-  { title: 'New Install', price: '£1,790 Gas Safe', description: 'Scunthorpe experts', location: 'Scunthorpe' },
+  { title: 'New Install', price: '£1,790 Gas Safe Registered – 966812', description: 'Scunthorpe experts', location: 'Scunthorpe' },
   { title: 'Replacement', price: '£1,500+', description: 'Scunthorpe experts', location: 'Scunthorpe' },
   { title: 'Repairs', price: '£99', description: 'Scunthorpe experts', location: 'Scunthorpe' },
   { title: 'Servicing', price: '£79', description: 'Scunthorpe experts', location: 'Scunthorpe' },
   { title: 'Heat Pump', price: '£4,799 grant', description: 'Scunthorpe experts', location: 'Scunthorpe' },
-  { title: 'New Install', price: '£1,790 Gas Safe', description: 'Scunthorpe experts', location: 'Grimsby' },
+  { title: 'New Install', price: '£1,790 Gas Safe Registered – 966812', description: 'Scunthorpe experts', location: 'Grimsby' },
 ];
 
 const schema = {

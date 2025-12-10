@@ -18,8 +18,8 @@ const locations: Record<string, LocationData> = {
   scunthorpe: {
     name: 'Scunthorpe',
     title: 'Gas Boiler Scunthorpe | £1,790 2025',
-    description: 'Affordable gas boiler installation in Scunthorpe from £1,790. Gas Safe registered engineers for reliable heating solutions.',
-    content: 'Get your gas boiler installed in Scunthorpe for just £1,790 in 2025. Professional services with Gas Safe certification.',
+    description: 'Affordable gas boiler installation in Scunthorpe from £1,790. Gas Safe Registered – 966812 engineers for reliable heating solutions.',
+    content: 'Get your gas boiler installed in Scunthorpe for just £1,790 in 2025. Professional services with Gas Safe Registered – 966812.',
     keywords: 'gas boiler Scunthorpe, boiler install Scunthorpe 2025, heating Scunthorpe',
     schema: {
       "@context": "https://schema.org",
@@ -41,8 +41,8 @@ const locations: Record<string, LocationData> = {
   grimsby: {
     name: 'Grimsby',
     title: 'Gas Boiler Grimsby | £1,790 2025',
-    description: 'Affordable gas boiler installation in Grimsby from £1,790. Gas Safe registered engineers for reliable heating solutions.',
-    content: 'Get your gas boiler installed in Grimsby for just £1,790 in 2025. Professional services with Gas Safe certification.',
+    description: 'Affordable gas boiler installation in Grimsby from £1,790. Gas Safe Registered – 966812 engineers for reliable heating solutions.',
+    content: 'Get your gas boiler installed in Grimsby for just £1,790 in 2025. Professional services with Gas Safe Registered – 966812.',
     keywords: 'gas boiler Grimsby, boiler install Grimsby 2025, heating Grimsby',
     schema: {
       "@context": "https://schema.org",
@@ -80,7 +80,7 @@ const LocationPage: React.FC<LocationPageProps> = ({ location, data }) => {
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "3 Crossbeck Road",
-          "addressLocality": location.name,
+          "addressLocality": "Scunthorpe",
           "addressRegion": "North Lincolnshire",
           "postalCode": "DN16 3HR",
           "addressCountry": "GB"
@@ -137,7 +137,7 @@ const LocationPage: React.FC<LocationPageProps> = ({ location, data }) => {
             </div>
             <div>
               <h3 className="font-medium">Are you Gas Safe registered in {location.name}?</h3>
-              <p>Yes, all our engineers are Gas Safe registered (966812) for your safety.</p>
+              <p>Yes, all our engineers are Gas Safe Registered – 966812 for your safety.</p>
             </div>
           </div>
           <div className="mb-6">
@@ -145,7 +145,7 @@ const LocationPage: React.FC<LocationPageProps> = ({ location, data }) => {
           </div>
           <div className="bg-green-50 p-4 rounded-lg flex items-center">
             <Image src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="Gas Safe registered heating engineer badge" width={64} height={64} className="w-16 h-16 mr-4" />
-            <p>Gas Safe Registered (966812) for E-E-A-T credibility and safety.</p>
+            <p>Gas Safe Registered – 966812 for E-E-A-T credibility and safety.</p>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ import { getLiveGoogleReviews, type LiveGoogleReviews } from '../src/lib/live-go
 const faqData = [
   {
     question: 'Why choose Nimbus for Scunthorpe?',
-    answer: 'As Gas Safe registered engineers (966812) with over 10 years experience in North Lincolnshire, we provide reliable boiler services and heat pump installations with fixed pricing and next-day availability. Our E-E-A-T credentials include certified technicians, local expertise, and customer testimonials.',
+    answer: 'As Gas Safe Registered – 966812 engineers with over 10 years experience in North Lincolnshire, we provide reliable boiler services and heat pump installations with fixed pricing and next-day availability. Our E-E-A-T credentials include certified technicians, local expertise, and customer testimonials.',
   },
 ];
 
@@ -19,7 +19,7 @@ const aggregateOfferSchema = {
   "@context": "https://schema.org",
   "@type": "AggregateOffer",
   "name": "Boiler Services Scunthorpe",
-  "description": "Gas Safe (966812) boiler installation from £1,790, repairs £99, heat pump grants available",
+  "description": "Gas Safe Registered – 966812 boiler installation from £1,790, repairs £99, heat pump grants available",
   "offers": [
     { "@type": "Offer", "price": "1790", "priceCurrency": "GBP", "description": "New Boiler Install" },
     { "@type": "Offer", "price": "99", "priceCurrency": "GBP", "description": "Boiler Repair" },
@@ -108,8 +108,8 @@ export default function Home({ data }: HomeProps) {
   return (
     <>
       <Head>
-        <title>New Boiler North Lincolnshire | Gas Safe (966812) £1,790 2025</title>
-        <meta name="description" content="Professional boiler services in Scunthorpe and Grimsby. Gas Safe (966812) £1,790 new installs, repairs from £99, heat pump grants available." />
+        <title>New Boiler North Lincolnshire | Gas Safe Registered – 966812 £1,790 2025</title>
+        <meta name="description" content="Professional boiler services in Scunthorpe and Grimsby. Gas Safe Registered – 966812 £1,790 new installs, repairs from £99, heat pump grants available." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         {reviewSchemas.map((schema, index) => (
@@ -135,7 +135,7 @@ export default function Home({ data }: HomeProps) {
         </motion.section>
         <motion.section variants={itemVariants} className="py-16 px-4 bg-blue-600 text-white text-center">
           <h2 className="text-3xl font-bold mb-4">Fixed Boiler Now?</h2>
-          <p className="mb-8">Book your Gas Safe (966812) installation today - next day available.</p>
+          <p className="mb-8">Book your Gas Safe Registered – 966812 installation today - next day available.</p>
           <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
             Get Started
           </button>

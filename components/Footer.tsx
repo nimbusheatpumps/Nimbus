@@ -37,14 +37,13 @@ const Footer: React.FC = () => {
             <div className="mt-4 flex items-center">
               <Image
                 src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png"
-                alt="Gas Safe registered heating engineer badge 966812"
+                alt="Gas Safe Registered – 966812 heating engineer badge"
                 width={80}
                 height={80}
                 className="mr-3"
               />
               <div>
-                <p className="text-sm font-semibold">Gas Safe Registered</p>
-                <p className="text-sm">Registration: 966812</p>
+                <p className="text-sm font-semibold">Gas Safe Registered – 966812</p>
               </div>
             </div>
           </div>

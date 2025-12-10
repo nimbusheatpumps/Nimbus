@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: Promise<{ town: string 
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "3 Crossbeck Road",
-      "addressLocality": capitalizedTown,
+      "addressLocality": "Scunthorpe",
       "addressRegion": "North Lincolnshire",
       "postalCode": "DN16 3HR",
       "addressCountry": "GB"
@@ -145,7 +145,7 @@ export default async function Page({ params }: { params: Promise<{ town: string 
           </div>
           <div className="mb-6 flex items-center">
             <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="Gas Safe Logo" className="w-16 h-16 mr-4" />
-            <span>Gas Safe Registered: 966812</span>
+            <span>Gas Safe Registered – 966812</span>
           </div>
           <div className="mb-6">
             <iframe

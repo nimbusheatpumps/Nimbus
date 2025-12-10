@@ -50,12 +50,13 @@
   "businessInfo": {
     "name": "Nimbus Heat Pumps",
     "address": {
-      "streetAddress": "123 Heating Street",
-      "addressLocality": "London",
-      "postalCode": "SW1A 1AA",
+      "streetAddress": "3 Crossbeck Road",
+      "addressLocality": "Scunthorpe",
+      "addressRegion": "North Lincolnshire",
+      "postalCode": "DN16 3HR",
       "addressCountry": "GB"
     },
-    "telephone": "+44 20 1234 5678",
+    "telephone": "01724 622069",
     "url": "https://nimbusheatpumps.co.uk"
   }
 }

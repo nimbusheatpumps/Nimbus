@@ -14,7 +14,7 @@ export const generateSEO = (title: string, description: string, slug?: string): 
   additionalMetaTags: [
     {
       name: 'author',
-      content: 'Brian Smith, Gas Safe registered engineer (966812) with 15+ years experience in North Lincolnshire heating systems.',
+      content: 'Bryan Whiteley, Gas Safe Registered – 966812 engineer with 15+ years experience in North Lincolnshire heating systems.',
     },
     {
       name: 'keywords',
@@ -24,8 +24,8 @@ export const generateSEO = (title: string, description: string, slug?: string): 
 });
 
 export const authorBio = {
-  name: 'Brian Smith',
-  credentials: 'Gas Safe registered engineer (966812)',
+  name: 'Bryan Whiteley',
+  credentials: 'Gas Safe Registered – 966812',
   experience: '15+ years in North Lincolnshire heating systems',
   expertise: 'Boiler installations, heat pump grants, energy efficiency',
 };

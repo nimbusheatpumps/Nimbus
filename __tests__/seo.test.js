@@ -9,8 +9,8 @@ describe('SEO utilities', () => {
   });
 
   test('authorBio contains required fields', () => {
-    expect(authorBio.name).toBe('Brian Smith');
-    expect(authorBio.credentials).toBe('Gas Safe registered engineer (966812)');
+    expect(authorBio.name).toBe('Bryan Whiteley');
+    expect(authorBio.credentials).toBe('Gas Safe Registered – 966812');
     expect(authorBio.experience).toBe('15+ years in North Lincolnshire heating systems');
   });
 });

@@ -33,14 +33,13 @@ export default function Hero() {
         >
           <Image
             src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png"
-            alt="Gas Safe registered heating engineer badge 966812"
+            alt="Gas Safe Registered – 966812 heating engineer badge"
             width={120}
             height={120}
             className="mr-4"
           />
           <div className="text-left">
-            <p className="text-lg font-semibold text-gray-800">Gas Safe Registered</p>
-            <p className="text-md text-gray-600">Registration: 966812</p>
+            <p className="text-lg font-semibold text-gray-800">Gas Safe Registered – 966812</p>
           </div>
         </motion.div>
         <motion.button

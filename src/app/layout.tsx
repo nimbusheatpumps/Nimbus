@@ -6,7 +6,7 @@ import FloatingTrustBubble from '../../components/FloatingTrustBubble';
 
 export const metadata = {
   title: 'Gas Boiler Installation North Lincolnshire | £1,790 Fixed Price 2025 | Nimbus',
-  description: 'Gas Safe registered boiler installation in Scunthorpe, Grimsby, Doncaster, Lincoln. £7,500 grant eligible heat pumps.',
+  description: 'Gas Safe Registered – 966812 boiler installation in Scunthorpe, Grimsby, Doncaster, Lincoln. £7,500 grant eligible heat pumps.',
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
               additionalMetaTags={[
                 {
                   name: 'author',
-                  content: 'Brian Smith, Gas Safe registered engineer with 15+ years experience in North Lincolnshire heating systems.',
+                  content: 'Bryan Whiteley, Gas Safe Registered – 966812 engineer with 15+ years experience in North Lincolnshire heating systems.',
                 },
               ]}
             />
@@ -49,7 +49,7 @@ export default function RootLayout({
                     "postalCode": "DN16 3HR",
                     "addressCountry": "GB"
                   },
-                  "telephone": "+44 1724 622069",
+                  "telephone": "01724 622069",
                   "email": "info@nimbusheatpumps.co.uk",
                   "url": "https://nimbusheatpumps.co.uk"
                 })

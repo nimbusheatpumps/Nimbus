@@ -37,7 +37,12 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
   const filteredServices = displayServices.filter(s => filter === 'all' || s.location.toLowerCase().includes(filter.toLowerCase()));
 
   return (
-    <section className="py-16 px-4">
+    <motion.section
+      className="py-16 px-4"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <div className="max-w-6xl mx-auto">
         <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-3xl font-bold text-center mb-8 text-primary">
@@ -59,7 +64,7 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
               whileHover={{ scale: 1.05 }}
               transition={{ delay: index * 0.1, duration: 0.2 }}
             >
-              <div className="p-6 bg-white rounded-lg shadow-sm h-full hover:shadow-lg transition-shadow border">
+              <div className="p-6 bg-white rounded-lg shadow-sm h-full hover:shadow-lg transition-shadow border border-primary">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -70,13 +75,14 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-lg font-bold text-blue-600 mb-2">{service.price}</p>
                 <p className="text-gray-600 mb-2">{service.description}</p>
-                <p className="text-sm text-gray-500">Location: {service.location}</p>
+                <p className="text-sm text-gray-500 mb-4">Location: {service.location}</p>
+                <button className="bg-accent text-white px-4 py-2 rounded w-full">Quote</button>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

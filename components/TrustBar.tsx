@@ -1,57 +1,22 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
-import { getLiveGoogleReviews } from '../src/lib/live-google-reviews';
+import React from 'react';
 
 const TrustBar: React.FC = () => {
-  const [rating, setRating] = useState<number | null>(null);
-  const [totalReviews, setTotalReviews] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const data = await getLiveGoogleReviews();
-        setRating(data.rating);
-        setTotalReviews(data.totalReviews);
-      } catch (err) {
-        setError('Failed to load reviews');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchReviews();
-  }, []);
-
-  if (loading) {
-    return <div className="text-center py-4">Loading reviews...</div>;
-  }
-
-  if (error) {
-    return (
-      <div className="bg-gray-100 py-4 text-center">
-        <a
-          href="https://g.page/r/yk7F28G9VpVstANKx/review"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:underline"
-        >
-          See all our Google reviews
-        </a>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-gray-100 py-4 text-center">
-      <p className="text-lg">
-        {totalReviews} verified Google reviews · {rating}/5 ★★★★★
-      </p>
-      <a href="https://g.page/r/yk7F28G9VpVstANKx/review" className="text-blue-600 hover:underline">
-        Leave a review
-      </a>
+    <div className="bg-white border border-teal-500 py-4 px-4">
+      <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-4">
+        <div className="flex items-center">
+          <span className="text-lg font-semibold">5.0</span>
+          <div className="flex ml-1">
+            ★★★★★
+          </div>
+        </div>
+        <span className="bg-gray-200 px-3 py-1 rounded-full text-sm font-medium">7 Google Reviews</span>
+        <img
+          src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png"
+          alt="Gas Safe Logo"
+          className="h-8 w-auto"
+        />
+      </div>
     </div>
   );
 };

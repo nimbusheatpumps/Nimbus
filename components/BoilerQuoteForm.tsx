@@ -5,6 +5,22 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
 const cn = (...classes: string[]) => classes.filter(Boolean).join(' ');
 
+const StepIndicator: React.FC<{ currentStep: number; totalSteps: number }> = ({ currentStep, totalSteps }) => {
+  return (
+    <div className="flex justify-center mb-4">
+      {Array.from({ length: totalSteps }, (_, i) => (
+        <div
+          key={i}
+          className={cn(
+            'w-3 h-3 rounded-full mx-1 transition-colors',
+            i < currentStep ? 'bg-teal-600' : i === currentStep ? 'bg-teal-400' : 'bg-gray-300'
+          )}
+        />
+      ))}
+    </div>
+  );
+};
+
 interface FormData {
   homeType: string;
   postcode: string;
@@ -158,13 +174,14 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
       {isModal && (
         <>
           <h2 className="text-lg font-semibold mb-4">Boiler Quote Form</h2>
-          <div className="bg-red-500 text-white p-4 rounded mb-4">
+          <StepIndicator currentStep={step} totalSteps={3} />
+          <div className="bg-teal-600 text-white p-4 rounded mb-4">
             <h3 className="font-bold">Limited Time Winter Discount - £150 Off!</h3>
             <p>Offer ends in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s</p>
             <div className="mt-2">
               <p className="text-sm">Only 15% availability remaining!</p>
-              <div className="bg-red-700 h-2 rounded mt-1">
-                <div className="bg-orange-400 h-2 rounded" style={{width: '15%'}}></div>
+              <div className="bg-teal-700 h-2 rounded mt-1">
+                <div className="bg-teal-400 h-2 rounded" style={{width: '15%'}}></div>
               </div>
             </div>
           </div>
@@ -189,17 +206,18 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
               )}
               {step === 1 && (
                 <div>
-                  <label htmlFor="postcode">Postcode</label>
+                  <label htmlFor="postcode" className="block mb-2 font-medium">Postcode</label>
                   <input
                     id="postcode"
                     type="text"
                     name="postcode"
                     value={formData.postcode}
                     onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
                     aria-invalid={!!errors.postcode}
                     aria-describedby="postcode-error"
                   />
-                  {errors.postcode && <p id="postcode-error" role="alert">{errors.postcode}</p>}
+                  {errors.postcode && <p id="postcode-error" role="alert" className="text-red-500 text-sm mt-1">{errors.postcode}</p>}
                 </div>
               )}
               {step === 2 && (
@@ -218,12 +236,13 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
                     </label>
                   </fieldset>
                   <div className="mt-4">
-                    <label htmlFor="preferredBrand">Preferred Brand</label>
+                    <label htmlFor="preferredBrand" className="block mb-2 font-medium">Preferred Brand</label>
                     <select
                       id="preferredBrand"
                       name="preferredBrand"
                       value={formData.preferredBrand}
                       onChange={handleChange}
+                      className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
                     >
                       <option value="Worcester Bosch">Worcester Bosch</option>
                       <option value="Other">Other</option>
@@ -234,8 +253,8 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
             </motion.div>
           </AnimatePresence>
           <div className="flex justify-between mt-4">
-            {step > 0 && <Button onClick={handlePrev}>Previous</Button>}
-            {step < 2 ? <Button onClick={handleNext}>Next</Button> : <Button onClick={handleSubmit}>Submit</Button>}
+            {step > 0 && <Button onClick={handlePrev} className="bg-teal-600 hover:bg-teal-700 text-white">Previous</Button>}
+            {step < 2 ? <Button onClick={handleNext} className="bg-teal-600 hover:bg-teal-700 text-white">Next</Button> : <Button onClick={handleSubmit} className="bg-teal-600 hover:bg-teal-700 text-white">Submit</Button>}
           </div>
         </>
       )}

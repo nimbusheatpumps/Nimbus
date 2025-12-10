@@ -125,47 +125,71 @@ console.log('Home component rendering with data:', data)
       <motion.div variants={containerVariants} initial="hidden" animate="visible">
         <Hero />
         <TrustBar />
-        <motion.section variants={itemVariants} className="py-16 px-4 bg-gray-50">
+        <motion.section
+          variants={itemVariants}
+          className="py-16 px-4 bg-gray-50"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8">Get Your Instant Boiler Quote</h2>
             <BoilerQuoteForm />
           </div>
         </motion.section>
         <ServiceGrid />
-        <motion.section variants={itemVariants} className="py-16 px-4">
+        <motion.section
+          variants={itemVariants}
+          className="py-16 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">Why Choose Worcester Bosch with Nimbus?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <img src="/images/worcester-bosch/worcester-logo.svg" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16" />
+                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16" />
                 <h3 className="text-xl font-semibold mb-2">Which? Best Buy</h3>
                 <p>Recognized for quality and reliability.</p>
               </div>
               <div className="text-center">
-                <img src="/images/worcester-bosch/worcester-logo.svg" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16" />
+                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16" />
                 <h3 className="text-xl font-semibold mb-2">Quiet Mark</h3>
                 <p>Certified for low noise operation.</p>
               </div>
               <div className="text-center">
-                <img src="/images/worcester-bosch/worcester-logo.svg" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16" />
+                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16" />
                 <h3 className="text-xl font-semibold mb-2">12-year guarantee</h3>
                 <p>Extended warranty for peace of mind.</p>
               </div>
               <div className="text-center">
-                <img src="/images/worcester-bosch/worcester-logo.svg" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16" />
+                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16" />
                 <h3 className="text-xl font-semibold mb-2">MCS certified for grants</h3>
                 <p>Eligible for government incentives.</p>
               </div>
             </div>
           </div>
         </motion.section>
-        <motion.section variants={itemVariants} className="py-16 px-4">
+        <motion.section
+          variants={itemVariants}
+          className="py-16 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">What Our Customers Say</h2>
             <Testimonials />
           </div>
         </motion.section>
-        <motion.section variants={itemVariants} className="py-16 px-4 bg-blue-600 text-white text-center">
+        <motion.section
+          variants={itemVariants}
+          className="py-16 px-4 bg-blue-600 text-white text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl font-bold mb-4">Fixed Boiler Now?</h2>
           <p className="mb-8">Book your Gas Safe Registered – 966812 installation today - next day available.</p>
           <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">

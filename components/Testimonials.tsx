@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { motion } from "framer-motion"
 import Autoplay from "embla-carousel-autoplay"
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 import { cn } from "@/lib/utils"
@@ -49,54 +50,61 @@ export default function Testimonials() {
   }
 
   return (
-    <Carousel
-      plugins={[
-        Autoplay({
-          delay: 5000,
-        }),
-      ]}
-      className="w-full max-w-xs mx-auto"
+    <motion.div
+      className="bg-teal-900 py-8"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
     >
-      <CarouselContent>
-        {reviews.map((review, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <div className="flex items-center mb-4">
-                  <img
-                    src={review.authorPhotoUri}
-                    alt={review.authorName}
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                  <div>
-                    <h4 className="font-semibold">{review.authorName}</h4>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <span
-                          key={i}
-                          className={cn(
-                            "text-lg",
-                            i < review.rating ? "text-yellow-400" : "text-gray-300"
-                          )}
-                        >
-                          ★
-                        </span>
-                      ))}
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 5000,
+          }),
+        ]}
+        className="w-full max-w-4xl mx-auto"
+      >
+        <CarouselContent>
+          {reviews.map((review, index) => (
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <div className="p-1">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-white/20">
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={review.authorPhotoUri}
+                      alt={review.authorName}
+                      className="w-10 h-10 rounded-full mr-3"
+                    />
+                    <div>
+                      <h4 className="font-semibold text-white">{review.authorName}</h4>
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <span
+                            key={i}
+                            className={cn(
+                              "text-lg transition-all duration-200 cursor-pointer",
+                              i < review.rating ? "text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" : "text-gray-300"
+                            )}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
+                  <p className="text-gray-200 italic">"{review.text}"</p>
+                  <img
+                    src="/images/worcester-bosch/kitchen-install.jpg"
+                    alt="Worcester Bosch Kitchen Installation"
+                    className="mt-4 w-full h-32 object-cover rounded"
+                  />
+                  <p className="text-sm text-gray-300 mt-2">{review.relativeTimeDescription}</p>
                 </div>
-                <p className="text-gray-700 italic">"{review.text}"</p>
-                <img
-                  src="/images/worcester-bosch/kitchen-install.jpg"
-                  alt="Worcester Bosch Kitchen Installation"
-                  className="mt-4 w-full h-32 object-cover rounded"
-                />
-                <p className="text-sm text-gray-500 mt-2">{review.relativeTimeDescription}</p>
               </div>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+    </motion.div>
   )
 }

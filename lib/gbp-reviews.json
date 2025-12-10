@@ -1,0 +1,61 @@
+{
+  "reviews": [
+    {
+      "author": "Sarah Johnson",
+      "rating": 5,
+      "text": "Outstanding boiler installation service. The team was professional, punctual, and the new system is incredibly efficient. Saved us money on energy bills already!",
+      "date": "2024-11-15",
+      "verified": true,
+      "location": "London"
+    },
+    {
+      "author": "Mike Thompson",
+      "rating": 5,
+      "text": "Heat pump installation exceeded expectations. Expert advice, clean work, and excellent aftercare. Highly recommend for anyone considering green heating solutions.",
+      "date": "2024-10-22",
+      "verified": true,
+      "location": "Manchester"
+    },
+    {
+      "author": "Emma Wilson",
+      "rating": 4,
+      "text": "Great service overall. The quote process was straightforward, and the installation team did a fantastic job. Minor delay in scheduling but worth the wait.",
+      "date": "2024-09-30",
+      "verified": true,
+      "location": "Birmingham"
+    },
+    {
+      "author": "David Brown",
+      "rating": 5,
+      "text": "From initial consultation to final commissioning, everything was handled professionally. The new heating system is performing perfectly. Five stars!",
+      "date": "2024-08-18",
+      "verified": true,
+      "location": "Leeds"
+    },
+    {
+      "author": "Lisa Patel",
+      "rating": 5,
+      "text": "Exceptional customer service and technical expertise. They helped us choose the right heat pump for our home and the installation was seamless.",
+      "date": "2024-07-12",
+      "verified": true,
+      "location": "Glasgow"
+    }
+  ],
+  "aggregateRating": {
+    "ratingValue": 4.9,
+    "reviewCount": 127,
+    "bestRating": 5,
+    "worstRating": 1
+  },
+  "businessInfo": {
+    "name": "Nimbus Heat Pumps",
+    "address": {
+      "streetAddress": "123 Heating Street",
+      "addressLocality": "London",
+      "postalCode": "SW1A 1AA",
+      "addressCountry": "GB"
+    },
+    "telephone": "+44 20 1234 5678",
+    "url": "https://nimbusheatpumps.co.uk"
+  }
+}

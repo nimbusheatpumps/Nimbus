@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /api/private/
+Disallow: /_next/static/
+
+Sitemap: https://nimbusheatpumps.co.uk/sitemap.xml

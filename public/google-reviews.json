@@ -1,0 +1,32 @@
+{
+  "reviews": [
+    {
+      "author_name": "Sarah Johnson",
+      "rating": 5,
+      "text": "Outstanding boiler installation service. The team was professional, punctual, and the new system is incredibly efficient. Saved us money on energy bills already!",
+      "time": 1731628800
+    },
+    {
+      "author_name": "Mike Thompson",
+      "rating": 5,
+      "text": "Heat pump installation exceeded expectations. Expert advice, clean work, and excellent aftercare. Highly recommend for anyone considering green heating solutions.",
+      "time": 1729555200
+    },
+    {
+      "author_name": "David Brown",
+      "rating": 5,
+      "text": "From initial consultation to final commissioning, everything was handled professionally. The new heating system is performing perfectly. Five stars!",
+      "time": 1723939200
+    },
+    {
+      "author_name": "Lisa Patel",
+      "rating": 5,
+      "text": "Exceptional customer service and technical expertise. They helped us choose the right heat pump for our home and the installation was seamless.",
+      "time": 1720742400
+    }
+  ],
+  "aggregateRating": {
+    "ratingValue": 5.0,
+    "reviewCount": 4
+  }
+}

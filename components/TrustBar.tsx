@@ -1,0 +1,1 @@
+import { aggregateRating } from '@/lib/google-reviews';

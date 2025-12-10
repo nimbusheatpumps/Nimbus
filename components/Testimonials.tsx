@@ -4,7 +4,7 @@ import * as React from "react"
 import Autoplay from "embla-carousel-autoplay"
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 import { cn } from "@/lib/utils"
-import { getLiveGoogleReviews, LiveReview } from "../src/lib/live-google-reviews"
+import { getLiveGoogleReviews, LiveReview } from "../lib/live-google-reviews"
 
 export default function Testimonials() {
   const [reviews, setReviews] = React.useState<LiveReview[]>([])
@@ -86,6 +86,11 @@ export default function Testimonials() {
                   </div>
                 </div>
                 <p className="text-gray-700 italic">"{review.text}"</p>
+                <img
+                  src="/images/worcester-bosch/kitchen-install.jpg"
+                  alt="Worcester Bosch Kitchen Installation"
+                  className="mt-4 w-full h-32 object-cover rounded"
+                />
                 <p className="text-sm text-gray-500 mt-2">{review.relativeTimeDescription}</p>
               </div>
             </div>

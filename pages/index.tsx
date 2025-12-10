@@ -6,12 +6,16 @@ import BoilerQuoteForm from '../components/BoilerQuoteForm';
 import ServiceGrid from '../components/ServiceGrid';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
-import { getLiveGoogleReviews, type LiveGoogleReviews } from '../src/lib/live-google-reviews';
+import { getLiveGoogleReviews, type LiveGoogleReviews } from '../lib/live-google-reviews';
 
 const faqData = [
   {
     question: 'Why choose Nimbus for Scunthorpe?',
     answer: 'As Gas Safe Registered – 966812 engineers with over 10 years experience in North Lincolnshire, we provide reliable boiler services and heat pump installations with fixed pricing and next-day availability. Our E-E-A-T credentials include certified technicians, local expertise, and customer testimonials.',
+  },
+  {
+    question: 'Is Worcester Bosch the best boiler?',
+    answer: 'Yes – Which? #1, 94% efficiency, 12-year warranty.',
   },
 ];
 
@@ -68,6 +72,7 @@ interface HomeProps {
 }
 
 export default function Home({ data }: HomeProps) {
+console.log('Home component rendering with data:', data)
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -127,6 +132,33 @@ export default function Home({ data }: HomeProps) {
           </div>
         </motion.section>
         <ServiceGrid />
+        <motion.section variants={itemVariants} className="py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-8">Why Choose Worcester Bosch with Nimbus?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <img src="/images/worcester-bosch/worcester-logo.svg" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16" />
+                <h3 className="text-xl font-semibold mb-2">Which? Best Buy</h3>
+                <p>Recognized for quality and reliability.</p>
+              </div>
+              <div className="text-center">
+                <img src="/images/worcester-bosch/worcester-logo.svg" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16" />
+                <h3 className="text-xl font-semibold mb-2">Quiet Mark</h3>
+                <p>Certified for low noise operation.</p>
+              </div>
+              <div className="text-center">
+                <img src="/images/worcester-bosch/worcester-logo.svg" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16" />
+                <h3 className="text-xl font-semibold mb-2">12-year guarantee</h3>
+                <p>Extended warranty for peace of mind.</p>
+              </div>
+              <div className="text-center">
+                <img src="/images/worcester-bosch/worcester-logo.svg" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16" />
+                <h3 className="text-xl font-semibold mb-2">MCS certified for grants</h3>
+                <p>Eligible for government incentives.</p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
         <motion.section variants={itemVariants} className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">What Our Customers Say</h2>

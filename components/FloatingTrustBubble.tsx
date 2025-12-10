@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getLiveGoogleReviews, type LiveGoogleReviews, type LiveReview } from '../src/lib/live-google-reviews';
+import { getLiveGoogleReviews, type LiveGoogleReviews, type LiveReview } from '../lib/live-google-reviews';
 
 export default function FloatingTrustBubble() {
   const [reviews, setReviews] = useState<LiveReview[]>([]);

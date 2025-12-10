@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface Service {
   title: string;
   price: string;
   description: string;
   location: string;
+  image: string;
 }
 
 const services: Service[] = [
-  { title: 'New Install', price: '£1,790 Gas Safe Registered – 966812', description: 'Scunthorpe experts', location: 'Scunthorpe' },
-  { title: 'Replacement', price: '£1,500+', description: 'Scunthorpe experts', location: 'Scunthorpe' },
-  { title: 'Repairs', price: '£99', description: 'Scunthorpe experts', location: 'Scunthorpe' },
-  { title: 'Servicing', price: '£79', description: 'Scunthorpe experts', location: 'Scunthorpe' },
-  { title: 'Heat Pump', price: '£4,799 grant', description: 'Scunthorpe experts', location: 'Scunthorpe' },
-  { title: 'New Install', price: '£1,790 Gas Safe Registered – 966812', description: 'Scunthorpe experts', location: 'Grimsby' },
+  { title: 'Worcester Bosch Combi Boilers', price: '£1,790', description: 'Greenstar 30i, 94% efficiency, 10-year warranty', location: 'Scunthorpe', image: '/images/worcester-bosch/greenstar-30i-front.png' },
+  { title: 'Worcester Bosch System Boilers', price: '£1,950', description: 'Greenstar 25Si', location: 'Scunthorpe', image: '/images/worcester-bosch/greenstar-30i-system.png' },
+  { title: 'Emergency Worcester Repairs', price: '£99 callout', description: '', location: 'Scunthorpe', image: '/images/worcester-bosch/gas-safe-worcester.png' },
+  { title: 'Upgrade to Greenstar Heat-Only', price: '£2,100', description: '', location: 'Scunthorpe', image: '/images/worcester-bosch/greenstar-8000-life.png' },
 ];
 
 const schema = {
@@ -60,6 +60,13 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
               transition={{ delay: index * 0.1, duration: 0.2 }}
             >
               <div className="p-6 bg-white rounded-lg shadow-sm h-full hover:shadow-lg transition-shadow border">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  width={300}
+                  height={200}
+                  className="w-full h-48 object-cover rounded mb-4"
+                />
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-lg font-bold text-blue-600 mb-2">{service.price}</p>
                 <p className="text-gray-600 mb-2">{service.description}</p>

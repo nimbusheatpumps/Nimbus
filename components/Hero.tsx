@@ -7,15 +7,16 @@ export default function Hero() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white">
-      <div className="container mx-auto px-4 text-center">
+    <section className="relative min-h-screen flex items-center justify-center" style={{ backgroundImage: 'url(/images/worcester-bosch/greenstar-30i-front.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="absolute inset-0 bg-teal-500 bg-opacity-50"></div>
+      <div className="container mx-auto px-4 text-center relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"
         >
-          Nimbus Heat Pumps
+          Worcester Bosch Boiler Installation in North Lincolnshire – Greenstar 30i from £1,790 Fixed Price, Gas Safe 966812
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}

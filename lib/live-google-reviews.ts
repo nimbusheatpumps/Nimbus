@@ -39,6 +39,10 @@ export async function getLiveGoogleReviews(): Promise<LiveGoogleReviews> {
 
   const { rating, userRatingCount, reviews } = data;
 
+  if (!reviews) {
+    throw new Error('Failed to fetch reviews');
+  }
+
   const recentReviews: LiveReview[] = reviews.map((review: any) => ({
     authorName: review.author_name,
     rating: review.rating,

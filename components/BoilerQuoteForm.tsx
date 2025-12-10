@@ -10,6 +10,7 @@ interface FormData {
   postcode: string;
   needs: string;
   upsell: boolean;
+  preferredBrand: string;
 }
 
 interface BoilerQuoteFormProps {
@@ -18,7 +19,7 @@ interface BoilerQuoteFormProps {
 
 const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) => {
   const [step, setStep] = useState(0);
-  const [formData, setFormData] = useState<FormData>({ homeType: '', postcode: '', needs: '', upsell: false });
+  const [formData, setFormData] = useState<FormData>({ homeType: '', postcode: '', needs: '', upsell: false, preferredBrand: 'Worcester Bosch' });
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -58,8 +59,9 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
     setShowModal(true);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
     setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
   };
 
@@ -116,19 +118,33 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
                   </div>
                 )}
                 {step === 2 && (
-                  <fieldset>
-                    <legend>Needs</legend>
-                    {['New Boiler', 'Repair', 'Upgrade'].map(need => (
-                      <label key={need} className="block">
-                        <input type="radio" name="needs" value={need} onChange={handleChange} aria-describedby={`needs-${need}`} />
-                        {need}
+                  <div>
+                    <fieldset>
+                      <legend>Needs</legend>
+                      {['New Boiler', 'Repair', 'Upgrade'].map(need => (
+                        <label key={need} className="block">
+                          <input type="radio" name="needs" value={need} onChange={handleChange} aria-describedby={`needs-${need}`} />
+                          {need}
+                        </label>
+                      ))}
+                      <label className="block">
+                        <input type="checkbox" name="upsell" checked={formData.upsell} onChange={handleChange} />
+                        Interested in Heat Pump grant?
                       </label>
-                    ))}
-                    <label className="block">
-                      <input type="checkbox" name="upsell" checked={formData.upsell} onChange={handleChange} />
-                      Interested in Heat Pump grant?
-                    </label>
-                  </fieldset>
+                    </fieldset>
+                    <div className="mt-4">
+                      <label htmlFor="preferredBrand">Preferred Brand</label>
+                      <select
+                        id="preferredBrand"
+                        name="preferredBrand"
+                        value={formData.preferredBrand}
+                        onChange={handleChange}
+                      >
+                        <option value="Worcester Bosch">Worcester Bosch</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
                 )}
               </motion.div>
             </AnimatePresence>
@@ -187,19 +203,33 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
                 </div>
               )}
               {step === 2 && (
-                <fieldset>
-                  <legend>Needs</legend>
-                  {['New Boiler', 'Repair', 'Upgrade'].map(need => (
-                    <label key={need} className="block">
-                      <input type="radio" name="needs" value={need} onChange={handleChange} aria-describedby={`needs-${need}`} />
-                      {need}
+                <div>
+                  <fieldset>
+                    <legend>Needs</legend>
+                    {['New Boiler', 'Repair', 'Upgrade'].map(need => (
+                      <label key={need} className="block">
+                        <input type="radio" name="needs" value={need} onChange={handleChange} aria-describedby={`needs-${need}`} />
+                        {need}
+                      </label>
+                    ))}
+                    <label className="block">
+                      <input type="checkbox" name="upsell" checked={formData.upsell} onChange={handleChange} />
+                      Interested in Heat Pump grant?
                     </label>
-                  ))}
-                  <label className="block">
-                    <input type="checkbox" name="upsell" checked={formData.upsell} onChange={handleChange} />
-                    Interested in Heat Pump grant?
-                  </label>
-                </fieldset>
+                  </fieldset>
+                  <div className="mt-4">
+                    <label htmlFor="preferredBrand">Preferred Brand</label>
+                    <select
+                      id="preferredBrand"
+                      name="preferredBrand"
+                      value={formData.preferredBrand}
+                      onChange={handleChange}
+                    >
+                      <option value="Worcester Bosch">Worcester Bosch</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
               )}
             </motion.div>
           </AnimatePresence>

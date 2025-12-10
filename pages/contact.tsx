@@ -3,10 +3,14 @@ import { NextSeo } from 'next-seo';
 import { useState } from 'react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { reviews, aggregateRating } from '../lib/google-reviews';
+import { getLiveGoogleReviews, type LiveGoogleReviews } from '../src/lib/live-google-reviews';
 import { generateSEO } from '../lib/seo';
 
-const ContactPage = () => {
+interface ContactPageProps {
+  data: LiveGoogleReviews;
+}
+
+const ContactPage = ({ data }: ContactPageProps) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ boilerType: '', name: '', email: '', message: '' });
   const [showModal, setShowModal] = useState(false);
@@ -27,58 +31,55 @@ const ContactPage = () => {
   const seoProps = generateSEO(
     'Contact Us for Boiler Installation Scunthorpe 2025 - Nimbus Heat Pumps',
     'Get a quote for boiler installation in Scunthorpe 2025. Choose your boiler type and contact us for professional heating services. GBP pricing, expert installation.',
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+    'contact'
+  );
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Nimbus Heat Pumps",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3 Crossbeck Road",
+      "addressLocality": "Scunthorpe",
+      "addressRegion": "North Lincolnshire",
+      "postalCode": "DN16 3HR",
+      "addressCountry": "GB"
+    },
+    "telephone": "01724 622069",
+    "url": "https://nimbusheatpumps.co.uk",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": data.rating,
+      "reviewCount": data.totalReviews
+    }
+  };
+
+  const reviewSchemas = data.reviews.map(review => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": review.author_name
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": review.rating,
+      "bestRating": 5
+    },
+    "reviewBody": review.text,
+    "datePublished": new Date().toISOString().split('T')[0] // Placeholder, as live data doesn't have exact date
+  }));
+
+  return (
+    <>
+      <NextSeo {...seoProps} />
       <Head>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
-      {reviewSchemas.map((schema, index) => (
-        <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         {reviewSchemas.map((schema, index) => (
           <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
         ))}
       </Head>
-  "name": "Nimbus Heat Pumps",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "3 Crossbeck Road",
-    "addressLocality": "Scunthorpe",
-    "addressRegion": "North Lincolnshire",
-    "postalCode": "DN16 3HR",
-    "addressCountry": "GB"
-  },
-  "telephone": "01724 622069",
-  "url": "https://nimbusheatpumps.co.uk",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": aggregateRating.ratingValue,
-    "reviewCount": aggregateRating.reviewCount
-  }
-};
-
-const reviewSchemas = reviews.map(review => ({
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "author": {
-    "@type": "Person",
-    "name": review.author_name
-  },
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": review.rating,
-    "bestRating": 5
-  },
-  "reviewBody": review.text,
-  "datePublished": new Date(review.time * 1000).toISOString().split('T')[0]
-}));
-    'contact'
-  );
-
-  return (
-    <>
-      <NextSeo {...seoProps} />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8">Contact Us for Boiler Installation</h1>
         <div className="grid md:grid-cols-2 gap-8">
@@ -190,5 +191,17 @@ const reviewSchemas = reviews.map(review => ({
     </>
   );
 };
+
+export async function getServerSideProps() {
+  let data;
+  try {
+    data = await getLiveGoogleReviews();
+  } catch (error) {
+    data = { rating: 0, totalReviews: 0, reviews: [] };
+  }
+  return {
+    props: { data },
+  };
+}
 
 export default ContactPage;

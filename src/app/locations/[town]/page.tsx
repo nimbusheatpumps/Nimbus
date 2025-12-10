@@ -1,6 +1,5 @@
-import { promises as fs } from 'fs';
 import Breadcrumbs from '../../../../components/Breadcrumbs';
-import { reviews, aggregateRating } from '../../../lib/google-reviews';
+import { getLiveGoogleReviews } from '../../../lib/live-google-reviews';
 import TrustBar from '../../../../components/TrustBar';
 
 const towns = ['scunthorpe', 'grimsby', 'hull', 'brigg', 'barton-upon-humber', 'winterton', 'epworth', 'crowle', 'gainsborough', 'louth'];
@@ -9,8 +8,8 @@ export async function generateStaticParams() {
   return towns.map(town => ({ town }));
 }
 
-export async function generateMetadata({ params }: { params: { town: string } }) {
-  const { town } = params;
+export async function generateMetadata({ params }: { params: Promise<{ town: string }> }) {
+  const { town } = await params;
   const capitalizedTown = town.replace(/\b\w/g, l => l.toUpperCase());
   const title = `Heat Pump Services in ${capitalizedTown} - Nimbus Heating`;
   const description = `Professional heat pump installation and services in ${capitalizedTown}. Get a free quote today.`;
@@ -21,12 +20,16 @@ export async function generateMetadata({ params }: { params: { town: string } })
   };
 }
 
-export default async function Page({ params }: { params: { town: string } }) {
-  const { town } = params;
-  const capitalizedTown = town.replace(/\b\w/g, l => l.toUpperCase());
+export default async function Page({ params }: { params: Promise<{ town: string }> }) {
+   const { town } = await params;
+   const capitalizedTown = town.replace(/\b\w/g, l => l.toUpperCase());
 
-  const reviewsData = JSON.parse(await fs.readFile(process.cwd() + '/public/google-reviews.json', 'utf8'));
-  const { aggregateRating } = reviewsData;
+   let data;
+   try {
+     data = await getLiveGoogleReviews();
+   } catch (error) {
+     data = { rating: 0, totalReviews: 0, reviews: [] };
+   }
 
   const schema = {
     "@context": "https://schema.org",
@@ -44,11 +47,13 @@ export default async function Page({ params }: { params: { town: string } }) {
     "url": `https://nimbusheatpumps.co.uk/locations/${town}`,
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": aggregateRating.ratingValue,
-      "reviewCount": aggregateRating.reviewCount
+      "ratingValue": data.rating,
+      "reviewCount": data.totalReviews
     },
     "sameAs": ["https://www.facebook.com/nimbusheatpumps"]
-  const reviewSchemas = reviews.map(review => ({
+  };
+
+  const reviewSchemas = data.reviews.map(review => ({
     "@context": "https://schema.org",
     "@type": "Review",
     "author": {
@@ -61,9 +66,8 @@ export default async function Page({ params }: { params: { town: string } }) {
       "bestRating": 5
     },
     "reviewBody": review.text,
-    "datePublished": new Date(review.time * 1000).toISOString().split('T')[0]
+    "datePublished": new Date().toISOString().split('T')[0] // Placeholder, as live data doesn't have exact date
   }));
-  };
 
   const faqs = [
     {
@@ -95,7 +99,7 @@ export default async function Page({ params }: { params: { town: string } }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      {reviews.map((review, index) => (
+      {data.reviews.map((review, index) => (
         <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Review",
@@ -109,7 +113,7 @@ export default async function Page({ params }: { params: { town: string } }) {
             "bestRating": 5
           },
           "reviewBody": review.text,
-          "datePublished": new Date(review.time * 1000).toISOString().split('T')[0]
+          "datePublished": new Date().toISOString().split('T')[0] // Placeholder, as live data doesn't have exact date
         }) }} />
       ))}
       <Breadcrumbs items={[
@@ -123,8 +127,21 @@ export default async function Page({ params }: { params: { town: string } }) {
         <div className="max-w-3xl mx-auto">
           <p className="text-lg mb-6">Professional heat pump installation and services in {capitalizedTown}. Get a free quote today.</p>
           <div className="mb-6">
-            <p>{aggregateRating.reviewCount} verified Google reviews · {aggregateRating.ratingValue}/5 ★★★★★</p>
-            <a href="https://g.page/r/yk7F28G9VpVstANKx/review" className="text-blue-600 hover:underline">Leave a review</a>
+            {data.totalReviews > 0 ? (
+              <>
+                <p>{data.totalReviews} verified Google reviews · {data.rating}/5 ★★★★★</p>
+                <a href="https://g.page/r/yk7F28G9VpVstANKx/review" className="text-blue-600 hover:underline">Leave a review</a>
+              </>
+            ) : (
+              <a
+                href="https://g.page/r/yk7F28G9VpVstANKx/review"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                See all our Google reviews
+              </a>
+            )}
           </div>
           <div className="mb-6 flex items-center">
             <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="Gas Safe Logo" className="w-16 h-16 mr-4" />

@@ -6,15 +6,7 @@ import BoilerQuoteForm from '../components/BoilerQuoteForm';
 import ServiceGrid from '../components/ServiceGrid';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
-import reviewsData from '../lib/gbp-reviews.json';
-import { reviews, aggregateRating } from '../lib/google-reviews';
-
-const testimonials = reviewsData.reviews.map(review => ({
-  quote: review.text,
-  rating: review.rating,
-  author: review.author,
-  avatar: `https://via.placeholder.com/40x40/4F46E5/FFFFFF?text=${encodeURIComponent(review.author.split(' ')[0][0] + review.author.split(' ')[1][0])}`,
-}));
+import { getLiveGoogleReviews, type LiveGoogleReviews } from '../src/lib/live-google-reviews';
 
 const faqData = [
   {
@@ -33,42 +25,6 @@ const aggregateOfferSchema = {
     { "@type": "Offer", "price": "99", "priceCurrency": "GBP", "description": "Boiler Repair" },
   ],
 };
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Nimbus Heat Pumps",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "3 Crossbeck Road",
-    "addressLocality": "Scunthorpe",
-    "addressRegion": "North Lincolnshire",
-    "postalCode": "DN16 3HR",
-    "addressCountry": "GB"
-  },
-  "telephone": "01724 622069",
-  "url": "https://nimbusheatpumps.co.uk",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": aggregateRating.ratingValue,
-    "reviewCount": aggregateRating.reviewCount
-  }
-};
-
-const reviewSchemas = reviews.map(review => ({
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "author": {
-    "@type": "Person",
-    "name": review.author_name
-  },
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": review.rating,
-    "bestRating": 5
-  },
-  "reviewBody": review.text,
-  "datePublished": new Date(review.time * 1000).toISOString().split('T')[0]
-}));
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -107,7 +63,48 @@ function FAQAccordion({ faq }: { faq: typeof faqData }) {
   );
 }
 
-export default function Home() {
+interface HomeProps {
+  data: LiveGoogleReviews;
+}
+
+export default function Home({ data }: HomeProps) {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Nimbus Heat Pumps",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3 Crossbeck Road",
+      "addressLocality": "Scunthorpe",
+      "addressRegion": "North Lincolnshire",
+      "postalCode": "DN16 3HR",
+      "addressCountry": "GB"
+    },
+    "telephone": "01724 622069",
+    "url": "https://nimbusheatpumps.co.uk",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": data.rating,
+      "reviewCount": data.totalReviews
+    }
+  };
+
+  const reviewSchemas = data.reviews.map(review => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": review.author_name
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": review.rating,
+      "bestRating": 5
+    },
+    "reviewBody": review.text,
+    "datePublished": new Date().toISOString().split('T')[0] // Placeholder, as live data doesn't have exact date
+  }));
+
   return (
     <>
       <Head>
@@ -133,7 +130,7 @@ export default function Home() {
         <motion.section variants={itemVariants} className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">What Our Customers Say</h2>
-            <Testimonials testimonials={testimonials} />
+            <Testimonials />
           </div>
         </motion.section>
         <motion.section variants={itemVariants} className="py-16 px-4 bg-blue-600 text-white text-center">
@@ -151,8 +148,14 @@ export default function Home() {
 }
 
 export async function getStaticProps() {
+  let data;
+  try {
+    data = await getLiveGoogleReviews();
+  } catch (error) {
+    data = { rating: 0, totalReviews: 0, reviews: [] };
+  }
   return {
-    props: {},
-    revalidate: 3600,
+    props: { data },
+    revalidate: 86400, // Match the live data revalidate
   };
 }

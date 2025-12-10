@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import { generateSEO } from '../../lib/seo';
-import { reviews, aggregateRating } from '../../lib/google-reviews';
+import { getLiveGoogleReviews, type LiveGoogleReviews } from '../../src/lib/live-google-reviews';
 
 interface LocationData {
   name: string;
@@ -65,9 +65,10 @@ const locations: Record<string, LocationData> = {
 
 interface LocationPageProps {
   location: LocationData;
+  data: LiveGoogleReviews;
 }
 
-const LocationPage: React.FC<LocationPageProps> = ({ location }) => {
+const LocationPage: React.FC<LocationPageProps> = ({ location, data }) => {
   const seoProps = generateSEO(location.title, location.description, `locations/${location.name.toLowerCase()}`);
 
   return (
@@ -88,12 +89,12 @@ const LocationPage: React.FC<LocationPageProps> = ({ location }) => {
         "url": `https://nimbusheatpumps.co.uk/locations/${location.name.toLowerCase()}`,
         "aggregateRating": {
           "@type": "AggregateRating",
-          "ratingValue": aggregateRating.ratingValue,
-          "reviewCount": aggregateRating.reviewCount
+          "ratingValue": data.rating,
+          "reviewCount": data.totalReviews
         },
         "sameAs": ["https://www.facebook.com/nimbusheatpumps"]
       }) }} />
-      {reviews.map((review, index) => (
+      {data.reviews.map((review, index) => (
         <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Review",
@@ -107,7 +108,7 @@ const LocationPage: React.FC<LocationPageProps> = ({ location }) => {
             "bestRating": 5
           },
           "reviewBody": review.text,
-          "datePublished": new Date(review.time * 1000).toISOString().split('T')[0]
+          "datePublished": new Date().toISOString().split('T')[0] // Placeholder, as live data doesn't have exact date
         }) }} />
       ))}
       <NextSeo {...seoProps} />
@@ -170,8 +171,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true };
   }
 
+  let data;
+  try {
+    data = await getLiveGoogleReviews();
+  } catch (error) {
+    data = { rating: 0, totalReviews: 0, reviews: [] };
+  }
+
   return {
-    props: { location }
+    props: { location, data },
+    revalidate: 86400,
   };
 };
 

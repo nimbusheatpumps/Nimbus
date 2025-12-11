@@ -6,6 +6,7 @@ import BoilerQuoteForm from '../components/BoilerQuoteForm';
 import ServiceGrid from '../components/ServiceGrid';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
 import { getLiveGoogleReviews, type LiveGoogleReviews } from '../lib/live-google-reviews';
 
 const faqData = [
@@ -25,8 +26,8 @@ const aggregateOfferSchema = {
   "name": "Boiler Services Scunthorpe",
   "description": "Gas Safe Registered – 966812 boiler installation from £1,790, repairs £99, heat pump grants available",
   "offers": [
-    { "@type": "Offer", "price": "1790", "priceCurrency": "GBP", "description": "New Boiler Install" },
-    { "@type": "Offer", "price": "99", "priceCurrency": "GBP", "description": "Boiler Repair" },
+    { "@type": "Offer", "price": "1790", "priceCurrency": "GBP", "description": "New Boiler Install", "brand": "Worcester Bosch" },
+    { "@type": "Offer", "price": "99", "priceCurrency": "GBP", "description": "Boiler Repair", "brand": "Worcester Bosch" },
   ],
 };
 
@@ -138,6 +139,59 @@ console.log('Home component rendering with data:', data)
           </div>
         </motion.section>
         <ServiceGrid />
+        <motion.section
+          variants={itemVariants}
+          className="py-16 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-8">Our Worcester Bosch Ranges</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <Card>
+                <CardHeader>
+                  <img src="/images/worcester-bosch/greenstar-30i-front.png" alt="Greenstar 1000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <CardTitle>Greenstar 1000</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p><strong>Features:</strong> Compact design for small homes, high efficiency up to 94%, easy installation.</p>
+                  <p><strong>Warranty:</strong> 5 years manufacturer's warranty.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <img src="/images/worcester/greenstar-30si-front.png" alt="Greenstar 2000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <CardTitle>Greenstar 2000</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p><strong>Features:</strong> Quiet operation, improved efficiency, smart controls for easy management.</p>
+                  <p><strong>Warranty:</strong> 5 years manufacturer's warranty.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <img src="/images/worcester/greenstar-4000-front.png" alt="Greenstar 4000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <CardTitle>Greenstar 4000</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p><strong>Features:</strong> Advanced smart technology, very quiet performance, high efficiency, Wi-Fi connectivity.</p>
+                  <p><strong>Warranty:</strong> 7 years manufacturer's warranty.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <img src="/images/worcester/greenstar-8000-front.png" alt="Greenstar 8000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <CardTitle>Greenstar 8000</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p><strong>Features:</strong> High power output, premium features, superior efficiency, long-lasting performance.</p>
+                  <p><strong>Warranty:</strong> 10 years manufacturer's warranty.</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </motion.section>
         <motion.section
           variants={itemVariants}
           className="py-16 px-4"

@@ -36,6 +36,19 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: '#ff6200',
+        teal: {
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#0f4a5c',
+        },
+        orange: '#ff6200',
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -52,6 +65,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        poppins: ['Poppins'],
+        inter: ['Inter'],
       },
       keyframes: {
         "accordion-down": {

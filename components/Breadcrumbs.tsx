@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 interface BreadcrumbItem {
   label: string;
@@ -10,8 +11,20 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+
   return (
-    <nav aria-label="breadcrumb" className="py-4">
+    <motion.nav
+      aria-label="breadcrumb"
+      className="py-4 bg-teal-50 shadow-lg"
+      initial="initial"
+      animate="animate"
+      variants={fadeIn}
+      whileHover={{ y: -5 }}
+    >
       <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
@@ -28,6 +41,6 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
           </li>
         ))}
       </ol>
-    </nav>
+    </motion.nav>
   );
 }

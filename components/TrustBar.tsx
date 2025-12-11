@@ -1,8 +1,20 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const TrustBar: React.FC = () => {
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+
   return (
-    <div className="bg-white border border-teal-500 py-4 px-4">
+    <motion.div
+      className="bg-teal-50 border border-teal-500 py-4 px-4 shadow-lg"
+      initial="initial"
+      animate="animate"
+      variants={fadeIn}
+      whileHover={{ y: -5 }}
+    >
       <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-4">
         <div className="flex items-center">
           <span className="text-lg font-semibold">5.0</span>
@@ -17,7 +29,7 @@ const TrustBar: React.FC = () => {
           className="h-8 w-auto"
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

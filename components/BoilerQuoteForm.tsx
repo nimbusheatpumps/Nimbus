@@ -27,6 +27,7 @@ interface FormData {
   needs: string;
   upsell: boolean;
   preferredBrand: string;
+  interestedIn: string;
 }
 
 interface BoilerQuoteFormProps {
@@ -34,8 +35,17 @@ interface BoilerQuoteFormProps {
 }
 
 const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) => {
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+
+  const hoverLift = {
+    whileHover: { y: -5 },
+  };
+
   const [step, setStep] = useState(0);
-  const [formData, setFormData] = useState<FormData>({ homeType: '', postcode: '', needs: '', upsell: false, preferredBrand: 'Worcester Bosch' });
+  const [formData, setFormData] = useState<FormData>({ homeType: '', postcode: '', needs: '', upsell: false, preferredBrand: 'Worcester Bosch', interestedIn: '' });
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -82,9 +92,13 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
   };
 
   return (
-    <div>
+    <motion.div
+      initial="initial"
+      animate="animate"
+      variants={fadeIn}
+    >
       {!isModal && (
-        <Card className="max-w-md mx-auto">
+        <Card className="max-w-md mx-auto shadow-lg">
           <CardHeader>
             <CardTitle>Boiler Quote Form</CardTitle>
           </CardHeader>
@@ -149,6 +163,21 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
                       </label>
                     </fieldset>
                     <div className="mt-4">
+                      <label htmlFor="interestedIn">Range & kW</label>
+                      <select
+                        id="interestedIn"
+                        name="interestedIn"
+                        value={formData.interestedIn}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select an option</option>
+                        <option value="1000 (25kW)">1000 (25kW)</option>
+                        <option value="2000 (25/30kW)">2000 (25/30kW)</option>
+                        <option value="4000 (25/30/35kW)">4000 (25/30/35kW)</option>
+                        <option value="8000 (25/30/35kW with Smart Controls)">8000 (25/30/35kW with Smart Controls)</option>
+                      </select>
+                    </div>
+                    <div className="mt-4">
                       <label htmlFor="preferredBrand">Preferred Brand</label>
                       <select
                         id="preferredBrand"
@@ -165,8 +194,8 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
               </motion.div>
             </AnimatePresence>
             <div className="flex justify-between mt-4">
-              {step > 0 && <Button onClick={handlePrev}>Previous</Button>}
-              {step < 2 ? <Button onClick={handleNext}>Next</Button> : <Button onClick={handleSubmit}>Submit</Button>}
+              {step > 0 && <motion.div variants={hoverLift} whileHover="whileHover"><Button onClick={handlePrev} className="bg-orange-500 hover:bg-orange-600 text-white">Previous</Button></motion.div>}
+              {step < 2 ? <motion.div variants={hoverLift} whileHover="whileHover"><Button onClick={handleNext} className="bg-orange-500 hover:bg-orange-600 text-white">Next</Button></motion.div> : <motion.div variants={hoverLift} whileHover="whileHover"><Button onClick={handleSubmit} className="bg-orange-500 hover:bg-orange-600 text-white">Submit</Button></motion.div>}
             </div>
           </CardContent>
         </Card>
@@ -236,6 +265,22 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
                     </label>
                   </fieldset>
                   <div className="mt-4">
+                    <label htmlFor="interestedIn" className="block mb-2 font-medium">Range & kW</label>
+                    <select
+                      id="interestedIn"
+                      name="interestedIn"
+                      value={formData.interestedIn}
+                      onChange={handleChange}
+                      className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                      <option value="">Select an option</option>
+                      <option value="1000 (25kW)">1000 (25kW)</option>
+                      <option value="2000 (25/30kW)">2000 (25/30kW)</option>
+                      <option value="4000 (25/30/35kW)">4000 (25/30/35kW)</option>
+                      <option value="8000 (25/30/35kW with Smart Controls)">8000 (25/30/35kW with Smart Controls)</option>
+                    </select>
+                  </div>
+                  <div className="mt-4">
                     <label htmlFor="preferredBrand" className="block mb-2 font-medium">Preferred Brand</label>
                     <select
                       id="preferredBrand"
@@ -253,21 +298,21 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ isModal = false }) =>
             </motion.div>
           </AnimatePresence>
           <div className="flex justify-between mt-4">
-            {step > 0 && <Button onClick={handlePrev} className="bg-teal-600 hover:bg-teal-700 text-white">Previous</Button>}
-            {step < 2 ? <Button onClick={handleNext} className="bg-teal-600 hover:bg-teal-700 text-white">Next</Button> : <Button onClick={handleSubmit} className="bg-teal-600 hover:bg-teal-700 text-white">Submit</Button>}
+            {step > 0 && <motion.div variants={hoverLift} whileHover="whileHover"><Button onClick={handlePrev} className="bg-orange-500 hover:bg-orange-600 text-white">Previous</Button></motion.div>}
+            {step < 2 ? <motion.div variants={hoverLift} whileHover="whileHover"><Button onClick={handleNext} className="bg-orange-500 hover:bg-orange-600 text-white">Next</Button></motion.div> : <motion.div variants={hoverLift} whileHover="whileHover"><Button onClick={handleSubmit} className="bg-orange-500 hover:bg-orange-600 text-white">Submit</Button></motion.div>}
           </div>
         </>
       )}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-modal="true">
-          <div className="bg-white p-4 rounded">
+          <div className="bg-white p-4 rounded shadow-lg">
             <p>Fixed Quote £2,200 – Book Next Day</p>
-            <Button onClick={() => setShowModal(false)}>Close</Button>
+            <motion.div variants={hoverLift} whileHover="whileHover"><Button onClick={() => setShowModal(false)} className="bg-orange-500 hover:bg-orange-600 text-white">Close</Button></motion.div>
           </div>
         </div>
       )}
       <Accordion />
-    </div>
+    </motion.div>
   );
 };
 

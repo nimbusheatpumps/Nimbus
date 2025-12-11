@@ -2,9 +2,19 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { getLiveGoogleReviews, type LiveGoogleReviews, type LiveReview } from '../lib/live-google-reviews';
 
 export default function FloatingTrustBubble() {
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+
+  const hoverLift = {
+    whileHover: { y: -10 },
+  };
+
   const [reviews, setReviews] = useState<LiveReview[]>([]);
   const [currentReview, setCurrentReview] = useState<LiveReview | null>(null);
 
@@ -27,7 +37,13 @@ export default function FloatingTrustBubble() {
 
   if (error) {
     return (
-      <div className="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg border max-w-sm z-50">
+      <motion.div
+        className="fixed bottom-4 right-4 bg-teal-50 p-4 rounded-lg shadow-lg border max-w-sm z-50"
+        initial="initial"
+        animate="animate"
+        variants={fadeIn}
+        whileHover={{ y: -10 }}
+      >
         <a
           href="https://g.page/r/yk7F28G9VpVstANKx/review"
           target="_blank"
@@ -36,14 +52,20 @@ export default function FloatingTrustBubble() {
         >
           See all our Google reviews
         </a>
-      </div>
+      </motion.div>
     );
   }
 
   if (!currentReview) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg border max-w-sm z-50 animate-bounce">
+    <motion.div
+      className="fixed bottom-4 right-4 bg-teal-50 p-4 rounded-lg shadow-lg border max-w-sm z-50 animate-bounce"
+      initial="initial"
+      animate="animate"
+      variants={fadeIn}
+      whileHover={{ y: -10 }}
+    >
       <div className="flex items-center mb-2">
         <img src={currentReview.authorPhotoUri} alt={currentReview.authorName} className="w-8 h-8 rounded-full mr-2" />
         <div>
@@ -58,6 +80,6 @@ export default function FloatingTrustBubble() {
       <p className="text-sm">{currentReview.text}</p>
       <p className="text-xs text-gray-500 mt-1">{currentReview.relativeTimeDescription}</p>
       <Link href="/reviews" className="text-blue-500 text-xs mt-2 block">View all reviews</Link>
-    </div>
+    </motion.div>
   );
 }

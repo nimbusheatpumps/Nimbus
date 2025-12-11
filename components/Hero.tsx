@@ -5,40 +5,62 @@ import BoilerQuoteForm from './BoilerQuoteForm';
 
 export default function Hero() {
   const [isOpen, setIsOpen] = useState(false);
+  const [src, setSrc] = useState('/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png');
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
+
+  const buttonVariants = {
+    ...itemVariants,
+    hover: { y: -5, transition: { duration: 0.2 } }
+  };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center" style={{ backgroundImage: 'url(https://source.unsplash.com/featured/?worcester,bosch,boiler,kitchen)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      <div className="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-blue-900/80"></div>
-      <div className="container mx-auto px-4 text-center relative z-10">
+    <section className="relative min-h-screen flex items-center justify-center">
+      <Image
+        src={src}
+        width={800}
+        height={600}
+        priority={true}
+        alt="Worcester Bosch Greenstar Hero by Bryan Whiteley"
+        onError={() => setSrc('https://source.unsplash.com/featured/?worcester%20bosch%204000%20boiler')}
+        className="absolute inset-0"
+      />
+      <div className="absolute inset-0 bg-teal-500/60"></div>
+      <motion.div
+        className="container mx-auto px-4 text-center relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold text-white mb-4"
+          variants={itemVariants}
+          className="text-5xl md:text-7xl font-bold text-white mb-8"
         >
-          Worcester Bosch Boilers Installed Next Day in North Lincolnshire – From <span className="text-orange-500">£1,790</span>
+          Worcester Bosch Greenstar 1000, 2000, 4000 & 8000 – 1000 from £1,790 (2000 £2,100+ | 4000 £2,400+ | 8000 £3,000+)
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl md:text-2xl text-white mb-8"
-        >
-          Bryan Whiteley
-        </motion.p>
         <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0, scale: [1, 1.05, 1] }}
-          transition={{ duration: 0.8, delay: 0.4, scale: { repeat: Infinity, duration: 2 } }}
+          variants={buttonVariants}
+          whileHover="hover"
           onClick={() => setIsOpen(true)}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-10 rounded-lg text-xl transition-colors"
+          className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-6 px-12 sm:py-4 sm:px-10 rounded-lg text-xl transition-colors"
         >
           Get Quote
         </motion.button>
-      </div>
+      </motion.div>
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setIsOpen(false)}>
-          <div className="bg-white p-6 rounded-lg max-w-md w-full mx-4 relative" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white p-6 rounded-lg max-w-md w-full mx-4 relative shadow-lg" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"

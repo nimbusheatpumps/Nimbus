@@ -7,6 +7,21 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/com
 import { cn } from "@/lib/utils"
 import { getLiveGoogleReviews, LiveReview } from "../lib/live-google-reviews"
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+}
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
 export default function Testimonials() {
   const [reviews, setReviews] = React.useState<LiveReview[]>([])
   const [loading, setLoading] = React.useState(true)
@@ -41,7 +56,7 @@ export default function Testimonials() {
           href="https://g.page/r/yk7F28G9VpVstANKx/review"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors"
         >
           See all our Google reviews
         </a>
@@ -52,9 +67,10 @@ export default function Testimonials() {
   return (
     <motion.div
       className="bg-teal-900 py-8"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial="hidden"
+      whileInView="visible"
+      variants={containerVariants}
+      viewport={{ once: true }}
     >
       <Carousel
         plugins={[
@@ -64,46 +80,47 @@ export default function Testimonials() {
         ]}
         className="w-full max-w-4xl mx-auto"
       >
-        <CarouselContent>
-          {reviews.map((review, index) => (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="p-1">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-white/20">
-                  <div className="flex items-center mb-4">
-                    <img
-                      src={review.authorPhotoUri}
-                      alt={review.authorName}
-                      className="w-10 h-10 rounded-full mr-3"
-                    />
-                    <div>
-                      <h4 className="font-semibold text-white">{review.authorName}</h4>
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <span
-                            key={i}
-                            className={cn(
-                              "text-lg transition-all duration-200 cursor-pointer",
-                              i < review.rating ? "text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" : "text-gray-300"
-                            )}
-                          >
-                            ★
-                          </span>
-                        ))}
+        <motion.div variants={containerVariants}>
+          <CarouselContent>
+            {reviews.map((review, index) => (
+              <CarouselItem key={index} className="basis-full sm:basis-1/2 lg:basis-1/3">
+                <div className="p-1">
+                  <motion.div
+                    className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-white/20"
+                    variants={cardVariants}
+                    whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                  >
+                    <div className="flex items-center mb-4">
+                      <img
+                        src={review.authorPhotoUri}
+                        alt={review.authorName}
+                        className="w-10 h-10 rounded-full mr-3"
+                      />
+                      <div>
+                        <h4 className="font-semibold text-white">{review.authorName}</h4>
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <span
+                              key={i}
+                              className={cn(
+                                "text-lg transition-all duration-200 cursor-pointer",
+                                i < review.rating ? "text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" : "text-gray-300"
+                              )}
+                            >
+                              ★
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <p className="text-gray-200 italic">"{review.text}"</p>
-                  <img
-                    src="/images/worcester-bosch/kitchen-install.jpg"
-                    alt="Worcester Bosch Kitchen Installation"
-                    className="mt-4 w-full h-32 object-cover rounded"
-                  />
-                  <p className="text-sm text-gray-300 mt-2">{review.relativeTimeDescription}</p>
+                    <p className="text-gray-200 italic">"{review.text}"</p>
+                    <p className="text-sm text-gray-300 mt-2">{review.relativeTimeDescription}</p>
+                  </motion.div>
                 </div>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </motion.div>
       </Carousel>
     </motion.div>
   )

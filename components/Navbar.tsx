@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,10 +15,22 @@ import { Button } from '@/components/ui/button';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 
 const Navbar: React.FC = () => {
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 w-full bg-white shadow z-50" aria-label="Main navigation">
+    <motion.nav
+      className="fixed top-0 w-full bg-teal-50 shadow-lg z-50"
+      aria-label="Main navigation"
+      initial="initial"
+      animate="animate"
+      variants={fadeIn}
+      whileHover={{ y: -5 }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="text-xl font-bold" aria-label="Nimbus Heat Pumps home">
@@ -110,7 +123,7 @@ const Navbar: React.FC = () => {
           </Sheet>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

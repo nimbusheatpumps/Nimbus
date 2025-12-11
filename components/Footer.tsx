@@ -1,29 +1,46 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
+
+  const hoverLift = {
+    whileHover: { y: -10 },
+  };
+
   return (
-    <footer className="bg-teal-600 text-white py-8" role="contentinfo" aria-label="Site footer">
+    <motion.footer
+      className="bg-teal-600 text-white py-8 shadow-lg"
+      role="contentinfo"
+      aria-label="Site footer"
+      initial="initial"
+      animate="animate"
+      variants={fadeIn}
+    >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
+          <motion.div variants={hoverLift} whileHover="whileHover">
             <h3 className="text-lg font-semibold mb-4" id="services-heading">Services</h3>
             <ul className="space-y-2" aria-labelledby="services-heading">
               <li><Link href="/boilers" className="hover:underline" aria-label="Boiler services">Boiler</Link></li>
               <li><Link href="/heat-pumps" className="hover:underline" aria-label="Heat pump services">Heat Pumps</Link></li>
               <li><Link href="/maintenance" className="hover:underline" aria-label="Maintenance services">Maintenance</Link></li>
             </ul>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div variants={hoverLift} whileHover="whileHover">
             <h3 className="text-lg font-semibold mb-4" id="locations-heading">Locations</h3>
             <ul className="space-y-2" aria-labelledby="locations-heading">
               <li><Link href="/locations/scunthorpe" className="hover:underline" aria-label="Scunthorpe location">Scunthorpe</Link></li>
               <li><Link href="/locations/lincoln" className="hover:underline" aria-label="Lincoln location">Lincoln</Link></li>
               <li><Link href="/locations/hull" className="hover:underline" aria-label="Hull location">Hull</Link></li>
             </ul>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div variants={hoverLift} whileHover="whileHover">
             <h3 className="text-lg font-semibold mb-4" id="contact-heading">Contact</h3>
             <address className="not-italic" aria-labelledby="contact-heading">
               3 Crossbeck Road, Scunthorpe, North Lincolnshire, DN16 3HR, GB<br />
@@ -46,8 +63,8 @@ const Footer: React.FC = () => {
                 <p className="text-sm font-semibold">Gas Safe Registered – 966812</p>
               </div>
             </div>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div variants={hoverLift} whileHover="whileHover">
             <h3 className="text-lg font-semibold mb-4" id="social-heading">Social</h3>
             <div className="flex space-x-4" aria-labelledby="social-heading">
               <a href="https://facebook.com/nimbusheatpumps" aria-label="Facebook page" target="_blank" rel="noopener noreferrer" className="hover:opacity-75 transition-opacity">
@@ -66,13 +83,13 @@ const Footer: React.FC = () => {
                 </svg>
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center">
           <p>&copy; 2023 Nimbus Heat Pumps. All rights reserved.</p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

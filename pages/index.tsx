@@ -1,5 +1,7 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import Hero from '../components/Hero';
 import TrustBar from '../components/TrustBar';
 import BoilerQuoteForm from '../components/BoilerQuoteForm';
@@ -74,6 +76,10 @@ interface HomeProps {
 
 export default function Home({ data }: HomeProps) {
 console.log('Home component rendering with data:', data)
+  const [src1000, setSrc1000] = useState('/images/worcester-bosch/Worcester_Bosch_1000_Which_24_584x550.jpg');
+  const [src2000, setSrc2000] = useState('/images/worcester-bosch/Worcs_Condens_2000_Front.jpg');
+  const [src4000, setSrc4000] = useState('/images/worcester-bosch/Worcester_Bosch_4000_Combi_Which_24_584x550.jpg');
+  const [src8000, setSrc8000] = useState('/images/worcester-bosch/Worcester_Bosch_8000_584x550.jpg');
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -151,7 +157,7 @@ console.log('Home component rendering with data:', data)
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <Card>
                 <CardHeader>
-                  <img src="/images/worcester-bosch/greenstar-30i-front.png" alt="Greenstar 1000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <Image src={src1000} onError={() => setSrc1000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 1000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
                   <CardTitle>Greenstar 1000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -161,7 +167,7 @@ console.log('Home component rendering with data:', data)
               </Card>
               <Card>
                 <CardHeader>
-                  <img src="/images/worcester/greenstar-30si-front.png" alt="Greenstar 2000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <Image src={src2000} onError={() => setSrc2000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 2000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
                   <CardTitle>Greenstar 2000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -171,7 +177,7 @@ console.log('Home component rendering with data:', data)
               </Card>
               <Card>
                 <CardHeader>
-                  <img src="/images/worcester/greenstar-4000-front.png" alt="Greenstar 4000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <Image src={src4000} onError={() => setSrc4000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 4000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
                   <CardTitle>Greenstar 4000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -181,7 +187,7 @@ console.log('Home component rendering with data:', data)
               </Card>
               <Card>
                 <CardHeader>
-                  <img src="/images/worcester/greenstar-8000-front.png" alt="Greenstar 8000" className="w-full h-48 object-cover rounded-t-lg" />
+                  <Image src={src8000} onError={() => setSrc8000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 8000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
                   <CardTitle>Greenstar 8000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -203,22 +209,22 @@ console.log('Home component rendering with data:', data)
             <h2 className="text-3xl font-bold text-center mb-8">Why Choose Worcester Bosch with Nimbus?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16" />
+                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16 object-contain" />
                 <h3 className="text-xl font-semibold mb-2">Which? Best Buy</h3>
                 <p>Recognized for quality and reliability.</p>
               </div>
               <div className="text-center">
-                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16" />
+                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16 object-contain" />
                 <h3 className="text-xl font-semibold mb-2">Quiet Mark</h3>
                 <p>Certified for low noise operation.</p>
               </div>
               <div className="text-center">
-                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16" />
+                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16 object-contain" />
                 <h3 className="text-xl font-semibold mb-2">12-year guarantee</h3>
                 <p>Extended warranty for peace of mind.</p>
               </div>
               <div className="text-center">
-                <img src="https://source.unsplash.com/1920x1080/?boiler,kitchen" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16" />
+                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16 object-contain" />
                 <h3 className="text-xl font-semibold mb-2">MCS certified for grants</h3>
                 <p>Eligible for government incentives.</p>
               </div>

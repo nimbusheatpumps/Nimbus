@@ -6,15 +6,15 @@ interface Service {
   title: string;
   price: string;
   description: string;
-  location: string;
   image: string;
+  alt: string;
 }
 
 const services: Service[] = [
-  { title: 'Worcester Bosch Combi Boilers', price: '£1,790', description: 'Greenstar 30i, 94% efficiency, 10-year warranty', location: 'Scunthorpe', image: '/images/worcester-bosch/greenstar-30i-front.png' },
-  { title: 'Worcester Bosch System Boilers', price: '£1,950', description: 'Greenstar 25Si', location: 'Scunthorpe', image: '/images/worcester-bosch/greenstar-30i-system.png' },
-  { title: 'Emergency Worcester Repairs', price: '£99 callout', description: '', location: 'Scunthorpe', image: '/images/worcester-bosch/gas-safe-worcester.png' },
-  { title: 'Upgrade to Greenstar Heat-Only', price: '£2,100', description: '', location: 'Scunthorpe', image: '/images/worcester-bosch/greenstar-8000-life.png' },
+  { title: '1000', price: '£1,790', description: '25kW combi, small homes', image: '/images/worcester-bosch/WB_1000.jpg', alt: 'Worcester Bosch Greenstar 1000 boiler' },
+  { title: '2000', price: '£2,100', description: '25/30kW combi, 1-2 baths', image: '/images/worcester-bosch/Worcester_2000_Left.jpg', alt: 'Worcester Bosch Greenstar 2000 boiler' },
+  { title: '4000', price: '£2,400', description: '25/30/35kW combi, 2-3 baths', image: '/images/worcester-bosch/4000_Front_Facing.jpg', alt: 'Worcester Bosch Greenstar 4000 boiler' },
+  { title: '8000', price: '£3,000+', description: '25/30/35kW combi with Smart Controls, 3+ baths', image: '/images/worcester-bosch/8000_Style_Black.jpg', alt: 'Worcester Bosch Greenstar 8000 boiler' },
 ];
 
 const schema = {
@@ -24,7 +24,8 @@ const schema = {
   "description": "Professional boiler installation, replacement, repairs, and servicing by Scunthorpe experts",
   "provider": { "@type": "Organization", "name": "Nimbus Heat Pumps" },
   "areaServed": ["Scunthorpe", "Grimsby"],
-  "serviceType": ["New Install", "Replacement", "Repairs", "Servicing", "Heat Pump"]
+  "serviceType": ["New Install", "Replacement", "Repairs", "Servicing", "Heat Pump"],
+  "brand": "Worcester Bosch"
 };
 
 interface ServiceGridProps {
@@ -32,9 +33,8 @@ interface ServiceGridProps {
 }
 
 export default function ServiceGrid({ services: propServices }: ServiceGridProps) {
-  const [filter, setFilter] = useState('all');
+  const [imageSrcs, setImageSrcs] = useState(services.map(s => s.image));
   const displayServices = propServices || services;
-  const filteredServices = displayServices.filter(s => filter === 'all' || s.location.toLowerCase().includes(filter.toLowerCase()));
 
   return (
     <motion.section
@@ -48,35 +48,30 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
         <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-3xl font-bold text-center mb-8 text-primary">
           Boiler Services - Scunthorpe Experts
         </motion.h2>
-        <input
-          type="text"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          placeholder="Filter by location (e.g., Grimsby)"
-          className="w-full max-w-md mx-auto block mb-8 p-2 border rounded"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {filteredServices.map((service, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
             <motion.div
-              key={`${service.title}-${service.location}-${index}`}
+              key={`${service.title}-${index}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -10 }}
               transition={{ delay: index * 0.1, duration: 0.2 }}
             >
-              <div className="p-6 bg-white rounded-lg shadow-sm h-full hover:shadow-lg transition-shadow border border-primary">
+              <div className="p-6 bg-teal-50 rounded-lg shadow-lg h-full hover:shadow-xl transition-all duration-300 border border-primary">
                 <Image
-                  src={service.image}
-                  alt={service.title}
-                  width={300}
-                  height={200}
+                  src={imageSrcs[index]}
+                  onError={() => setImageSrcs(prev => prev.map((src, i) => i === index ? `https://source.unsplash.com/featured/?worcester%20bosch%20${service.title}%20boiler` : src))}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  priority={index === 0}
+                  width={600}
+                  height={450}
+                  alt={service.alt}
                   className="w-full h-48 object-cover rounded mb-4"
                 />
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-lg font-bold text-blue-600 mb-2">{service.price}</p>
                 <p className="text-gray-600 mb-2">{service.description}</p>
-                <p className="text-sm text-gray-500 mb-4">Location: {service.location}</p>
-                <button className="bg-accent text-white px-4 py-2 rounded w-full">Quote</button>
+                <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded w-full">Quote</button>
               </div>
             </motion.div>
           ))}
@@ -85,9 +80,3 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
     </motion.section>
   );
 }
-
-// Filter test
-export const testFilter = () => {
-  const filtered = services.filter(s => s.location.toLowerCase().includes('grimsby'));
-  return filtered.length === 1 && filtered[0].location === 'Grimsby';
-};

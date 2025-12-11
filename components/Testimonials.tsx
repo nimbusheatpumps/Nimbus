@@ -82,12 +82,12 @@ export default function Testimonials() {
         className="w-full max-w-4xl mx-auto"
       >
         <motion.div variants={containerVariants}>
-          <CarouselContent>
+          <CarouselContent className="gap-4">
             {reviews.map((review, index) => (
               <CarouselItem key={index} className="basis-full sm:basis-1/2 lg:basis-1/3">
                 <div className="p-1">
                   <motion.div
-                    className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
+                    className="bg-white shadow-md rounded-lg p-4"
                     variants={cardVariants}
                     whileHover={{ y: -10, transition: { duration: 0.2 } }}
                   >
@@ -104,15 +104,19 @@ export default function Testimonials() {
                         <h4 className="font-semibold text-gray-900">{review.authorName}</h4>
                         <div className="flex items-center">
                           {[...Array(5)].map((_, i) => (
-                            <span
+                            <svg
                               key={i}
+                              width="20"
+                              height="20"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
                               className={cn(
-                                "text-lg transition-all duration-200 cursor-pointer",
+                                "transition-all duration-200",
                                 i < review.rating ? "text-yellow-400 hover:drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]" : "text-gray-300"
                               )}
                             >
-                              ★
-                            </span>
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
                           ))}
                         </div>
                       </div>

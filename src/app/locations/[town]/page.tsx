@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function LocationPage() {
   const params = useParams();
   const town = params.town as string;
+  const [fallback, setFallback] = useState('');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -49,12 +51,15 @@ export default function LocationPage() {
     <>
       <motion.div className="section relative min-h-screen flex items-center justify-center" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }}>
         <Image
-          src={data.image}
-          fill={true}
+          src={fallback || "/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png"}
+          width={1920}
+          height={1080}
           priority={true}
-          quality={90}
-          alt={`${data.name} location`}
+          quality={95}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          alt="Worcester Bosch Greenstar Hero boiler by Bryan Whiteley"
           className="absolute inset-0 object-cover"
+          onError={() => setFallback('https://source.unsplash.com/random?worcester+bosch+hero+boiler')}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-teal-900/80 to-blue-900/80"></div>
         <motion.div

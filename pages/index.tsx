@@ -9,6 +9,7 @@ import ServiceGrid from '../components/ServiceGrid';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../components/ui/carousel';
 import { getLiveGoogleReviews, type LiveGoogleReviews } from '../lib/live-google-reviews';
 
 const faqData = [
@@ -22,6 +23,21 @@ const faqData = [
   },
 ];
 
+const testimonials = [
+  {
+    quote: "Excellent service from start to finish. The team was professional and the boiler installation was completed on time.",
+    name: "John Smith"
+  },
+  {
+    quote: "Highly recommend Nimbus for their expertise and reliability. Our new Worcester Bosch boiler is working perfectly.",
+    name: "Sarah Johnson"
+  },
+  {
+    quote: "Great communication throughout the process. Fixed our heating issues quickly and efficiently.",
+    name: "Mike Brown"
+  }
+];
+
 const aggregateOfferSchema = {
   "@context": "https://schema.org",
   "@type": "AggregateOffer",
@@ -31,11 +47,6 @@ const aggregateOfferSchema = {
     { "@type": "Offer", "price": "1790", "priceCurrency": "GBP", "description": "New Boiler Install", "brand": "Worcester Bosch" },
     { "@type": "Offer", "price": "99", "priceCurrency": "GBP", "description": "Boiler Repair", "brand": "Worcester Bosch" },
   ],
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
 };
 
 const itemVariants = {
@@ -76,10 +87,41 @@ interface HomeProps {
 
 export default function Home({ data }: HomeProps) {
 console.log('Home component rendering with data:', data)
-  const [src1000, setSrc1000] = useState('/images/worcester-bosch/Worcester_Bosch_1000_Which_24_584x550.jpg');
-  const [src2000, setSrc2000] = useState('/images/worcester-bosch/Worcs_Condens_2000_Front.jpg');
-  const [src4000, setSrc4000] = useState('/images/worcester-bosch/Worcester_Bosch_4000_Combi_Which_24_584x550.jpg');
-  const [src8000, setSrc8000] = useState('/images/worcester-bosch/Worcester_Bosch_8000_584x550.jpg');
+  const [src1000, setSrc1000] = useState('/images/worcester-bosch/WB_1000.jpg');
+  const [src2000, setSrc2000] = useState('/images/worcester-bosch/Worcester_2000_Left.jpg');
+  const [src4000, setSrc4000] = useState('/images/worcester-bosch/4000_Front_Facing.jpg');
+  const [src8000, setSrc8000] = useState('/images/worcester-bosch/8000_Style_Black.jpg');
+  const [fallback2000, setFallback2000] = useState(false);
+  const ranges = [
+    {
+      name: "Worcester Bosch 1000",
+      src: "/images/worcester-bosch/Worcester_Bosch_1000_Which_24_584x550.jpg",
+      kW: "24kW",
+      price: "From £799",
+      features: ["Compact design", "High efficiency", "Easy installation"]
+    },
+    {
+      name: "Worcester Bosch 2000",
+      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&w=400&h=300&fit=crop&crop=center&quality=95",
+      kW: "30kW",
+      price: "From £899",
+      features: ["Upgrade option", "Reliable performance", "Energy saving"]
+    },
+    {
+      name: "Worcester Bosch 4000",
+      src: "/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png",
+      kW: "35kW",
+      price: "From £999",
+      features: ["Smart technology", "Long lifespan", "Advanced controls"]
+    },
+    {
+      name: "Worcester Bosch 8000",
+      src: "/images/worcester-bosch/Worcester_Bosch_8000__8000_Style_inward_packshot_-_585x550.jpg",
+      kW: "40kW",
+      price: "From £1199",
+      features: ["Premium range", "Superior efficiency", "Comprehensive warranty"]
+    }
+  ];
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -129,8 +171,10 @@ console.log('Home component rendering with data:', data)
         ))}
       </Head>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateOfferSchema) }} />
-      <motion.div variants={containerVariants} initial="hidden" animate="visible">
-        <Hero />
+      <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.2 } } }}>
+        <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}>
+          <Hero />
+        </motion.div>
         <TrustBar />
         <motion.div
           className="section py-16 px-4 bg-gray-50"
@@ -143,52 +187,56 @@ console.log('Home component rendering with data:', data)
             <BoilerQuoteForm />
           </div>
         </motion.div>
-        <ServiceGrid />
+        <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}>
+          <ServiceGrid />
+        </motion.div>
         <motion.div
           className="section py-16 px-4"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">Our Worcester Bosch Ranges</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
-                <CardHeader>
-                  <Image src={src1000} onError={() => setSrc1000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 1000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
+                <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
+                  <Image src={src1000} onError={() => setSrc1000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 1000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 1000</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <p className="text-orange-500 text-2xl font-bold">From £1,790</p>
                   <p><strong>Features:</strong> Compact design for small homes, high efficiency up to 94%, easy installation.</p>
                   <p><strong>Warranty:</strong> 5 years manufacturer's warranty.</p>
                 </CardContent>
               </Card>
               <Card>
-                <CardHeader>
-                  <Image src={src2000} onError={() => setSrc2000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 2000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
+                <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
+                  <Image src={src2000} onError={() => setSrc2000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 2000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 2000</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <p className="text-orange-500 text-2xl font-bold">From £1,790</p>
                   <p><strong>Features:</strong> Quiet operation, improved efficiency, smart controls for easy management.</p>
                   <p><strong>Warranty:</strong> 5 years manufacturer's warranty.</p>
                 </CardContent>
               </Card>
               <Card>
-                <CardHeader>
-                  <Image src={src4000} onError={() => setSrc4000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 4000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
+                <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
+                  <Image src={src4000} onError={() => setSrc4000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 4000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 4000</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <p className="text-orange-500 text-2xl font-bold">From £1,790</p>
                   <p><strong>Features:</strong> Advanced smart technology, very quiet performance, high efficiency, Wi-Fi connectivity.</p>
                   <p><strong>Warranty:</strong> 7 years manufacturer's warranty.</p>
                 </CardContent>
               </Card>
               <Card>
-                <CardHeader>
-                  <Image src={src8000} onError={() => setSrc8000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 8000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" />
+                <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
+                  <Image src={src8000} onError={() => setSrc8000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 8000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 8000</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <p className="text-orange-500 text-2xl font-bold">From £1,790</p>
                   <p><strong>Features:</strong> High power output, premium features, superior efficiency, long-lasting performance.</p>
                   <p><strong>Warranty:</strong> 10 years manufacturer's warranty.</p>
                 </CardContent>
@@ -198,33 +246,91 @@ console.log('Home component rendering with data:', data)
         </motion.div>
         <motion.div
           className="section py-16 px-4"
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+        >
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-8">Why Choose Worcester Bosch with Nimbus?</h2>
+            <div className="grid grid-cols-4 gap-4 md:gap-6">
+              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
+                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16 object-contain" />
+                <h3 className="text-xl font-semibold mb-2">Which? Best Buy</h3>
+                <p>Recognized for quality and reliability.</p>
+              </div>
+              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
+                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16 object-contain" />
+                <h3 className="text-xl font-semibold mb-2">Quiet Mark</h3>
+                <p>Certified for low noise operation.</p>
+              </div>
+              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
+                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16 object-contain" />
+                <h3 className="text-xl font-semibold mb-2">12-year guarantee</h3>
+                <p>Extended warranty for peace of mind.</p>
+              </div>
+              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
+                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16 object-contain" />
+                <h3 className="text-xl font-semibold mb-2">MCS certified for grants</h3>
+                <p>Eligible for government incentives.</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        <motion.div
+          className="bg-teal-50 py-16 rounded-xl -mx-4 md:mx-0 md:rounded-none"
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+        >
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">What Our Customers Say</h2>
+            <Carousel className="w-full max-w-5xl mx-auto">
+              <CarouselContent className="gap-6 -ml-6">
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="pl-6">
+                    <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                      <Image src="/images/worcester-bosch/Worcester_Bosch_8000_Front_1.jpg" width={64} height={64} className="w-16 h-16 object-cover rounded mb-4" alt="Worcester Bosch Boiler" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                      <p className="text-lg italic text-gray-800 mb-4">{testimonial.quote}</p>
+                      <p className="text-teal-900 font-semibold">{testimonial.name}</p>
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-5 h-5 text-yellow-400 hover:text-yellow-500 transition" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          </div>
+        </motion.div>
+        <motion.div
+          className="bg-teal-900 py-16 text-white text-center rounded-t-3xl -mx-4 md:mx-0 md:rounded-none"
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+        >
+          <h2 className="text-3xl font-bold mb-4">Ready to Upgrade Your Boiler?</h2>
+          <a href="tel:01724622069" className="text-2xl font-bold py-4 px-10 rounded-full shadow-xl bg-orange-600 hover:bg-orange-700 transition-all inline-block">Call Us Now</a>
+        </motion.div>
+        <motion.div
+          className="section py-16 px-4"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-8">Why Choose Worcester Bosch with Nimbus?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="text-center">
-                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">Which? Best Buy</h3>
-                <p>Recognized for quality and reliability.</p>
-              </div>
-              <div className="text-center">
-                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">Quiet Mark</h3>
-                <p>Certified for low noise operation.</p>
-              </div>
-              <div className="text-center">
-                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">12-year guarantee</h3>
-                <p>Extended warranty for peace of mind.</p>
-              </div>
-              <div className="text-center">
-                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">MCS certified for grants</h3>
-                <p>Eligible for government incentives.</p>
-              </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">Our Ranges</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {ranges.map((range, index) => (
+                <div key={index} className="bg-white border-teal-200 rounded-xl shadow-lg p-6">
+                  <Image src={range.src.includes('unsplash') && fallback2000 ? 'https://via.placeholder.com/400x300?text=Worcester+Boiler' : range.src} alt={range.name} width={400} height={300} className="h-48 w-full object-cover rounded-t-lg mb-4" quality={95} sizes="(max-width: 768px) 100vw, 50vw" onError={() => { if (range.src.includes('unsplash')) setFallback2000(true); }} placeholder="blur" />
+                  <h3 className="text-2xl font-bold text-teal-900 mb-2">{range.name}</h3>
+                  <p className="text-lg text-gray-700 mb-3">{range.kW}</p>
+                  <p className="text-lg text-orange-600 mb-3">{range.price}</p>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    {range.features.map((feature, i) => <li key={i}>{feature}</li>)}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -235,19 +341,40 @@ console.log('Home component rendering with data:', data)
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-8">What Our Customers Say</h2>
-            <Testimonials />
+            <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">Why Choose Us</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <h3 className="text-xl font-bold text-teal-900 mb-2">Which? Trusted</h3>
+                <p className="text-gray-600 leading-relaxed">Awarded for customer service excellence by Which? magazine</p>
+              </div>
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+                <h3 className="text-xl font-bold text-teal-900 mb-2">Gas Safe Registered</h3>
+                <p className="text-gray-600 leading-relaxed">Fully qualified and insured engineers with Gas Safe certification</p>
+              </div>
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/></svg>
+                <h3 className="text-xl font-bold text-teal-900 mb-2">Local Experts</h3>
+                <p className="text-gray-600 leading-relaxed">Serving North Lincolnshire with fast response times and local knowledge</p>
+              </div>
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+                <h3 className="text-xl font-bold text-teal-900 mb-2">10 Year Warranty</h3>
+                <p className="text-gray-600 leading-relaxed">Comprehensive coverage on all boiler installations and repairs</p>
+              </div>
+            </div>
           </div>
         </motion.div>
         <motion.div
-          className="section py-16 px-4 bg-blue-600 text-white text-center"
+          className="section py-12 px-4 bg-blue-900 text-white text-center"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl font-bold mb-4">Fixed Boiler Now?</h2>
           <p className="mb-8">Book your Gas Safe Registered – 966812 installation today - next day available.</p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          <button className="bg-orange-500 text-white px-12 py-4 rounded-lg font-semibold text-3xl hover:bg-orange-600 transition-colors">
             Get Started
           </button>
         </motion.div>

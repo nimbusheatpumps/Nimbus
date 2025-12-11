@@ -45,7 +45,7 @@ const itemVariants = {
 
 function FAQAccordion({ faq }: { faq: typeof faqData }) {
   return (
-    <section className="py-16 px-4">
+    <motion.div className="section py-16 px-4" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }}>
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
         {faq.map((item, index) => (
@@ -66,7 +66,7 @@ function FAQAccordion({ faq }: { faq: typeof faqData }) {
           }))
         })
       }} />
-    </section>
+    </motion.div>
   );
 }
 
@@ -132,24 +132,22 @@ console.log('Home component rendering with data:', data)
       <motion.div variants={containerVariants} initial="hidden" animate="visible">
         <Hero />
         <TrustBar />
-        <motion.section
-          variants={itemVariants}
-          className="py-16 px-4 bg-gray-50"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        <motion.div
+          className="section py-16 px-4 bg-gray-50"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8">Get Your Instant Boiler Quote</h2>
             <BoilerQuoteForm />
           </div>
-        </motion.section>
+        </motion.div>
         <ServiceGrid />
-        <motion.section
-          variants={itemVariants}
-          className="py-16 px-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        <motion.div
+          className="section py-16 px-4"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-6xl mx-auto">
@@ -197,12 +195,11 @@ console.log('Home component rendering with data:', data)
               </Card>
             </div>
           </div>
-        </motion.section>
-        <motion.section
-          variants={itemVariants}
-          className="py-16 px-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        </motion.div>
+        <motion.div
+          className="section py-16 px-4"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-6xl mx-auto">
@@ -230,24 +227,22 @@ console.log('Home component rendering with data:', data)
               </div>
             </div>
           </div>
-        </motion.section>
-        <motion.section
-          variants={itemVariants}
-          className="py-16 px-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        </motion.div>
+        <motion.div
+          className="section py-16 px-4"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">What Our Customers Say</h2>
             <Testimonials />
           </div>
-        </motion.section>
-        <motion.section
-          variants={itemVariants}
-          className="py-16 px-4 bg-blue-600 text-white text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        </motion.div>
+        <motion.div
+          className="section py-16 px-4 bg-blue-600 text-white text-center"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl font-bold mb-4">Fixed Boiler Now?</h2>
@@ -255,7 +250,7 @@ console.log('Home component rendering with data:', data)
           <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
             Get Started
           </button>
-        </motion.section>
+        </motion.div>
         <Footer />
       </motion.div>
       <FAQAccordion faq={faqData} />

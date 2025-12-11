@@ -6,6 +6,7 @@ import Autoplay from "embla-carousel-autoplay"
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 import { cn } from "@/lib/utils"
 import { getLiveGoogleReviews, LiveReview } from "../lib/live-google-reviews"
+import Image from 'next/image'
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -66,7 +67,7 @@ export default function Testimonials() {
 
   return (
     <motion.div
-      className="bg-teal-900 py-8"
+      className="bg-teal-50 py-16"
       initial="hidden"
       whileInView="visible"
       variants={containerVariants}
@@ -86,18 +87,21 @@ export default function Testimonials() {
               <CarouselItem key={index} className="basis-full sm:basis-1/2 lg:basis-1/3">
                 <div className="p-1">
                   <motion.div
-                    className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-white/20"
+                    className="bg-white rounded-lg shadow-lg p-6 border border-gray-200"
                     variants={cardVariants}
                     whileHover={{ y: -10, transition: { duration: 0.2 } }}
                   >
                     <div className="flex items-center mb-4">
-                      <img
+                      <Image
                         src={review.authorPhotoUri}
                         alt={review.authorName}
+                        width={40}
+                        height={40}
+                        quality={90}
                         className="w-10 h-10 rounded-full mr-3"
                       />
                       <div>
-                        <h4 className="font-semibold text-white">{review.authorName}</h4>
+                        <h4 className="font-semibold text-gray-900">{review.authorName}</h4>
                         <div className="flex items-center">
                           {[...Array(5)].map((_, i) => (
                             <span
@@ -113,8 +117,8 @@ export default function Testimonials() {
                         </div>
                       </div>
                     </div>
-                    <p className="text-gray-200 italic">"{review.text}"</p>
-                    <p className="text-sm text-gray-300 mt-2">{review.relativeTimeDescription}</p>
+                    <p className="text-gray-700 italic">"{review.text}"</p>
+                    <p className="text-sm text-gray-500 mt-2">{review.relativeTimeDescription}</p>
                   </motion.div>
                 </div>
               </CarouselItem>

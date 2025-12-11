@@ -29,26 +29,32 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center">
       <Image
         src={src}
-        width={800}
-        height={600}
+        fill={true}
         priority={true}
-        alt="Worcester Bosch Greenstar Hero by Bryan Whiteley"
-        onError={() => setSrc('https://source.unsplash.com/featured/?worcester%20bosch%204000%20boiler')}
+        quality={90}
+        alt="Worcester Bosch Greenstar 4000 boiler by Bryan Whiteley"
+        onError={() => setSrc('https://source.unsplash.com/featured/?worcester%20bosch%204000%20boiler&q=90&sizes=100vw')}
         className="absolute inset-0"
       />
-      <div className="absolute inset-0 bg-teal-500/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-teal-900/80 to-blue-900/80"></div>
       <motion.div
-        className="container mx-auto px-4 text-center relative z-10"
+        className="text-center relative z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.h1
           variants={itemVariants}
-          className="text-5xl md:text-7xl font-bold text-white mb-8"
+          className="font-poppins text-5xl md:text-7xl font-bold text-white mb-8"
         >
-          Worcester Bosch Greenstar 1000, 2000, 4000 & 8000 – 1000 from £1,790 (2000 £2,100+ | 4000 £2,400+ | 8000 £3,000+)
+          Worcester Bosch Greenstar 1000, 2000, 4000 & 8000 – 1000 from <span className="text-orange-400">£1,790</span> (2000 <span className="text-orange-400">£2,100+</span> | 4000 <span className="text-orange-400">£2,400+</span> | 8000 <span className="text-orange-400">£3,000+</span>)
         </motion.h1>
+        <motion.p
+          variants={itemVariants}
+          className="text-lg text-gray-200 mb-8"
+        >
+          Bryan Whiteley
+        </motion.p>
         <motion.button
           variants={buttonVariants}
           whileHover="hover"

@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
@@ -57,9 +59,10 @@ export default function LocationPage() {
           priority={true}
           quality={95}
           sizes="(max-width: 768px) 100vw, 50vw"
+          placeholder="blur"
           alt="Worcester Bosch Greenstar Hero boiler by Bryan Whiteley"
           className="absolute inset-0 object-cover"
-          onError={() => setFallback('https://source.unsplash.com/random?worcester+bosch+hero+boiler')}
+          onError={() => setFallback('https://via.placeholder.com/800x600?text=4000+Boiler')}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-teal-900/80 to-blue-900/80"></div>
         <motion.div

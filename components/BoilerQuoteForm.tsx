@@ -52,16 +52,16 @@ const BoilerQuoteForm: React.FC = () => {
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="border-teal-500 rounded-2xl shadow-2xl max-w-lg mx-auto bg-white p-8"
+          className="border border-teal-500 rounded-2xl shadow-2xl max-w-lg mx-auto bg-white p-8"
         >
           <div className="w-full bg-teal-200 rounded-full h-2 mb-6">
             <div
-              className="bg-orange-500 rounded-full h-full"
+              className="bg-orange-500 rounded-full h-full transition-all duration-300"
               style={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
             ></div>
           </div>
 
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center gap-2 mb-6">
             {Array.from({ length: totalSteps }, (_, i) => (
               <div
                 key={i}

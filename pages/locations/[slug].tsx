@@ -52,9 +52,12 @@ export default function LocationPage() {
           src={data.image}
           fill={true}
           priority={true}
-          quality={90}
+          quality={95}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          placeholder="blur"
           alt={`${data.name} location`}
           className="absolute inset-0 object-cover"
+          onError={() => {}}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-teal-900/80 to-blue-900/80"></div>
         <motion.div

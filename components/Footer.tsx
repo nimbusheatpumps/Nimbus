@@ -14,16 +14,20 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-teal-900 text-white py-12">
+    <footer className="bg-teal-900 text-white py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
           <div>
             <Image
               src="/wp-content/uploads/2025/06/Nimbus-Heat-Pumps-Logo.png"
               alt="Nimbus Heat Pumps Logo"
               width={128}
               height={128}
+              quality={95}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              placeholder="blur"
               className="w-32 mb-4"
+              onError={() => {}}
             />
             <h2 className="text-xl font-bold">Nimbus Heat Pumps</h2>
           </div>
@@ -48,20 +52,22 @@ const Footer: React.FC = () => {
             <h3 className="font-bold mb-2">Contact</h3>
             <p>Phone: <a href="tel:01724622069" className="text-orange-400 font-bold hover:underline">01724 622069</a></p>
             <p>Email: info@nimbusheatpumps.co.uk</p>
-            <p>Address: Scunthorpe, DN15 8QR</p>
+            <p className="text-gray-300">3 Crossbeck Road, Scunthorpe, North Lincolnshire, DN16 3HR</p>
             <Image
-              src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png"
-              alt="Gas Safe Registered"
-              width={96}
-              height={96}
-              className="w-24 mt-4"
+              src="/gas-safe-badge.png"
+              alt="Gas Safe Registered 966812"
+              width={150}
+              height={100}
+              quality={95}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              placeholder="blur"
+              className="mb-2"
+              onError={() => {}}
             />
-            <p>Gas Safe: 966812</p>
+            <p className="text-orange-400 font-bold">Gas Safe Registered – 966812</p>
           </div>
         </div>
-        <div className="text-center py-4 border-t border-teal-700">
-          © 2025 Nimbus Heat Pumps. All rights reserved.
-        </div>
+        <p className="col-span-full text-center text-gray-400 mt-4">&copy; 2025 Nimbus Boilers & Heat Pumps. All rights reserved.</p>
       </div>
     </footer>
   );

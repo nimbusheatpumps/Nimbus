@@ -87,22 +87,22 @@ interface HomeProps {
 
 export default function Home({ data }: HomeProps) {
 console.log('Home component rendering with data:', data)
-  const [src1000, setSrc1000] = useState('/images/worcester-bosch/WB_1000.jpg');
-  const [src2000, setSrc2000] = useState('/images/worcester-bosch/Worcester_2000_Left.jpg');
-  const [src4000, setSrc4000] = useState('/images/worcester-bosch/4000_Front_Facing.jpg');
-  const [src8000, setSrc8000] = useState('/images/worcester-bosch/8000_Style_Black.jpg');
+  const [src1000, setSrc1000] = useState('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%201000&quality=95');
+  const [src2000, setSrc2000] = useState('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&quality=95');
+  const [src4000, setSrc4000] = useState('/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png');
+  const [src8000, setSrc8000] = useState('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%208000&quality=95');
   const [fallback2000, setFallback2000] = useState(false);
   const ranges = [
     {
       name: "Worcester Bosch 1000",
-      src: "/images/worcester-bosch/Worcester_Bosch_1000_Which_24_584x550.jpg",
+      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%201000&quality=95",
       kW: "24kW",
       price: "From £799",
       features: ["Compact design", "High efficiency", "Easy installation"]
     },
     {
       name: "Worcester Bosch 2000",
-      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&w=400&h=300&fit=crop&crop=center&quality=95",
+      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&quality=95",
       kW: "30kW",
       price: "From £899",
       features: ["Upgrade option", "Reliable performance", "Energy saving"]
@@ -116,7 +116,7 @@ console.log('Home component rendering with data:', data)
     },
     {
       name: "Worcester Bosch 8000",
-      src: "/images/worcester-bosch/Worcester_Bosch_8000__8000_Style_inward_packshot_-_585x550.jpg",
+      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%208000&quality=95",
       kW: "40kW",
       price: "From £1199",
       features: ["Premium range", "Superior efficiency", "Comprehensive warranty"]
@@ -199,7 +199,7 @@ console.log('Home component rendering with data:', data)
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src1000} onError={() => setSrc1000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 1000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                  <Image src={src1000} onError={() => setSrc1000('https://via.placeholder.com/584x550?text=1000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 1000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 1000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -210,7 +210,7 @@ console.log('Home component rendering with data:', data)
               </Card>
               <Card>
                 <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src2000} onError={() => setSrc2000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 2000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                  <Image src={src2000} onError={() => setSrc2000('https://via.placeholder.com/584x550?text=2000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 2000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 2000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -221,7 +221,7 @@ console.log('Home component rendering with data:', data)
               </Card>
               <Card>
                 <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src4000} onError={() => setSrc4000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 4000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                  <Image src={src4000} onError={() => setSrc4000('https://via.placeholder.com/584x550?text=4000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 4000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 4000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -232,7 +232,7 @@ console.log('Home component rendering with data:', data)
               </Card>
               <Card>
                 <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src8000} onError={() => setSrc8000('https://via.placeholder.com/584x550?text=Worcester+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 8000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                  <Image src={src8000} onError={() => setSrc8000('https://via.placeholder.com/584x550?text=8000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 8000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
                   <CardTitle>Greenstar 8000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -285,7 +285,7 @@ console.log('Home component rendering with data:', data)
                 {testimonials.map((testimonial, index) => (
                   <CarouselItem key={index} className="pl-6">
                     <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition">
-                      <Image src="/images/worcester-bosch/Worcester_Bosch_8000_Front_1.jpg" width={64} height={64} className="w-16 h-16 object-cover rounded mb-4" alt="Worcester Bosch Boiler" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                      <Image src="/images/worcester-bosch/Worcester_Bosch_8000_Front_1.jpg" width={64} height={64} className="w-16 h-16 object-cover rounded mb-4" alt="Worcester Bosch Boiler" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" onError={() => {}} />
                       <p className="text-lg italic text-gray-800 mb-4">{testimonial.quote}</p>
                       <p className="text-teal-900 font-semibold">{testimonial.name}</p>
                       <div className="flex">
@@ -305,7 +305,7 @@ console.log('Home component rendering with data:', data)
           </div>
         </motion.div>
         <motion.div
-          className="bg-teal-900 py-16 text-white text-center rounded-t-3xl -mx-4 md:mx-0 md:rounded-none"
+          className="bg-teal-900 py-12 text-white text-center rounded-t-3xl -mx-4 md:mx-0 md:rounded-none"
           variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
         >
           <h2 className="text-3xl font-bold mb-4">Ready to Upgrade Your Boiler?</h2>
@@ -319,13 +319,12 @@ console.log('Home component rendering with data:', data)
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">Our Ranges</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-4 gap-6 md:gap-8">
               {ranges.map((range, index) => (
                 <div key={index} className="bg-white border-teal-200 rounded-xl shadow-lg p-6">
-                  <Image src={range.src.includes('unsplash') && fallback2000 ? 'https://via.placeholder.com/400x300?text=Worcester+Boiler' : range.src} alt={range.name} width={400} height={300} className="h-48 w-full object-cover rounded-t-lg mb-4" quality={95} sizes="(max-width: 768px) 100vw, 50vw" onError={() => { if (range.src.includes('unsplash')) setFallback2000(true); }} placeholder="blur" />
+                  <Image src={range.src.includes('unsplash') && fallback2000 ? `https://via.placeholder.com/400x300?text=${range.name.split(' ')[2]}+Boiler` : range.src} alt={range.name} width={400} height={300} className="h-48 w-full object-cover rounded-t-lg mb-4" quality={95} sizes="(max-width: 768px) 100vw, 50vw" onError={() => { if (range.src.includes('unsplash')) setFallback2000(true); }} placeholder="blur" />
                   <h3 className="text-2xl font-bold text-teal-900 mb-2">{range.name}</h3>
-                  <p className="text-lg text-gray-700 mb-3">{range.kW}</p>
-                  <p className="text-lg text-orange-600 mb-3">{range.price}</p>
+                  <p className="text-lg text-gray-700 mb-3">{range.kW} <span className="text-orange-600">{range.price}</span></p>
                   <ul className="text-sm text-gray-600 space-y-1">
                     {range.features.map((feature, i) => <li key={i}>{feature}</li>)}
                   </ul>
@@ -342,7 +341,7 @@ console.log('Home component rendering with data:', data)
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">Why Choose Us</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-4 gap-6 md:gap-8">
               <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
                 <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                 <h3 className="text-xl font-bold text-teal-900 mb-2">Which? Trusted</h3>

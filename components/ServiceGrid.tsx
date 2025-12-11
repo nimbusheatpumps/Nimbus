@@ -9,10 +9,10 @@ interface Service {
 }
 
 const services: Service[] = [
-  { title: 'Worcester Bosch 1000', price: 'From £799', image: '/images/worcester-bosch/Worcester_Bosch_1000_Which_24_584x550.jpg' },
-  { title: 'Worcester Bosch 2000', price: 'From £899', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&w=400&h=300&fit=crop&crop=center&quality=95' },
+  { title: 'Worcester Bosch 1000', price: 'From £799', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%201000&quality=95' },
+  { title: 'Worcester Bosch 2000', price: 'From £899', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&quality=95' },
   { title: 'Worcester Bosch 4000', price: 'From £999', image: '/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png' },
-  { title: 'Worcester Bosch 8000', price: 'From £1199', image: '/images/worcester-bosch/Worcester_Bosch_8000__8000_Style_inward_packshot_-_585x550.jpg' },
+  { title: 'Worcester Bosch 8000', price: 'From £1199', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%208000&quality=95' },
 ];
 
 const schema = {
@@ -57,15 +57,16 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
               <div className="bg-white border border-teal-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 hover:-translate-y-1">
                 <Image
                   src={fallbacks[index]}
-                  onError={() => setFallback(prev => prev.map((src, i) => i === index ? `https://source.unsplash.com/random?worcester+bosch+${service.title}+boiler` : src))}
+                  onError={() => setFallback(prev => prev.map((src, i) => i === index ? `https://via.placeholder.com/800x600?text=${service.title.split(' ')[2]}+Boiler` : src))}
                   loading={index === 0 ? "eager" : "lazy"}
                   priority={index === 0}
                   width={800}
                   height={600}
                   quality={95}
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  placeholder="blur"
                   alt={service.title}
-                  className="h-32 md:h-40 w-full object-cover rounded-t-xl mb-4"
+                  className="h-48 w-full object-cover rounded-t-xl mb-4"
                 />
                 <h3 className="text-xl font-bold text-teal-900 mb-2">{service.title}</h3>
                 <p className="text-2xl font-bold text-orange-600 mb-4">{service.price}</p>

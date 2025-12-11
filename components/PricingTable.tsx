@@ -107,37 +107,52 @@ const PricingTable: React.FC = () => {
             {model.name === 'Greenstar 30i' ? (
               <Image
                 src={src30i}
-                onError={() => setSrc30i('https://via.placeholder.com/800x600?text=Worcester+Boiler')}
+                onError={() => setSrc30i('https://via.placeholder.com/800x600?text=1000+Boiler')}
                 loading="lazy"
                 width="800"
                 height="600"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
                 alt={`Worcester Bosch Greenstar ${model.name} boiler by Bryan Whiteley`}
                 className="w-full h-48 object-cover"
               />
             ) : model.name === 'Greenstar 30si' ? (
               <Image
                 src={src30si}
-                onError={() => setSrc30si('https://via.placeholder.com/800x600?text=Worcester+Boiler')}
+                onError={() => setSrc30si('https://via.placeholder.com/800x600?text=2000+Boiler')}
                 loading="lazy"
                 width="800"
                 height="600"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
                 alt={`Worcester Bosch Greenstar ${model.name} boiler by Bryan Whiteley`}
                 className="w-full h-48 object-cover"
               />
             ) : model.name === 'Greenstar 4000' ? (
               <Image
                 src={src4000}
-                onError={() => setSrc4000('https://via.placeholder.com/800x600?text=Worcester+Boiler')}
+                onError={() => setSrc4000('https://via.placeholder.com/800x600?text=4000+Boiler')}
                 loading="lazy"
                 width="800"
                 height="600"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
                 alt={`Worcester Bosch Greenstar ${model.name} boiler by Bryan Whiteley`}
                 className="w-full h-48 object-cover"
               />
             ) : (
-              <img
+              <Image
                 src={model.image}
                 alt={model.name}
+                width="800"
+                height="600"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
+                onError={() => {}}
                 className="w-full h-48 object-cover"
               />
             )}

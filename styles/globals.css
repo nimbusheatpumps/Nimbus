@@ -8,13 +8,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer components {
-  .text-teal-900 { @apply text-teal-900; }
-  .bg-teal-900 { @apply bg-teal-900; }
-  /* Add similar for orange and other shades used */
-  .text-orange-900 { @apply text-orange-900; }
-  .bg-orange-900 { @apply bg-orange-900; }
-}
 
 @layer base {
   :root {
@@ -65,7 +58,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
     @apply bg-background text-foreground;
@@ -73,9 +66,10 @@
     line-height: 1.6;
     color: #374151;
   }
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
-    @apply text-4xl md:text-6xl font-bold text-teal-900;
+    font-weight: bold;
+    color: #0f766e;
   }
 }
 
@@ -93,6 +87,13 @@
 .fade-in {
   animation: fadeIn 0.6s ease-out;
 }
+
+.fade-in:nth-child(1) { animation-delay: 0s; }
+.fade-in:nth-child(2) { animation-delay: 0.1s; }
+.fade-in:nth-child(3) { animation-delay: 0.2s; }
+.fade-in:nth-child(4) { animation-delay: 0.3s; }
+.fade-in:nth-child(5) { animation-delay: 0.4s; }
+.fade-in:nth-child(6) { animation-delay: 0.5s; }
 
 @layer components {
   .card {

@@ -11,7 +11,7 @@ export default function Hero() {
         <Image
           src="/images/worcester-bosch/iStock-2211126281-scaled.jpg"
           fill
-          className="object-cover object-center"
+          className="object-cover object-center hover:scale-105 transition-all duration-300 ease-in-out"
           alt="Worcester Bosch Boiler Installation"
           quality={95}
           priority={true}
@@ -22,7 +22,7 @@ export default function Hero() {
             <h1 className="text-4xl md:text-7xl font-bold text-white mb-4 leading-tight font-poppins drop-shadow-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
               Worcester Bosch Boiler Installation North Lincolnshire
             </h1>
-            <p className="text-lg md:text-xl text-gray-200 italic mb-6 drop-shadow-lg">
+            <p className="text-lg md:text-xl text-gray-200 italic mb-6 drop-shadow-lg leading-1.5">
               Gas Safe 966812 • Next-Day Fitting • Fixed Prices from <span className="text-orange-500 text-6xl drop-shadow-lg">£1,790</span>
             </p>
             <button

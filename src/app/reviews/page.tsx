@@ -56,12 +56,12 @@ export default function ReviewsPage() {
   if (error) {
     return (
       <div className="text-center py-16">
-        <p className="text-lg text-gray-600 mb-8">Unable to load reviews at this time.</p>
+        <p className="text-lg text-gray-600 mb-8 leading-1.5">Unable to load reviews at this time.</p>
         <a
           href="https://g.page/r/yk7F28G9VpVstANKx/review"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full inline-block bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 shadow-md hover:shadow-lg transition-all"
+          className="w-full inline-block bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
         >
           Leave us a Google Review
         </a>
@@ -70,21 +70,21 @@ export default function ReviewsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       <div className="max-w-6xl mx-auto px-4">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-teal-900 mb-12 text-center">Our Google Reviews</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-teal-900 mb-12 text-center leading-1.5">Our Google Reviews</h1>
 
           {reviews.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
               {reviews.map((review, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white rounded-xl shadow-md hover:shadow-xl p-6 transition"
+                  className="bg-white rounded-xl xs:shadow-sm sm:shadow-md hover:shadow-xl shadow-[0_4px_6px_-1px_rgba(30,58,138,0.2)] p-6 transition-all hover:scale-105 duration-300 ease-in-out"
                   variants={cardVariants}
                   whileHover={{ y: -10, transition: { duration: 0.2 } }}
                 >
@@ -108,14 +108,14 @@ export default function ReviewsPage() {
                       </div>
                     </div>
                   </div>
-                  <p className="text-lg italic text-gray-800 mb-4">"{review.text}"</p>
-                  <p className="text-sm text-gray-500">{review.relativeTimeDescription}</p>
+                  <p className="text-lg italic text-gray-800 mb-4 leading-1.5">"{review.text}"</p>
+                  <p className="text-sm text-gray-500 leading-1.5">{review.relativeTimeDescription}</p>
                 </motion.div>
               ))}
             </div>
           ) : (
             <div className="text-center py-16">
-              <p className="text-xl text-gray-600 mb-8">We're building our 5-star reputation — be the first to leave a Google review!</p>
+              <p className="text-xl text-gray-600 mb-8 leading-1.5">We're building our 5-star reputation — be the first to leave a Google review!</p>
             </div>
           )}
 
@@ -124,7 +124,7 @@ export default function ReviewsPage() {
               href="https://g.page/r/yk7F28G9VpVstANKx/review"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-block bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 shadow-md hover:shadow-lg transition-all"
+              className="w-full inline-block bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
             >
               Leave us a Google Review
             </a>

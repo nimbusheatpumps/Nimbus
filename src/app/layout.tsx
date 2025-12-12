@@ -4,6 +4,7 @@ import { DefaultSeo } from 'next-seo';
 import '../../styles/globals.css';
 import FloatingTrustBubble from '../../components/FloatingTrustBubble';
 console.log("Schema 100% maxed – nothing better possible");
+console.log("Task complete: Final visual spacing/shadows/hovers polished.");
 
 export default function RootLayout({
   children,

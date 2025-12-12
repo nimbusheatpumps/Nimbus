@@ -40,7 +40,7 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
   return (
     <>
       <motion.section
-        className="py-16 px-4"
+        className="p-4 sm:p-6"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -50,7 +50,7 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-4xl md:text-5xl font-bold text-center mb-8 text-primary">
             Boiler Services - Scunthorpe Experts
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
             {displayServices.map((service, index) => (
               <motion.div
                 key={`${service.title}-${index}`}
@@ -58,7 +58,7 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.2 }}
               >
-                <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all p-6">
+                <div className="bg-white rounded-xl xs:shadow-sm sm:shadow-md hover:shadow-xl shadow-[0_4px_6px_-1px_rgba(30,58,138,0.2)] transition-all p-6">
                   {failedImages.has(index) ? (
                     <div className="h-48 w-full bg-gray-300 rounded-t-xl mb-4 flex items-center justify-center">
                       <span className="text-gray-600 font-semibold">{service.title}</span>
@@ -74,14 +74,14 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
                       quality={95}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       alt={`${service.title} Series`}
-                      className="w-full object-cover rounded-t-xl mb-4"
+                      className="w-full object-cover rounded-t-xl mb-4 hover:scale-105 transition-all duration-300 ease-in-out"
                     />
                   )}
-                  <h3 className="text-3xl md:text-4xl font-bold text-teal-900 mb-2">{service.title}</h3>
-                  <p className="text-3xl font-bold text-orange-600 mb-4">{service.price}</p>
+                  <h3 className="text-3xl md:text-4xl font-bold text-teal-900 mb-2 leading-1.5">{service.title}</h3>
+                  <p className="text-3xl font-bold text-orange-600 mb-4 leading-1.5">{service.price}</p>
                   <button
                     onClick={() => { console.log("Quote button clicked"); setIsOpen(true); }}
-                    className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg w-full shadow-md hover:shadow-lg transition-all"
+                    className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg w-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
                   >
                     Quote
                   </button>

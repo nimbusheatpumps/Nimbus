@@ -75,16 +75,16 @@ export default function Testimonials() {
 
   return (
     <motion.div
-      className="bg-teal-50 py-16"
+      className="bg-teal-50 p-4 sm:p-6"
       initial="hidden"
       whileInView="visible"
       variants={containerVariants}
       viewport={{ once: true }}
     >
-      <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">What Our Customers Say About Their New Boiler</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center leading-1.5">What Our Customers Say About Their New Boiler</h2>
       {reviews.length > 0 && (
         <div className="text-center mb-8">
-          <p className="text-lg text-gray-700">{rating.toFixed(1)} {'★'.repeat(Math.round(rating))} · {totalReviews} Google reviews</p>
+          <p className="text-lg text-gray-700 leading-1.5">{rating.toFixed(1)} {'★'.repeat(Math.round(rating))} · {totalReviews} Google reviews</p>
         </div>
       )}
       {reviews.length > 0 ? (
@@ -102,7 +102,7 @@ export default function Testimonials() {
                 <CarouselItem key={index} className="basis-full sm:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
                     <motion.div
-                      className="bg-white rounded-xl shadow-lg hover:shadow-2xl p-6 transition-all"
+                      className="bg-white rounded-xl xs:shadow-sm sm:shadow-md hover:shadow-xl shadow-[0_4px_6px_-1px_rgba(30,58,138,0.2)] p-6 transition-all hover:scale-105 duration-300 ease-in-out"
                       variants={cardVariants}
                       whileHover={{ y: -10, transition: { duration: 0.2 } }}
                     >
@@ -117,17 +117,17 @@ export default function Testimonials() {
                             height={40}
                             quality={95}
                             sizes="(max-width: 768px) 100vw, 50vw"
-                            className="w-10 h-10 rounded-full mr-3"
+                            className="w-10 h-10 rounded-full mr-3 hover:scale-105 transition-all duration-300 ease-in-out"
                             onError={() => setLogoError(true)}
                           />
                         )}
                         <div>
-                          <h4 className="text-teal-900 font-semibold">{review.authorName}</h4>
-                          <div className="text-yellow-400">{'★'.repeat(review.rating)}</div>
+                          <h4 className="text-teal-900 font-semibold leading-1.5">{review.authorName}</h4>
+                          <div className="text-yellow-400 leading-1.5">{'★'.repeat(review.rating)}</div>
                         </div>
                       </div>
-                      <p className="text-lg italic text-gray-800 mb-4">"{review.text}"</p>
-                      <p className="text-sm text-gray-500">{review.relativeTimeDescription}</p>
+                      <p className="text-lg italic text-gray-800 mb-4 leading-1.5">"{review.text}"</p>
+                      <p className="text-sm text-gray-500 leading-1.5">{review.relativeTimeDescription}</p>
                     </motion.div>
                   </div>
                 </CarouselItem>
@@ -145,7 +145,7 @@ export default function Testimonials() {
           href="https://g.page/r/yk7F28G9VpVstANKx/review"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full inline-block bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 shadow-md hover:shadow-lg transition-all"
+          className="w-full inline-block bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-700 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out"
         >
           Leave us a Google Review
         </a>

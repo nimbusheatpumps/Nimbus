@@ -114,9 +114,9 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-xl shadow-md p-8 max-w-4xl mx-auto"
+        className="bg-white rounded-xl xs:shadow-sm sm:shadow-md hover:shadow-xl shadow-[0_4px_6px_-1px_rgba(30,58,138,0.2)] p-8 max-w-4xl mx-auto"
       >
-        <p className="text-red-600 font-bold animate-pulse mb-4">3 slots left this week – £150 off if booked today</p>
+        <p className="text-red-600 font-bold animate-pulse mb-4 leading-1.5">3 slots left this week – £150 off if booked today</p>
 
         {success ? (
           <div className="text-center">
@@ -202,7 +202,7 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
               variant="orange"
               onClick={() => { if (currentStep === totalSteps) handleSubmit(onSubmit)(); else nextStep(); }}
               disabled={isLoading}
-              className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all w-full disabled:opacity-50"
+              className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out w-full disabled:opacity-50"
             >
               {isLoading ? 'Submitting...' : currentStep === totalSteps ? 'Submit' : 'Next'}
             </Button>
@@ -221,7 +221,7 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="w-full max-w-md mx-auto bg-gradient-to-br from-blue-900/20 to-blue-600/20 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-6 relative min-h-screen sm:min-h-0"
+            className="w-full max-w-md mx-auto bg-gradient-to-br from-blue-900/20 to-blue-600/20 backdrop-blur-lg border border-white/20 rounded-3xl xs:shadow-sm sm:shadow-md hover:shadow-xl shadow-[0_4px_6px_-1px_rgba(30,58,138,0.2)] p-6 relative min-h-screen sm:min-h-0"
           >
             <button onClick={closeModal} className="absolute top-4 right-4 text-white hover:text-gray-300 text-3xl">×</button>
 
@@ -229,18 +229,18 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
               Fixed Price Guarantee - Limited Slots!
             </div>
 
-            <h2 className="text-2xl font-bold text-white mb-6 text-center font-inter">Get Your Fixed-Price Boiler Quote</h2>
+            <h2 className="text-2xl font-bold text-white mb-6 text-center font-inter leading-1.5">Get Your Fixed-Price Boiler Quote</h2>
 
             <div className="text-center text-white mb-4">
-              <p className="text-sm">Get Your Quote in Seconds!</p>
-              <p className="text-lg font-bold">{countdown}s</p>
+              <p className="text-sm leading-1.5">Get Your Quote in Seconds!</p>
+              <p className="text-lg font-bold leading-1.5">{countdown}s</p>
             </div>
 
             <div className="w-full bg-white/20 rounded-full h-3 mb-6">
               <motion.div className="bg-orange-500 h-3 rounded-full" initial={{width: 0}} animate={{width: `${(currentStep / totalSteps) * 100}%`}} transition={{duration: 0.3}}></motion.div>
             </div>
 
-            <p className="text-white text-center mb-4">Boilers Installing Fast in Scunthorpe - Act Now!</p>
+            <p className="text-white text-center mb-4 leading-1.5">Boilers Installing Fast in Scunthorpe - Act Now!</p>
 
             {success ? (
               <div className="text-center">
@@ -312,9 +312,9 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
                     <div className="grid grid-cols-1 gap-4 mb-4">
                       {worcesterModels.map(model => (
                         <div key={model.name} className={`p-4 rounded-lg border cursor-pointer ${selectedModel === model.name ? 'border-orange-500 bg-orange-500/20' : 'border-white/30 bg-white/10'}`} onClick={() => setSelectedModel(model.name)}>
-                          <img src={model.image} alt={model.name} className="w-full h-32 object-cover rounded-lg mb-2" />
-                          <p className="text-white font-inter">{model.name}</p>
-                          <p className="text-white/70 text-sm">{model.kW} kW</p>
+                          <img src={model.image} alt={model.name} className="w-full h-32 object-cover rounded-lg mb-2 hover:scale-105 transition-all duration-300 ease-in-out" />
+                          <p className="text-white font-inter leading-1.5">{model.name}</p>
+                          <p className="text-white/70 text-sm leading-1.5">{model.kW} kW</p>
                         </div>
                       ))}
                     </div>
@@ -348,7 +348,7 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
                     <Button
                       type="button"
                       onClick={() => setCurrentStep(currentStep - 1)}
-                      className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all flex-1"
+                      className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:scale-105 transition-all duration-300 ease-in-out flex-1"
                     >
                       Back
                     </Button>
@@ -357,7 +357,7 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
                     type={currentStep === totalSteps ? 'submit' : 'button'}
                     onClick={currentStep === totalSteps ? undefined : nextStep}
                     disabled={isLoading}
-                    className={`bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all flex-1 disabled:opacity-50 ${currentStep === totalSteps ? 'animate-pulse' : ''}`}
+                    className={`bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:scale-105 transition-all duration-300 ease-in-out flex-1 disabled:opacity-50 ${currentStep === totalSteps ? 'animate-pulse' : ''}`}
                   >
                     {isLoading ? 'Submitting...' : currentStep === totalSteps ? 'Submit' : 'Next'}
                   </Button>

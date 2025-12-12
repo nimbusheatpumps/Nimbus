@@ -19,7 +19,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-teal-900/70 to-transparent"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-4xl md:text-7xl font-bold text-white mb-4 leading-tight font-poppins drop-shadow-lg">
+            <h1 className="text-4xl md:text-7xl font-bold text-white mb-4 leading-tight font-poppins drop-shadow-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
               Worcester Bosch Boiler Installation North Lincolnshire
             </h1>
             <p className="text-lg md:text-xl text-gray-200 italic mb-6 drop-shadow-lg">

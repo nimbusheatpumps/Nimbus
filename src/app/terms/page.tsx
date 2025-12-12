@@ -4,8 +4,8 @@ import * as React from "react";
 import { motion } from "framer-motion";
 
 export const metadata = {
-  title: "Terms & Conditions | Nimbus Heat Pumps Scunthorpe",
-  description: "Terms and conditions for services provided by Nimbus Heat Pumps in Scunthorpe and North Lincolnshire."
+  title: "Terms & Conditions | Nimbus Boilers & Heat Pumps",
+  description: "Terms and conditions for services provided by Nimbus Boilers & Heat Pumps."
 };
 
 const containerVariants = {
@@ -36,14 +36,14 @@ export default function TermsPage() {
             className="text-4xl md:text-5xl font-bold text-teal-900 mb-8 text-center"
             variants={itemVariants}
           >
-            Terms and Conditions
+            Terms & Conditions – Nimbus Boilers & Heat Pumps
           </motion.h1>
 
           <motion.div className="bg-white rounded-xl shadow-md p-8 space-y-6" variants={itemVariants}>
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Acceptance of Terms</h2>
               <p className="text-gray-700 mb-4">
-                By accessing and using Nimbus Heat Pumps' services, you accept and agree to be bound by the terms
+                By accessing and using Nimbus Boilers & Heat Pumps' services, you accept and agree to be bound by the terms
                 and provision of this agreement.
               </p>
             </div>
@@ -51,7 +51,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Services</h2>
               <p className="text-gray-700 mb-4">
-                We provide gas boiler installation, repair, and maintenance services. All work is carried out by
+                Nimbus Boilers & Heat Pumps provides gas boiler and heat pump installation, repair, and maintenance services. All work is carried out by
                 qualified Gas Safe registered engineers.
               </p>
             </div>
@@ -59,7 +59,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Pricing and Payment</h2>
               <p className="text-gray-700 mb-4">
-                All prices quoted are valid for 30 days. Payment is due upon completion of work unless otherwise agreed.
+                Fixed-price quotes are valid for 30 days. Payment is due upon completion of work unless otherwise agreed.
                 We accept various payment methods including cash, bank transfer, and card payments.
               </p>
             </div>
@@ -67,8 +67,8 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Warranties</h2>
               <p className="text-gray-700 mb-4">
-                We provide warranties on our workmanship and installed equipment as specified at the time of quote.
-                Manufacturer warranties apply to equipment supplied.
+                We provide a 10-year warranty on Worcester Bosch equipment and workmanship as specified at the time of quote.
+                Manufacturer warranties apply to all equipment supplied.
               </p>
             </div>
 
@@ -83,8 +83,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Cancellation</h2>
               <p className="text-gray-700 mb-4">
-                Cancellations must be made at least 24 hours before the scheduled appointment. Late cancellations
-                may incur a charge.
+                You have the right to cancel this contract within 14 days without giving any reason. To exercise the right to cancel, you must inform us of your decision to cancel this contract by a clear statement (e.g. a letter sent by post or e-mail). Cancellations must be made at least 24 hours before the scheduled appointment. Late cancellations may incur a charge.
               </p>
             </div>
 
@@ -98,7 +97,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Contact Information</h2>
               <p className="text-gray-700 mb-4">
-                For any questions regarding these terms, please contact us at:
+                For any questions regarding these terms, please contact Nimbus Boilers & Heat Pumps at:
               </p>
               <p className="text-gray-700">
                 Email: info@nimbusheatpumps.co.uk<br />

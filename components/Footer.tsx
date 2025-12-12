@@ -63,6 +63,8 @@ const Footer: React.FC = () => {
               onError={() => {}}
             />
             <p className="text-orange-400 font-bold">Gas Safe Registered – 966812</p>
+            <p><Link href="/privacy-policy" className="hover:underline hover:text-orange-500">Privacy Policy</Link></p>
+            <p><Link href="/terms" className="hover:underline hover:text-orange-500">Terms & Conditions</Link></p>
           </div>
         </div>
         <p className="col-span-full text-center text-gray-400 mt-4">&copy; 2025 Nimbus Boilers & Heat Pumps. All rights reserved.</p>

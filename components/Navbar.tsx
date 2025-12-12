@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,7 +11,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 
@@ -21,7 +20,7 @@ const Navbar: React.FC = () => {
     animate: { opacity: 1 },
   };
 
-  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const router = useRouter();
 
@@ -155,65 +154,84 @@ const Navbar: React.FC = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
-                <HamburgerMenuIcon className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-4">
-                <Link href="/" onClick={() => setOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Home">
-                  Home
-                </Link>
-                <Link href="/services" onClick={() => setOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Services">
-                  Services
-                </Link>
-                <div>
-                  <div className="text-lg font-medium">Locations</div>
-                  <Link href="/locations/lincoln" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Lincoln">
-                    Lincoln
-                  </Link>
-                  <Link href="/locations/scunthorpe" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Scunthorpe">
-                    Scunthorpe
-                  </Link>
-                  <Link href="/locations/hull" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Hull">
-                    Hull
-                  </Link>
-                  <Link href="/locations/grimsby" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Grimsby">
-                    Grimsby
-                  </Link>
-                  <Link href="/locations/doncaster" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Doncaster">
-                    Doncaster
-                  </Link>
-                  <Link href="/locations/cleethorpes" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Cleethorpes">
-                    Cleethorpes
-                  </Link>
-                  <Link href="/locations/gainsborough" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Gainsborough">
-                    Gainsborough
-                  </Link>
-                  <Link href="/locations/brigg" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Brigg">
-                    Brigg
-                  </Link>
-                  <Link href="/locations/barton-upon-humber" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Barton-upon-Humber">
-                    Barton-upon-Humber
-                  </Link>
-                  <Link href="/locations/goole" onClick={() => setOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Goole">
-                    Goole
-                  </Link>
-                </div>
-                <Link href="/reviews" onClick={() => setOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Reviews">
-                  Reviews
-                </Link>
-                <Link href="/about" onClick={() => setOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="About">
-                  About
-                </Link>
-                <Link href="/contact" onClick={() => setOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Contact">
-                  Contact
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu">
+            <HamburgerMenuIcon className="h-6 w-6" />
+          </Button>
+          <AnimatePresence>
+            {mobileOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black bg-opacity-50 z-50"
+                onClick={() => setMobileOpen(false)}
+              >
+                <motion.div
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ type: 'tween', duration: 0.3 }}
+                  className="fixed right-0 top-0 h-full w-full bg-white p-4"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button onClick={() => setMobileOpen(false)} className="absolute top-4 right-4 text-2xl font-bold">&times;</button>
+                  <nav className="flex flex-col gap-4 mt-16">
+                    <Link href="/" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Home">
+                      Home
+                    </Link>
+                    <Link href="/services" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Services">
+                      Services
+                    </Link>
+                    <div>
+                      <div className="text-lg font-medium mb-2">Locations</div>
+                      <Link href="/locations/lincoln" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Lincoln">
+                        Lincoln
+                      </Link>
+                      <Link href="/locations/scunthorpe" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Scunthorpe">
+                        Scunthorpe
+                      </Link>
+                      <Link href="/locations/hull" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Hull">
+                        Hull
+                      </Link>
+                      <Link href="/locations/grimsby" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Grimsby">
+                        Grimsby
+                      </Link>
+                      <Link href="/locations/doncaster" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Doncaster">
+                        Doncaster
+                      </Link>
+                      <Link href="/locations/cleethorpes" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Cleethorpes">
+                        Cleethorpes
+                      </Link>
+                      <Link href="/locations/gainsborough" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Gainsborough">
+                        Gainsborough
+                      </Link>
+                      <Link href="/locations/brigg" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Brigg">
+                        Brigg
+                      </Link>
+                      <Link href="/locations/barton-upon-humber" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Barton-upon-Humber">
+                        Barton-upon-Humber
+                      </Link>
+                      <Link href="/locations/goole" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Goole">
+                        Goole
+                      </Link>
+                    </div>
+                    <Link href="/reviews" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Reviews">
+                      Reviews
+                    </Link>
+                    <Link href="/contact" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Contact">
+                      Contact
+                    </Link>
+                    <Link href="/privacy-policy" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Privacy Policy">
+                      Privacy
+                    </Link>
+                    <Link href="/terms" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Terms">
+                      Terms
+                    </Link>
+                  </nav>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </motion.nav>

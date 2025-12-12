@@ -4,8 +4,8 @@ import * as React from "react";
 import { motion } from "framer-motion";
 
 export const metadata = {
-  title: "Privacy Policy | Nimbus Heat Pumps Scunthorpe",
-  description: "Privacy policy for Nimbus Heat Pumps, serving Scunthorpe and North Lincolnshire with Worcester Bosch boilers."
+  title: "Privacy Policy – Nimbus Boilers & Heat Pumps",
+  description: "Privacy policy for Nimbus Boilers & Heat Pumps."
 };
 
 const containerVariants = {
@@ -36,70 +36,55 @@ export default function PrivacyPolicyPage() {
             className="text-4xl md:text-5xl font-bold text-teal-900 mb-8 text-center"
             variants={itemVariants}
           >
-            Privacy Policy
+            Privacy Policy – Nimbus Boilers & Heat Pumps
           </motion.h1>
 
           <motion.div className="bg-white rounded-xl shadow-md p-8 space-y-6" variants={itemVariants}>
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Information We Collect</h2>
               <p className="text-gray-700 mb-4">
-                We collect information you provide directly to us, such as when you contact us for quotes, request services,
-                or communicate with us. This may include your name, email address, phone number, and property details.
+                At Nimbus Boilers & Heat Pumps, we collect personal information from you when you submit a quote request through our form. This includes your name, phone number, email address, and postcode.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">How We Use Your Information</h2>
               <p className="text-gray-700 mb-4">
-                We use the information we collect to:
-              </p>
-              <ul className="text-gray-700 space-y-2 ml-6">
-                <li>• Provide and improve our services</li>
-                <li>• Communicate with you about your inquiries</li>
-                <li>• Send you relevant information about our services</li>
-                <li>• Comply with legal obligations</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-semibold text-teal-800 mb-4">Information Sharing</h2>
-              <p className="text-gray-700 mb-4">
-                We do not sell, trade, or otherwise transfer your personal information to third parties without your consent,
-                except as described in this policy or as required by law.
+                The information we collect is used solely for the purpose of providing you with quotes for our boiler and heat pump services. We do not use your data for any other purposes.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Data Security</h2>
               <p className="text-gray-700 mb-4">
-                We implement appropriate security measures to protect your personal information against unauthorized access,
-                alteration, disclosure, or destruction.
+                We take the security of your personal information seriously and implement appropriate measures to protect it from unauthorized access, alteration, disclosure, or destruction.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold text-teal-800 mb-4">Information Sharing</h2>
+              <p className="text-gray-700 mb-4">
+                We do not sell, share, or transfer your personal information to third parties under any circumstances.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Your Rights</h2>
               <p className="text-gray-700 mb-4">
-                You have the right to access, update, or delete your personal information. You may also opt out of receiving
-                marketing communications from us at any time.
+                Under UK data protection laws, you have the right to access, rectify, or erase your personal information. If you wish to exercise these rights, please contact us.
               </p>
             </div>
 
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Contact Us</h2>
               <p className="text-gray-700 mb-4">
-                If you have any questions about this Privacy Policy, please contact us at:
-              </p>
-              <p className="text-gray-700">
-                Email: info@nimbusheatpumps.co.uk<br />
-                Phone: 01724 622069<br />
-                Address: 3 Crossbeck Road, Scunthorpe, North Lincolnshire, DN16 3HR
+                If you have any questions about this Privacy Policy, please contact Nimbus Boilers & Heat Pumps.
               </p>
             </div>
 
             <div>
               <p className="text-sm text-gray-500">
-                Last updated: December 2024
+                Last updated: 12 December 2025
               </p>
             </div>
           </motion.div>

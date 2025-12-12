@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-teal-900 text-white py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           <div>
             <Image
               src="/wp-content/uploads/2025/06/Nimbus-Heat-Pumps-Logo.png"
@@ -25,7 +25,6 @@ const Footer: React.FC = () => {
               height={128}
               quality={95}
               sizes="(max-width: 768px) 100vw, 50vw"
-              placeholder="blur"
               className="w-32 mb-4"
               onError={() => {}}
             />
@@ -60,7 +59,6 @@ const Footer: React.FC = () => {
               height={100}
               quality={95}
               sizes="(max-width: 768px) 100vw, 50vw"
-              placeholder="blur"
               className="mb-2"
               onError={() => {}}
             />

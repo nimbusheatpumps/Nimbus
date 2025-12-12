@@ -1,10 +1,16 @@
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { getLiveGoogleReviews, type LiveGoogleReviews } from '../src/lib/live-google-reviews';
 import { generateSEO } from '../lib/seo';
+const fadeInVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
 
 interface ContactPageProps {
   data: LiveGoogleReviews;
@@ -14,8 +20,20 @@ const ContactPage = ({ data }: ContactPageProps) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ boilerType: '', name: '', email: '', message: '' });
   const [showModal, setShowModal] = useState(false);
+  const headerRef = useRef(null);
+  const gridRef = useRef(null);
+
+  const headerInView = useInView(headerRef, { once: true });
+  const gridInView = useInView(gridRef, { once: true });
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const headerRef = useRef(null);
+  const gridRef = useRef(null);
+
+  const headerInView = useInView(headerRef, { once: true });
+  const gridInView = useInView(gridRef, { once: true });
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -180,7 +198,7 @@ const ContactPage = ({ data }: ContactPageProps) => {
         </div>
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-8 rounded shadow-lg">
+            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all">
               <h2 className="text-2xl font-bold mb-4">Success!</h2>
               <p>Your message has been sent. We'll get back to you soon.</p>
               <Button onClick={() => setShowModal(false)} className="mt-4">Close</Button>

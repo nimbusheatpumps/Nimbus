@@ -9,10 +9,10 @@ interface Service {
 }
 
 const services: Service[] = [
-  { title: 'Worcester Bosch 1000', price: 'From £799', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%201000&quality=95' },
-  { title: 'Worcester Bosch 2000', price: 'From £899', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&quality=95' },
-  { title: 'Worcester Bosch 4000', price: 'From £999', image: '/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png' },
-  { title: 'Worcester Bosch 8000', price: 'From £1199', image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%208000&quality=95' },
+  { title: 'Worcester Bosch 1000', price: 'From £799', image: '/images/worcester-bosch/Worcester_Bosch_1000_Which_24_584x550.jpg' },
+  { title: 'Worcester Bosch 2000', price: 'From £899', image: '/images/worcester-bosch/Worcester_2000_Right.jpg' },
+  { title: 'Worcester Bosch 4000', price: 'From £999', image: '/images/worcester-bosch/4000_Left_Facing.jpg' },
+  { title: 'Worcester Bosch 8000', price: 'From £1199', image: '/images/worcester-bosch/Worcester_Bosch_8000_Front_1.jpg' },
 ];
 
 const schema = {
@@ -32,6 +32,7 @@ interface ServiceGridProps {
 
 export default function ServiceGrid({ services: propServices }: ServiceGridProps) {
   const [fallbacks, setFallback] = useState(services.map(s => s.image));
+  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
   const displayServices = propServices || services;
 
   return (
@@ -54,23 +55,28 @@ export default function ServiceGrid({ services: propServices }: ServiceGridProps
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.2 }}
             >
-              <div className="bg-white border border-teal-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 hover:-translate-y-1">
-                <Image
-                  src={fallbacks[index]}
-                  onError={() => setFallback(prev => prev.map((src, i) => i === index ? `https://via.placeholder.com/800x600?text=${service.title.split(' ')[2]}+Boiler` : src))}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  priority={index === 0}
-                  width={800}
-                  height={600}
-                  quality={95}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  placeholder="blur"
-                  alt={service.title}
-                  className="h-48 w-full object-cover rounded-t-xl mb-4"
-                />
-                <h3 className="text-xl font-bold text-teal-900 mb-2">{service.title}</h3>
-                <p className="text-2xl font-bold text-orange-600 mb-4">{service.price}</p>
-                <button className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all w-full">Quote</button>
+              <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all p-6">
+                {failedImages.has(index) ? (
+                  <div className="h-48 w-full bg-gray-300 rounded-t-xl mb-4 flex items-center justify-center">
+                    <span className="text-gray-600 font-semibold">{service.title}</span>
+                  </div>
+                ) : (
+                  <Image
+                    src={fallbacks[index]}
+                    onError={() => setFailedImages(prev => new Set(prev).add(index))}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    priority={index === 0}
+                    width={800}
+                    height={600}
+                    quality={95}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    alt={`${service.title} Series`}
+                    className="w-full object-cover rounded-t-xl mb-4"
+                  />
+                )}
+                <h3 className="text-2xl font-bold text-teal-900 mb-2">{service.title}</h3>
+                <p className="text-3xl font-bold text-orange-600 mb-4">{service.price}</p>
+                <button className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg w-full shadow-md hover:shadow-lg transition-all">Quote</button>
               </div>
             </motion.div>
           ))}

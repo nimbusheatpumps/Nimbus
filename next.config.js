@@ -5,7 +5,10 @@ const nextConfig = {
   },
   serverExternalPackages: [],
   images: {
-    domains: ['www.pngkey.com', 'imgbin.com', 'seeklogo.com', 'www.alamy.com', 'macoungroup.wordpress.com', 'via.placeholder.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: '**' },
+    ],
+    qualities: [65, 75, 85, 95],   // fixes the quality=95 warnings
   },
 };
 module.exports = nextConfig;

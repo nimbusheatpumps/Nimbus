@@ -19,11 +19,11 @@ export async function getLiveGoogleReviews(): Promise<LiveGoogleReviews> {
   }
 
   try {
-    const url = `https://places.googleapis.com/v1/places/yk7F28G9VpVstANKx?key=${apiKey}&fields=reviews,rating,userRatingCount`;
+    const url = `https://places.googleapis.com/v1/places/yk7F28G9VpVstANKx?key=${apiKey}&fields=reviews,rating,userRatingsTotal`;
 
     const res = await fetch(url, {
       headers: {
-        'X-Goog-FieldMask': 'reviews,rating,userRatingCount'
+        'X-Goog-FieldMask': 'reviews,rating,userRatingsTotal'
       },
       next: { revalidate: 86400 }
     });
@@ -38,7 +38,7 @@ export async function getLiveGoogleReviews(): Promise<LiveGoogleReviews> {
       throw new Error(`API error: ${res.status}`);
     }
 
-    const { rating, userRatingCount, reviews } = data;
+    const { rating, userRatingsTotal, reviews } = data;
 
     const recentReviews: LiveReview[] = reviews.map((review: any) => ({
       authorName: review.author_name,
@@ -52,13 +52,13 @@ export async function getLiveGoogleReviews(): Promise<LiveGoogleReviews> {
 
     return {
       rating,
-      totalReviews: userRatingCount,
+      totalReviews: userRatingsTotal,
       reviews: recentReviews,
     };
   } catch (error) {
     return {
-      rating: 5.0,
-      totalReviews: 7,
+      rating: 0,
+      totalReviews: 0,
       reviews: [],
     };
   }

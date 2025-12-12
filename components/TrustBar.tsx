@@ -1,5 +1,9 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { getLiveGoogleReviews } from '../src/lib/live-google-reviews';
 
 const TrustBar: React.FC = () => {
   const fadeIn = {
@@ -7,9 +11,25 @@ const TrustBar: React.FC = () => {
     animate: { opacity: 1 },
   };
 
+  const [rating, setRating] = useState<number>(0);
+  const [totalReviews, setTotalReviews] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getLiveGoogleReviews();
+        setRating(data.rating);
+        setTotalReviews(data.totalReviews);
+      } catch (error) {
+        // Keep defaults
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <motion.div
-      className="bg-teal-50 border border-teal-500 py-4 px-4 shadow-lg"
+      className="bg-teal-50 border border-teal-500 py-4 px-4 shadow-lg hover:shadow-2xl transition-all rounded-xl"
       initial="initial"
       animate="animate"
       variants={fadeIn}
@@ -17,14 +37,14 @@ const TrustBar: React.FC = () => {
     >
       <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-4">
         <div className="flex items-center">
-          <span className="text-lg font-semibold">5.0</span>
-          <div className="flex ml-1">
-            ★★★★★
-          </div>
+          <span className="text-lg font-semibold">{rating.toFixed(1)} ★★★★★ · {totalReviews} Google reviews</span>
         </div>
-        <span className="bg-gray-200 px-3 py-1 rounded-full text-sm font-medium">7 Google Reviews</span>
-        <img
-          src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png"
+        <Image
+          src="/gas-safe-badge.png"
+          width={160}
+          height={160}
+          quality={95}
+          priority
           alt="Gas Safe Logo"
           className="h-8 w-auto"
         />

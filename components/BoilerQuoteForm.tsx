@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface FormData {
@@ -21,6 +21,11 @@ const BoilerQuoteForm: React.FC = () => {
     message: ''
   });
   const [showToast, setShowToast] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  useEffect(() => {
+    setIsOpen(false);
+  }, []);
+  const closeModal = () => setIsOpen(false);
   const totalSteps = 3;
 
   const handleNext = () => {
@@ -47,13 +52,16 @@ const BoilerQuoteForm: React.FC = () => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-50">
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-50" onClick={closeModal}>
         <motion.div
+          onClick={(e) => e.stopPropagation()}
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="border border-teal-500 rounded-2xl shadow-2xl max-w-lg mx-auto bg-white p-8"
+          className="border border-teal-500 rounded-xl shadow-lg hover:shadow-2xl transition-all max-w-lg mx-auto bg-white p-8 relative"
         >
+          <button onClick={closeModal} className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-3xl">×</button>
           <div className="w-full bg-teal-200 rounded-full h-2 mb-6">
             <div
               className="bg-orange-500 rounded-full h-full transition-all duration-300"
@@ -144,7 +152,7 @@ const BoilerQuoteForm: React.FC = () => {
 
           <button
             onClick={currentStep < totalSteps - 1 ? handleNext : handleSubmit}
-            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all w-full"
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all w-full"
           >
             {currentStep < totalSteps - 1 ? 'Next' : 'Submit'}
           </button>
@@ -158,7 +166,8 @@ const BoilerQuoteForm: React.FC = () => {
             </button>
           )}
         </motion.div>
-      </div>
+        </div>
+      )}
 
       {showToast && (
         <div className="fixed bottom-4 right-4 bg-green-500 text-white p-6 rounded-xl shadow-lg flex items-center gap-2 z-50">

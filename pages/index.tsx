@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useState, useRef } from 'react';
 import Hero from '../components/Hero';
 import TrustBar from '../components/TrustBar';
 import BoilerQuoteForm from '../components/BoilerQuoteForm';
@@ -54,9 +54,17 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
+const fadeInVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
 function FAQAccordion({ faq }: { faq: typeof faqData }) {
+  const faqRef = useRef(null);
+  const faqInView = useInView(faqRef, { once: true });
+
   return (
-    <motion.div className="section py-16 px-4" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }}>
+    <motion.div ref={faqRef} className="section py-16 px-4" variants={fadeInVariants} initial="hidden" animate={faqInView ? "visible" : "hidden"}>
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
         {faq.map((item, index) => (
@@ -86,23 +94,52 @@ interface HomeProps {
 }
 
 export default function Home({ data }: HomeProps) {
-console.log('Home component rendering with data:', data)
-  const [src1000, setSrc1000] = useState('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%201000&quality=95');
-  const [src2000, setSrc2000] = useState('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&quality=95');
+   const [src1000, setSrc1000] = useState('/images/worcester-bosch/WB_1000.jpg');
+  const [src2000, setSrc2000] = useState('/images/worcester-bosch/Worcester_2000_Left.jpg');
   const [src4000, setSrc4000] = useState('/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png');
-  const [src8000, setSrc8000] = useState('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%208000&quality=95');
-  const [fallback2000, setFallback2000] = useState(false);
+  const [src8000, setSrc8000] = useState('/images/worcester-bosch/8000_Style_Black.jpg');
+  const [error1000, setError1000] = useState(false);
+  const [error2000, setError2000] = useState(false);
+  const [error4000, setError4000] = useState(false);
+  const [error8000, setError8000] = useState(false);
+  const [rangeErrors, setRangeErrors] = useState<Record<number, boolean>>({});
+  const heroRef = useRef(null);
+  const trustRef = useRef(null);
+  const quoteRef = useRef(null);
+  const serviceRef = useRef(null);
+  const rangesRef = useRef(null);
+  const whyChooseRef = useRef(null);
+  const testimonialsRef = useRef(null);
+  const upgradeRef = useRef(null);
+  const ourRangesRef = useRef(null);
+  const whyChooseUsRef = useRef(null);
+  const fixedRef = useRef(null);
+  const faqRef = useRef(null);
+
+  const heroInView = useInView(heroRef, { once: true });
+  const trustInView = useInView(trustRef, { once: true });
+  const quoteInView = useInView(quoteRef, { once: true });
+  const serviceInView = useInView(serviceRef, { once: true });
+  const rangesInView = useInView(rangesRef, { once: true });
+  const whyChooseInView = useInView(whyChooseRef, { once: true });
+  const testimonialsInView = useInView(testimonialsRef, { once: true });
+  const upgradeInView = useInView(upgradeRef, { once: true });
+  const ourRangesInView = useInView(ourRangesRef, { once: true });
+  const whyChooseUsInView = useInView(whyChooseUsRef, { once: true });
+  const fixedInView = useInView(fixedRef, { once: true });
+  const faqInView = useInView(faqRef, { once: true });
+
   const ranges = [
     {
       name: "Worcester Bosch 1000",
-      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%201000&quality=95",
+      src: "/images/worcester-bosch/WB_1000.jpg",
       kW: "24kW",
       price: "From £799",
       features: ["Compact design", "High efficiency", "Easy installation"]
     },
     {
       name: "Worcester Bosch 2000",
-      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%202000&quality=95",
+      src: "/images/worcester-bosch/Worcester_2000_Left.jpg",
       kW: "30kW",
       price: "From £899",
       features: ["Upgrade option", "Reliable performance", "Energy saving"]
@@ -116,7 +153,7 @@ console.log('Home component rendering with data:', data)
     },
     {
       name: "Worcester Bosch 8000",
-      src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=worcester%20bosch%20greenstar%208000&quality=95",
+      src: "/images/worcester-bosch/8000_Style_Black.jpg",
       kW: "40kW",
       price: "From £1199",
       features: ["Premium range", "Superior efficiency", "Comprehensive warranty"]
@@ -171,37 +208,47 @@ console.log('Home component rendering with data:', data)
         ))}
       </Head>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateOfferSchema) }} />
-      <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.2 } } }}>
-        <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}>
+      <div>
+        <motion.div ref={heroRef} variants={fadeInVariants} initial="hidden" animate={heroInView ? "visible" : "hidden"}>
           <Hero />
         </motion.div>
-        <TrustBar />
+        <motion.div ref={trustRef} variants={fadeInVariants} initial="hidden" animate={trustInView ? "visible" : "hidden"}>
+          <TrustBar />
+        </motion.div>
         <motion.div
+          ref={quoteRef}
           className="section py-16 px-4 bg-gray-50"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={quoteInView ? "visible" : "hidden"}
         >
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8">Get Your Instant Boiler Quote</h2>
             <BoilerQuoteForm />
           </div>
         </motion.div>
-        <motion.div variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}>
+        <motion.div ref={serviceRef} variants={fadeInVariants} initial="hidden" animate={serviceInView ? "visible" : "hidden"}>
           <ServiceGrid />
         </motion.div>
         <motion.div
+          ref={rangesRef}
           className="section py-16 px-4"
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={rangesInView ? "visible" : "hidden"}
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">Our Worcester Bosch Ranges</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
-                <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src1000} onError={() => setSrc1000('https://via.placeholder.com/584x550?text=1000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 1000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
-                  <CardTitle>Greenstar 1000</CardTitle>
-                </CardHeader>
+              <CardHeader className="bg-teal-900 text-white rounded-t-xl py-2 px-4">
+                {error1000 ? (
+                  <div className="w-full h-48 bg-gray-300 flex items-center justify-center text-gray-700 rounded-t-lg">Worcester Bosch 1000</div>
+                ) : (
+                  <Image src={src1000} onError={() => setError1000(true)} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 1000 boiler" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" />
+                )}
+                <CardTitle>Greenstar 1000</CardTitle>
+              </CardHeader>
                 <CardContent>
                   <p className="text-orange-500 text-2xl font-bold">From £1,790</p>
                   <p><strong>Features:</strong> Compact design for small homes, high efficiency up to 94%, easy installation.</p>
@@ -209,8 +256,12 @@ console.log('Home component rendering with data:', data)
                 </CardContent>
               </Card>
               <Card>
-                <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src2000} onError={() => setSrc2000('https://via.placeholder.com/584x550?text=2000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 2000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                <CardHeader className="bg-teal-900 text-white rounded-t-xl py-2 px-4">
+                  {error2000 ? (
+                    <div className="w-full h-48 bg-gray-300 flex items-center justify-center text-gray-700 rounded-t-lg">Worcester Bosch 2000</div>
+                  ) : (
+                    <Image src={src2000} onError={() => setError2000(true)} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 2000 boiler" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" />
+                  )}
                   <CardTitle>Greenstar 2000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -220,8 +271,12 @@ console.log('Home component rendering with data:', data)
                 </CardContent>
               </Card>
               <Card>
-                <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src4000} onError={() => setSrc4000('https://via.placeholder.com/584x550?text=4000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 4000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                <CardHeader className="bg-teal-900 text-white rounded-t-xl py-2 px-4">
+                  {error4000 ? (
+                    <div className="w-full h-48 bg-gray-300 flex items-center justify-center text-gray-700 rounded-t-lg">Worcester Bosch 4000</div>
+                  ) : (
+                    <Image src={src4000} onError={() => setError4000(true)} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 4000 boiler" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" />
+                  )}
                   <CardTitle>Greenstar 4000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -232,7 +287,11 @@ console.log('Home component rendering with data:', data)
               </Card>
               <Card>
                 <CardHeader className="bg-teal-900 text-white rounded-t-lg py-2 px-4">
-                  <Image src={src8000} onError={() => setSrc8000('https://via.placeholder.com/584x550?text=8000+Boiler')} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 8000 boiler by Bryan Whiteley" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" />
+                  {error8000 ? (
+                    <div className="w-full h-48 bg-gray-300 flex items-center justify-center text-gray-700 rounded-t-lg">Worcester Bosch 8000</div>
+                  ) : (
+                    <Image src={src8000} onError={() => setError8000(true)} loading="lazy" width="584" height="550" alt="Worcester Bosch Greenstar 8000 boiler" className="w-full h-48 object-cover rounded-t-lg" quality={95} sizes="(max-width: 768px) 100vw, 50vw" />
+                  )}
                   <CardTitle>Greenstar 8000</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -245,38 +304,48 @@ console.log('Home component rendering with data:', data)
           </div>
         </motion.div>
         <motion.div
+          ref={whyChooseRef}
           className="section py-16 px-4"
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={whyChooseInView ? "visible" : "hidden"}
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-8">Why Choose Worcester Bosch with Nimbus?</h2>
-            <div className="grid grid-cols-4 gap-4 md:gap-6">
-              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
-                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="Which? Best Buy" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">Which? Best Buy</h3>
-                <p>Recognized for quality and reliability.</p>
+            <h2 className="text-3xl font-bold text-center mb-8">Why Choose Nimbus for Your Gas Boiler Installation?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              <div className="text-center bg-teal-50 border-teal-200 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all">
+                <Image src="/gas-safe-badge.png" width={160} height={160} quality={95} priority alt="Gas Safe Registered 966812" className="mx-auto mb-4 w-16 h-16 object-contain" />
+                <h3 className="text-xl font-semibold mb-2">Gas Safe Registered 966812</h3>
+                <p>Fully qualified and registered engineers – certificate 966812</p>
               </div>
-              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
-                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="Quiet Mark" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">Quiet Mark</h3>
-                <p>Certified for low noise operation.</p>
+              <div className="text-center bg-teal-50 border-teal-200 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all">
+                <svg className="w-16 h-16 mx-auto mb-4 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/>
+                </svg>
+                <h3 className="text-xl font-semibold mb-2">Next-Day Installation Available</h3>
+                <p>Monday–Saturday across North Lincolnshire</p>
               </div>
-              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
-                <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="12-year guarantee" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">12-year guarantee</h3>
-                <p>Extended warranty for peace of mind.</p>
+              <div className="text-center bg-teal-50 border-teal-200 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all">
+                <svg className="w-16 h-16 mx-auto mb-4 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/>
+                </svg>
+                <h3 className="text-xl font-semibold mb-2">Fixed Prices from £1,790</h3>
+                <p>No hidden extras – includes removal, flush & commissioning</p>
               </div>
-              <div className="text-center bg-teal-50 border-teal-200 rounded-lg p-6 shadow-sm">
-                <img src="/wp-content/uploads/2025/08/Gas-Safe-Logo-2.png" alt="MCS certified for grants" className="mx-auto mb-4 w-16 h-16 object-contain" />
-                <h3 className="text-xl font-semibold mb-2">MCS certified for grants</h3>
-                <p>Eligible for government incentives.</p>
+              <div className="text-center bg-teal-50 border-teal-200 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all">
+                <img src="/images/worcester-bosch/4000_Lft_10years_2500x2700_copy.png" alt="10-Year Parts & Labour Warranty" className="mx-auto mb-4 w-16 h-16 object-contain" />
+                <h3 className="text-xl font-semibold mb-2">10-Year Parts & Labour Warranty</h3>
+                <p>All Worcester Bosch backed warranty on all new boilers</p>
               </div>
             </div>
           </div>
         </motion.div>
         <motion.div
+          ref={testimonialsRef}
           className="bg-teal-50 py-16 rounded-xl -mx-4 md:mx-0 md:rounded-none"
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={testimonialsInView ? "visible" : "hidden"}
         >
           <div className="max-w-6xl mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">What Our Customers Say</h2>
@@ -284,8 +353,8 @@ console.log('Home component rendering with data:', data)
               <CarouselContent className="gap-6 -ml-6">
                 {testimonials.map((testimonial, index) => (
                   <CarouselItem key={index} className="pl-6">
-                    <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 hover:shadow-lg transition">
-                      <Image src="/images/worcester-bosch/Worcester_Bosch_8000_Front_1.jpg" width={64} height={64} className="w-16 h-16 object-cover rounded mb-4" alt="Worcester Bosch Boiler" quality={95} sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" onError={() => {}} />
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all">
+                      <Image src="/images/worcester-bosch/Worcester_Bosch_8000_Front_1.jpg" width={64} height={64} className="w-16 h-16 object-cover rounded mb-4" alt="Worcester Bosch Boiler" quality={95} sizes="(max-width: 768px) 100vw, 50vw" onError={() => {}} />
                       <p className="text-lg italic text-gray-800 mb-4">{testimonial.quote}</p>
                       <p className="text-teal-900 font-semibold">{testimonial.name}</p>
                       <div className="flex">
@@ -305,24 +374,32 @@ console.log('Home component rendering with data:', data)
           </div>
         </motion.div>
         <motion.div
+          ref={upgradeRef}
           className="bg-teal-900 py-12 text-white text-center rounded-t-3xl -mx-4 md:mx-0 md:rounded-none"
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={upgradeInView ? "visible" : "hidden"}
         >
           <h2 className="text-3xl font-bold mb-4">Ready to Upgrade Your Boiler?</h2>
-          <a href="tel:01724622069" className="text-2xl font-bold py-4 px-10 rounded-full shadow-xl bg-orange-600 hover:bg-orange-700 transition-all inline-block">Call Us Now</a>
+          <a href="tel:01724622069" className="w-full text-2xl font-bold py-4 px-10 rounded-full shadow-md hover:shadow-lg bg-orange-600 hover:bg-orange-700 transition-all inline-block">Call Us Now</a>
         </motion.div>
         <motion.div
+          ref={ourRangesRef}
           className="section py-16 px-4"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={ourRangesInView ? "visible" : "hidden"}
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">Our Ranges</h2>
-            <div className="grid grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {ranges.map((range, index) => (
-                <div key={index} className="bg-white border-teal-200 rounded-xl shadow-lg p-6">
-                  <Image src={range.src.includes('unsplash') && fallback2000 ? `https://via.placeholder.com/400x300?text=${range.name.split(' ')[2]}+Boiler` : range.src} alt={range.name} width={400} height={300} className="h-48 w-full object-cover rounded-t-lg mb-4" quality={95} sizes="(max-width: 768px) 100vw, 50vw" onError={() => { if (range.src.includes('unsplash')) setFallback2000(true); }} placeholder="blur" />
+                <div key={index} className="bg-white border-teal-200 rounded-xl shadow-lg hover:shadow-2xl transition-all p-6">
+                  {rangeErrors[index] ? (
+                    <div className="h-48 w-full bg-gray-300 flex items-center justify-center text-gray-700 rounded-t-lg mb-4">Worcester Bosch {range.name.split(' ')[2]}</div>
+                  ) : (
+                    <Image src={range.src} alt={range.name} width={400} height={300} className="h-48 w-full object-cover rounded-t-lg mb-4" quality={95} sizes="(max-width: 768px) 100vw, 50vw" onError={() => setRangeErrors(prev => ({ ...prev, [index]: true }))} />
+                  )}
                   <h3 className="text-2xl font-bold text-teal-900 mb-2">{range.name}</h3>
                   <p className="text-lg text-gray-700 mb-3">{range.kW} <span className="text-orange-600">{range.price}</span></p>
                   <ul className="text-sm text-gray-600 space-y-1">
@@ -334,30 +411,31 @@ console.log('Home component rendering with data:', data)
           </div>
         </motion.div>
         <motion.div
+          ref={whyChooseUsRef}
           className="section py-16 px-4"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={whyChooseUsInView ? "visible" : "hidden"}
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-teal-900 mb-8 text-center">Why Choose Us</h2>
-            <div className="grid grid-cols-4 gap-6 md:gap-8">
-              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all">
                 <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                 <h3 className="text-xl font-bold text-teal-900 mb-2">Which? Trusted</h3>
                 <p className="text-gray-600 leading-relaxed">Awarded for customer service excellence by Which? magazine</p>
               </div>
-              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all">
                 <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
                 <h3 className="text-xl font-bold text-teal-900 mb-2">Gas Safe Registered</h3>
                 <p className="text-gray-600 leading-relaxed">Fully qualified and insured engineers with Gas Safe certification</p>
               </div>
-              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all">
                 <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/></svg>
                 <h3 className="text-xl font-bold text-teal-900 mb-2">Local Experts</h3>
                 <p className="text-gray-600 leading-relaxed">Serving North Lincolnshire with fast response times and local knowledge</p>
               </div>
-              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+              <div className="bg-teal-50 border border-teal-200 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all">
                 <svg className="w-12 h-12 text-teal-600 mb-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
                 <h3 className="text-xl font-bold text-teal-900 mb-2">10 Year Warranty</h3>
                 <p className="text-gray-600 leading-relaxed">Comprehensive coverage on all boiler installations and repairs</p>
@@ -366,19 +444,20 @@ console.log('Home component rendering with data:', data)
           </div>
         </motion.div>
         <motion.div
+          ref={fixedRef}
           className="section py-12 px-4 bg-blue-900 text-white text-center"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          variants={fadeInVariants}
+          initial="hidden"
+          animate={fixedInView ? "visible" : "hidden"}
         >
           <h2 className="text-3xl font-bold mb-4">Fixed Boiler Now?</h2>
           <p className="mb-8">Book your Gas Safe Registered – 966812 installation today - next day available.</p>
-          <button className="bg-orange-500 text-white px-12 py-4 rounded-lg font-semibold text-3xl hover:bg-orange-600 transition-colors">
+          <button className="w-full bg-orange-600 text-white px-12 py-4 rounded-lg font-semibold text-3xl hover:bg-orange-700 shadow-md hover:shadow-lg transition-all">
             Get Started
           </button>
         </motion.div>
         <Footer />
-      </motion.div>
+      </div>
       <FAQAccordion faq={faqData} />
     </>
   );

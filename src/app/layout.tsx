@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="font-inter">
         <ThemeProvider attribute="class" defaultTheme="dark">
           <MotionConfig reducedMotion="user">
             <DefaultSeo

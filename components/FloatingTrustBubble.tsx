@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { getLiveGoogleReviews, type LiveGoogleReviews, type LiveReview } from '../lib/live-google-reviews';
+import { getLiveGoogleReviews, type LiveGoogleReviews } from '../src/lib/live-google-reviews';
 
 export default function FloatingTrustBubble() {
   const fadeIn = {
@@ -15,8 +15,8 @@ export default function FloatingTrustBubble() {
     whileHover: { y: -10 },
   };
 
-  const [reviews, setReviews] = useState<LiveReview[]>([]);
-  const [currentReview, setCurrentReview] = useState<LiveReview | null>(null);
+  const [rating, setRating] = useState<number>(0);
+  const [totalReviews, setTotalReviews] = useState<number>(0);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -24,10 +24,8 @@ export default function FloatingTrustBubble() {
     const fetchReviews = async () => {
       try {
         const data = await getLiveGoogleReviews();
-        setReviews(data.reviews);
-        if (data.reviews.length > 0) {
-          setCurrentReview(data.reviews[0]); // Show the first review, or randomize
-        }
+        setRating(data.rating);
+        setTotalReviews(data.totalReviews);
       } catch (err) {
         setError('Failed to load reviews');
       }
@@ -38,7 +36,7 @@ export default function FloatingTrustBubble() {
   if (error) {
     return (
       <motion.div
-        className="fixed bottom-4 right-4 bg-teal-50 p-4 rounded-lg shadow-lg border max-w-sm z-50"
+        className="fixed bottom-4 right-4 bg-teal-50 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all border max-w-sm z-50"
         initial="initial"
         animate="animate"
         variants={fadeIn}
@@ -56,29 +54,25 @@ export default function FloatingTrustBubble() {
     );
   }
 
-  if (!currentReview) return null;
+  // Removed fake review code for no reviews case
 
   return (
     <motion.div
-      className="fixed bottom-4 right-4 bg-teal-50 p-4 rounded-lg shadow-lg border max-w-sm z-50 animate-bounce"
+      className="fixed bottom-4 right-4 bg-teal-50 p-4 rounded-xl shadow-lg hover:shadow-2xl transition-all border max-w-sm z-50 animate-bounce"
       initial="initial"
       animate="animate"
       variants={fadeIn}
       whileHover={{ y: -10 }}
     >
       <div className="flex items-center mb-2">
-        <img src={currentReview.authorPhotoUri} alt={currentReview.authorName} className="w-8 h-8 rounded-full mr-2" />
-        <div>
-          <p className="font-semibold text-sm">{currentReview.authorName}</p>
-          <div className="flex">
-            {Array.from({ length: 5 }, (_, i) => (
-              <span key={i} className={`text-yellow-400 ${i < currentReview.rating ? 'fill-current' : ''}`}>★</span>
-            ))}
-          </div>
+        <span className="font-semibold text-sm">{rating.toFixed(1)}</span>
+        <div className="flex ml-1">
+          {Array.from({ length: 5 }, (_, i) => (
+            <span key={i} className="text-yellow-400">★</span>
+          ))}
         </div>
+        <span className="ml-2 text-sm">· {totalReviews} Google reviews</span>
       </div>
-      <p className="text-sm">{currentReview.text}</p>
-      <p className="text-xs text-gray-500 mt-1">{currentReview.relativeTimeDescription}</p>
       <Link href="/reviews" className="text-blue-500 text-xs mt-2 block">View all reviews</Link>
     </motion.div>
   );

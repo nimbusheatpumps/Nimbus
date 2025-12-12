@@ -1,180 +1,164 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Button } from './ui/button';
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  boilerType: string;
-  message: string;
-}
+const schema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  phone: z.string().min(1, 'Phone is required'),
+  email: z.string().email('Invalid email'),
+  postcode: z.string().min(1, 'Postcode is required'),
+  range: z.string().min(1, 'Range is required'),
+  message: z.string().optional(),
+  website: z.string().optional(), // honeypot
+});
+
+type FormData = z.infer<typeof schema>;
 
 const BoilerQuoteForm: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    boilerType: '',
-    message: ''
-  });
-  const [showToast, setShowToast] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
-  useEffect(() => {
-    setIsOpen(false);
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+
   const closeModal = () => setIsOpen(false);
-  const totalSteps = 3;
 
-  const handleNext = () => {
-    if (currentStep < totalSteps - 1) {
-      setCurrentStep(currentStep + 1);
+  const onSubmit = async (data: FormData) => {
+    // Check honeypot
+    if (data.website) {
+      // Spam detected, do nothing
+      return;
     }
-  };
 
-  const handlePrev = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/submit-quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit quote');
+      }
+
+      setSuccess(true);
+      reset();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setIsLoading(false);
     }
-  };
-
-  const handleSubmit = () => {
-    // Submit logic here
-    setShowToast(true);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <>
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-50" onClick={closeModal}>
-        <motion.div
-          onClick={(e) => e.stopPropagation()}
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="border border-teal-500 rounded-xl shadow-lg hover:shadow-2xl transition-all max-w-lg mx-auto bg-white p-8 relative"
-        >
-          <button onClick={closeModal} className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-3xl">×</button>
-          <div className="w-full bg-teal-200 rounded-full h-2 mb-6">
-            <div
-              className="bg-orange-500 rounded-full h-full transition-all duration-300"
-              style={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
-            ></div>
-          </div>
-
-          <div className="flex justify-center gap-2 mb-6">
-            {Array.from({ length: totalSteps }, (_, i) => (
-              <div
-                key={i}
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                  i === currentStep ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                {i + 1}
-              </div>
-            ))}
-          </div>
-
-          <p className="text-red-600 font-bold animate-pulse mb-4">3 slots left this week – £150 off if booked today</p>
-
-          {currentStep === 0 && (
-            <div>
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                value={formData.name}
-                onChange={handleChange}
-                className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
-              />
-            </div>
-          )}
-
-          {currentStep === 1 && (
-            <div>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
-              />
-              <input
-                type="text"
-                name="address"
-                placeholder="Address"
-                value={formData.address}
-                onChange={handleChange}
-                className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
-              />
-            </div>
-          )}
-
-          {currentStep === 2 && (
-            <div>
-              <select
-                name="boilerType"
-                value={formData.boilerType}
-                onChange={handleChange}
-                className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
-              >
-                <option value="">Select Boiler Type</option>
-                <option value="Combi">Combi</option>
-                <option value="System">System</option>
-                <option value="Regular">Regular</option>
-              </select>
-              <textarea
-                name="message"
-                placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
-                className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
-                rows={4}
-              ></textarea>
-            </div>
-          )}
-
-          <button
-            onClick={currentStep < totalSteps - 1 ? handleNext : handleSubmit}
-            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all w-full"
+          <motion.div
+            onClick={(e) => e.stopPropagation()}
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="border border-teal-500 rounded-2xl shadow-2xl hover:shadow-2xl transition-all max-w-lg mx-auto bg-white p-8 relative"
           >
-            {currentStep < totalSteps - 1 ? 'Next' : 'Submit'}
-          </button>
+            <button onClick={closeModal} className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 text-3xl">×</button>
 
-          {currentStep > 0 && (
-            <button
-              onClick={handlePrev}
-              className="mt-2 text-gray-600 w-full"
-            >
-              Previous
-            </button>
-          )}
-        </motion.div>
-        </div>
-      )}
+            <p className="text-red-600 font-bold animate-pulse mb-4">3 slots left this week – £150 off if booked today</p>
 
-      {showToast && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white p-6 rounded-xl shadow-lg flex items-center gap-2 z-50">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          Success! Quote submitted.
+            {success ? (
+              <div className="text-center">
+                <p className="text-green-600 font-bold">Thanks! We'll be in touch within the same day</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  {...register('name')}
+                  className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
+                />
+                {errors.name && <p className="text-red-500 mb-2">{errors.name.message}</p>}
+
+                <input
+                  type="tel"
+                  placeholder="Phone"
+                  {...register('phone')}
+                  className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
+                />
+                {errors.phone && <p className="text-red-500 mb-2">{errors.phone.message}</p>}
+
+                <input
+                  type="email"
+                  placeholder="Email"
+                  {...register('email')}
+                  className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
+                />
+                {errors.email && <p className="text-red-500 mb-2">{errors.email.message}</p>}
+
+                <input
+                  type="text"
+                  placeholder="Postcode"
+                  {...register('postcode')}
+                  className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
+                />
+                {errors.postcode && <p className="text-red-500 mb-2">{errors.postcode.message}</p>}
+
+                <select
+                  {...register('range')}
+                  className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
+                >
+                  <option value="">Select Range</option>
+                  <option value="Combi">Combi</option>
+                  <option value="System">System</option>
+                  <option value="Regular">Regular</option>
+                </select>
+                {errors.range && <p className="text-red-500 mb-2">{errors.range.message}</p>}
+
+                <textarea
+                  placeholder="Message"
+                  {...register('message')}
+                  className="rounded-lg border-gray-300 focus:border-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
+                  rows={4}
+                ></textarea>
+
+                {/* Honeypot */}
+                <input
+                  type="text"
+                  {...register('website')}
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                {error && <p className="text-red-500 mb-2">{error}</p>}
+
+                <Button
+                  variant="orange"
+                  type="submit"
+                  disabled={isLoading}
+                  className="font-bold py-3 px-8 rounded-lg w-full disabled:opacity-50"
+                >
+                  {isLoading ? 'Submitting...' : 'Submit'}
+                </Button>
+              </form>
+            )}
+          </motion.div>
         </div>
       )}
     </>

@@ -199,8 +199,8 @@ export default function Home({ data }: HomeProps) {
   return (
     <>
       <Head>
-        <title>New Boiler North Lincolnshire | Gas Safe Registered – 966812 £1,790 2025</title>
-        <meta name="description" content="Professional boiler services in Scunthorpe and Grimsby. Gas Safe Registered – 966812 £1,790 new installs, repairs from £99, heat pump grants available." />
+        <title>Worcester Bosch Boiler Installation Scunthorpe | Gas Safe Engineers North Lincolnshire</title>
+        <meta name="description" content="Expert Worcester Bosch boiler installation in Scunthorpe and North Lincolnshire. Gas Safe registered, next-day fitting, fixed prices from £1,790. Call 01724 123456." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
         {reviewSchemas.map((schema, index) => (

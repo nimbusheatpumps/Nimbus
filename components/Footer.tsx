@@ -33,10 +33,10 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-bold mb-2">Services</h3>
             <ul className="space-y-1">
-              <li><Link href="/services" className="hover:underline">Boiler Installation</Link></li>
-              <li><Link href="/services" className="hover:underline">Repairs & Maintenance</Link></li>
-              <li><Link href="/services" className="hover:underline">New Boiler Quotes</Link></li>
-              <li><Link href="/services" className="hover:underline">Emergency Callouts</Link></li>
+              <li><Link href="/services" className="hover:underline hover:text-orange-500">Boiler Installation</Link></li>
+              <li><Link href="/services" className="hover:underline hover:text-orange-500">Repairs & Maintenance</Link></li>
+              <li><Link href="/services" className="hover:underline hover:text-orange-500">New Boiler Quotes</Link></li>
+              <li><Link href="/services" className="hover:underline hover:text-orange-500">Emergency Callouts</Link></li>
             </ul>
           </div>
           <div>

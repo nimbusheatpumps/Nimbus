@@ -5,6 +5,11 @@ import { motion } from "framer-motion";
 import { getLiveGoogleReviews, LiveReview } from "../../lib/live-google-reviews";
 import Image from 'next/image';
 
+export const metadata = {
+  title: "Customer Reviews | Worcester Bosch Boilers Scunthorpe North Lincolnshire",
+  description: "Read customer reviews for Nimbus Heat Pumps' Worcester Bosch boiler installations in Scunthorpe and North Lincolnshire."
+};
+
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },

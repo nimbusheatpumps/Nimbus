@@ -147,6 +147,13 @@ const Navbar: React.FC = () => {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
+                  <Link href="/faq" className={`${navigationMenuTriggerStyle()} relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full focus:after:w-full hover:underline hover:text-orange-500`} aria-label="FAQ">
+                    FAQ
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
                   <Link href="/about" className={`${navigationMenuTriggerStyle()} relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full focus:after:w-full hover:underline hover:text-orange-500`} aria-label="About">
                     About
                   </Link>
@@ -227,6 +234,9 @@ const Navbar: React.FC = () => {
                     </div>
                     <Link href="/reviews" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Reviews">
                       Reviews
+                    </Link>
+                    <Link href="/faq" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="FAQ">
+                      FAQ
                     </Link>
                     <Link href="/contact" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Contact">
                       Contact

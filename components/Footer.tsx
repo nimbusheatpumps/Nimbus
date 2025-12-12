@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-teal-900 text-white py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
           <div>
             <Image
               src="/wp-content/uploads/2025/06/Nimbus-Heat-Pumps-Logo.png"
@@ -37,6 +37,14 @@ const Footer: React.FC = () => {
               <li><Link href="/services" className="hover:underline hover:text-orange-500">Repairs & Maintenance</Link></li>
               <li><Link href="/services" className="hover:underline hover:text-orange-500">New Boiler Quotes</Link></li>
               <li><Link href="/services" className="hover:underline hover:text-orange-500">Emergency Callouts</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-bold mb-2">Links</h3>
+            <ul className="space-y-1">
+              <li><Link href="/faq" className="hover:underline hover:text-orange-500">FAQ</Link></li>
+              <li><Link href="/privacy-policy" className="hover:underline hover:text-orange-500">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:underline hover:text-orange-500">Terms & Conditions</Link></li>
             </ul>
           </div>
           <div>
@@ -63,8 +71,6 @@ const Footer: React.FC = () => {
               onError={() => {}}
             />
             <p className="text-orange-400 font-bold">Gas Safe Registered – 966812</p>
-            <p><Link href="/privacy-policy" className="hover:underline hover:text-orange-500">Privacy Policy</Link></p>
-            <p><Link href="/terms" className="hover:underline hover:text-orange-500">Terms & Conditions</Link></p>
           </div>
         </div>
         <p className="col-span-full text-center text-gray-400 mt-4">&copy; 2025 Nimbus Boilers & Heat Pumps. All rights reserved.</p>

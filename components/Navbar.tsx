@@ -58,13 +58,20 @@ const Navbar: React.FC = () => {
                 <NavigationMenuTrigger onClick={() => router.push('/locations/scunthorpe')} className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:w-full group-focus:after:w-full" aria-label="Locations menu">Locations</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-3 p-4 md:w-[400px]">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link href="/locations/lincoln" className="block select-none rounded-md p-3 hover:bg-accent focus:bg-accent transition-colors hover:underline hover:text-orange-500" aria-label="Lincoln">
-                          Lincoln
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
+                                      <li>
+                                        <NavigationMenuLink asChild>
+                                          <Link href="/locations" className="block select-none rounded-md p-3 hover:bg-accent focus:bg-accent transition-colors hover:underline hover:text-orange-500" aria-label="All Locations">
+                                            All Locations
+                                          </Link>
+                                        </NavigationMenuLink>
+                                      </li>
+                                      <li>
+                                        <NavigationMenuLink asChild>
+                                          <Link href="/locations/lincoln" className="block select-none rounded-md p-3 hover:bg-accent focus:bg-accent transition-colors hover:underline hover:text-orange-500" aria-label="Lincoln">
+                                            Lincoln
+                                          </Link>
+                                        </NavigationMenuLink>
+                                      </li>
                     <li>
                       <NavigationMenuLink asChild>
                         <Link href="/locations/scunthorpe" className="block select-none rounded-md p-3 hover:bg-accent focus:bg-accent transition-colors hover:underline hover:text-orange-500" aria-label="Scunthorpe">
@@ -184,6 +191,9 @@ const Navbar: React.FC = () => {
                     </Link>
                     <div>
                       <div className="text-lg font-medium mb-2">Locations</div>
+                      <Link href="/locations" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="All Locations">
+                        All Locations
+                      </Link>
                       <Link href="/locations/lincoln" onClick={() => setMobileOpen(false)} className="block pl-4 text-sm hover:underline hover:text-orange-500" aria-label="Lincoln">
                         Lincoln
                       </Link>

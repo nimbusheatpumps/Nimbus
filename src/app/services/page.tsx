@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
+import ServiceGrid from '../../components/ServiceGrid';
 
 export const metadata = {
   title: "Worcester Bosch Boiler Services Scunthorpe | Installation & Repairs North Lincolnshire",
@@ -303,6 +304,176 @@ export default function ServicesPage() {
               Contact us today for your free no-obligation quote.
             </p>
           </motion.div>
+
+          <motion.div className="mb-8" variants={itemVariants}>
+            <ServiceGrid />
+          </motion.div>
+
+          {/* Gas Boiler Installation Process */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <h2 className="text-3xl font-semibold text-teal-800 mb-6">Gas Boiler Installation Process</h2>
+            <details className="md:open">
+              <summary className="cursor-pointer text-xl font-semibold text-teal-700 mb-4 md:hidden">Installation Steps</summary>
+              <div className="prose prose-lg max-w-none">
+                <ol className="list-decimal list-inside space-y-4">
+                  <li><strong>Free quote and survey:</strong> Our Gas Safe engineer visits your North Lincolnshire home to assess your current system, discuss requirements, and provide a detailed quote with no obligation.</li>
+                  <li><strong>Installation day:</strong> Our experienced team arrives with all necessary equipment and materials, working efficiently to minimize disruption to your daily routine.</li>
+                  <li><strong>Commissioning and testing:</strong> We thoroughly test the new boiler, ensuring optimal performance, safety compliance, and integration with your existing heating system.</li>
+                  <li><strong>Handover and training:</strong> We demonstrate the boiler's features, explain maintenance requirements, and provide all necessary documentation and warranties.</li>
+                  <li><strong>Aftercare support:</strong> Enjoy ongoing support with our comprehensive aftercare package, including priority booking for servicing and 24/7 emergency assistance.</li>
+                </ol>
+              </div>
+            </details>
+          </motion.div>
+
+          {/* Testimonial 1 */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <blockquote className="border-l-4 border-teal-500 pl-4 italic text-gray-700">
+              "The installation process was seamless from start to finish. The team was professional, punctual, and explained everything clearly. Our new boiler has made such a difference to our home comfort." - Sarah Thompson, Scunthorpe
+            </blockquote>
+          </motion.div>
+
+          {/* What's Included in Every Installation */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <h2 className="text-3xl font-semibold text-teal-800 mb-6">What's Included in Every Installation</h2>
+            <details className="md:open">
+              <summary className="cursor-pointer text-xl font-semibold text-teal-700 mb-4 md:hidden">Installation Package</summary>
+              <div className="prose prose-lg max-w-none">
+                <ul className="space-y-3">
+                  <li><svg className="w-5 h-5 inline mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>MagnaCleanse chemical flush to remove sludge and improve system efficiency</li>
+                  <li><svg className="w-5 h-5 inline mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>Hive smart thermostat for intelligent temperature control and energy savings</li>
+                  <li><svg className="w-5 h-5 inline mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>Gas Safe registered engineer with full certification and insurance</li>
+                  <li><svg className="w-5 h-5 inline mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>British Standard compliance testing and certification</li>
+                  <li><svg className="w-5 h-5 inline mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>10-year warranty on parts and labour for complete peace of mind</li>
+                  <li><svg className="w-5 h-5 inline mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>Comprehensive safety checks and system optimization</li>
+                </ul>
+              </div>
+            </details>
+          </motion.div>
+
+          {/* Testimonial 2 */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <blockquote className="border-l-4 border-teal-500 pl-4 italic text-gray-700">
+              "Everything was included as promised - from the chemical flush to the smart thermostat. The warranty gives us real confidence in the installation quality." - Michael Davies, Brigg
+            </blockquote>
+          </motion.div>
+
+          {/* Boiler Types for Your Home */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <h2 className="text-3xl font-semibold text-teal-800 mb-6">Boiler Types for Your Home</h2>
+            <details className="md:open">
+              <summary className="cursor-pointer text-xl font-semibold text-teal-700 mb-4 md:hidden">Boiler Options</summary>
+              <div className="prose prose-lg max-w-none space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-teal-700">Combi Boilers (24-35kW)</h3>
+                  <p>Ideal for most North Lincolnshire homes, combi boilers provide instant hot water without needing a separate cylinder. Perfect for 1-4 bedroom properties with 1-2 bathrooms. Choose based on your hot water demand - 24kW for smaller homes, 30-35kW for larger families.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-teal-700">System Boilers (18-35kW)</h3>
+                  <p>Best for homes with multiple bathrooms or higher hot water demand. System boilers work with an unvented cylinder to store hot water, providing greater capacity. Suitable for 3+ bedroom homes where simultaneous hot water use is common.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-teal-700">Regular Boilers (12-30kW)</h3>
+                  <p>Traditional setup with a separate hot water cylinder and cold water storage tank. Good for larger properties or where space allows for tanks. Lower output options suit smaller homes, while higher outputs handle demanding heating loads.</p>
+                </div>
+                <p><strong>Sizing Guidance:</strong> Our survey will determine the perfect kW output for your North Lincolnshire home, considering factors like property size, insulation, and local climate conditions.</p>
+              </div>
+            </details>
+          </motion.div>
+
+          {/* Testimonial 3 */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <blockquote className="border-l-4 border-teal-500 pl-4 italic text-gray-700">
+              "The team helped us choose the right combi boiler for our 3-bedroom home. The sizing was spot-on and we've never had better hot water pressure." - Emma Wilson, Barton-upon-Humber
+            </blockquote>
+          </motion.div>
+
+          {/* Pricing & Factors */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <h2 className="text-3xl font-semibold text-teal-800 mb-6">Pricing & Factors</h2>
+            <div className="prose prose-lg max-w-none">
+              <p>Guide prices for complete Worcester Bosch boiler installations start from £1,790 for our entry-level models. This includes the boiler, flue system, pipework modifications, commissioning, and all safety checks.</p>
+              <p><strong>Key Pricing Factors:</strong></p>
+              <ul className="list-disc list-inside space-y-2">
+                <li>Property size and layout affecting installation complexity</li>
+                <li>Current heating system type and condition</li>
+                <li>Fuel type conversion requirements</li>
+                <li>Access difficulties or structural modifications needed</li>
+                <li>Additional features like smart controls or system upgrades</li>
+              </ul>
+              <p>Finance options are available through our approved partners, and early booking can save up to £500 on standard installations. Contact us for a personalized quote tailored to your North Lincolnshire home.</p>
+            </div>
+          </motion.div>
+
+          {/* Our Trusted Brands */}
+          <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
+            <h2 className="text-3xl font-semibold text-teal-800 mb-6">Our Trusted Brands</h2>
+            <div className="prose prose-lg max-w-none">
+              <p>We exclusively install Worcester Bosch boilers, renowned for their reliability, efficiency, and comprehensive warranties. Our range includes:</p>
+              <ul className="space-y-3">
+                <li><strong>Greenstar 1000 Series:</strong> 12-15kW - Compact and efficient for smaller homes</li>
+                <li><strong>Greenstar 2000 Series:</strong> 18-26kW - Versatile system boilers for family homes</li>
+                <li><strong>Greenstar 4000 Series:</strong> 29-35kW - Premium combi boilers with advanced features</li>
+                <li><strong>Greenstar 8000 Series:</strong> 30-50kW - Flagship range for luxury installations</li>
+              </ul>
+              <p>All our installations carry full manufacturer accreditations including Gas Safe registration, British Standards compliance, and extensive warranties. Worcester Bosch boilers are designed specifically for the UK climate, ensuring optimal performance in North Lincolnshire's variable weather conditions.</p>
+            </div>
+          </motion.div>
+
+          {/* JSON-LD Schema */}
+          <script type="application/ld+json" dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              "name": "Gas Boiler Installation Process",
+              "description": "Complete guide to professional gas boiler installation in North Lincolnshire",
+              "step": [
+                {
+                  "@type": "HowToStep",
+                  "name": "Free Quote and Survey",
+                  "text": "Gas Safe engineer assesses your current system and provides detailed quote"
+                },
+                {
+                  "@type": "HowToStep",
+                  "name": "Installation Day",
+                  "text": "Experienced team installs the new boiler with minimal disruption"
+                },
+                {
+                  "@type": "HowToStep",
+                  "name": "Commissioning and Testing",
+                  "text": "Thorough testing ensures optimal performance and safety compliance"
+                },
+                {
+                  "@type": "HowToStep",
+                  "name": "Handover and Training",
+                  "text": "Demonstration of features and provision of documentation"
+                },
+                {
+                  "@type": "HowToStep",
+                  "name": "Aftercare Support",
+                  "text": "Ongoing support with priority servicing and emergency assistance"
+                }
+              ]
+            })
+          }} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Offer",
+              "name": "Worcester Bosch Boiler Installation",
+              "description": "Complete boiler installation packages starting from £1,790",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "1790",
+                "priceCurrency": "GBP"
+              },
+              "availability": "https://schema.org/InStock",
+              "seller": {
+                "@type": "Organization",
+                "name": "Nimbus Heat Pumps"
+              }
+            })
+          }} />
         </motion.div>
       </div>
     </div>

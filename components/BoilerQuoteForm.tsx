@@ -21,6 +21,7 @@ const schema = z.object({
   website: z.string().optional(), // honeypot
   kW: z.string().optional(),
   model: z.string().optional(),
+  brand: z.string().min(1, 'Brand is required'),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -78,7 +79,8 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false, isO
     if (currentStep === 1) {
       if (!watch('name') || !watch('phone') || !watch('email') || errors.name || errors.phone || errors.email) valid = false;
     } else if (currentStep === 2) {
-      if (!watch('postcode') || !watch('range') || !selectedKW || !selectedModel || errors.postcode || errors.range) valid = false;
+      if (!watch('postcode') || !watch('range') || !watch('brand') || errors.postcode || errors.range || errors.brand) valid = false;
+      if (!fullPage && (!selectedKW || !selectedModel)) valid = false;
     }
     if (valid) setCurrentStep(currentStep + 1);
   };
@@ -183,6 +185,20 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false, isO
                   <option value="Regular">Regular</option>
                 </select>
                 {errors.range && <p className="text-red-500 mb-2">{errors.range.message}</p>}
+
+                <select
+                  {...register('brand')}
+                  className="rounded-lg border-gray-300 focus:border-orange-500 focus:ring-orange-500 p-4 shadow-sm font-inter placeholder-gray-500 w-full mb-4"
+                >
+                  <option value="">Select Brand</option>
+                  <option value="Worcester Bosch">Worcester Bosch</option>
+                  <option value="Vaillant">Vaillant</option>
+                  <option value="Viessmann">Viessmann</option>
+                  <option value="Baxi">Baxi</option>
+                  <option value="Ideal">Ideal</option>
+                  <option value="Other">Other</option>
+                </select>
+                {errors.brand && <p className="text-red-500 mb-2">{errors.brand.message}</p>}
               </>
             )}
 
@@ -307,6 +323,20 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false, isO
                       <option value="Regular">Regular</option>
                     </select>
                     {errors.range && <p className="text-red-300 mb-2">{errors.range.message}</p>}
+
+                    <select
+                      {...register('brand')}
+                      className="rounded-lg border-white/30 bg-white/10 text-white placeholder-white/70 focus:border-orange-500 focus:ring-orange-500 p-4 shadow-sm font-inter w-full mb-4"
+                    >
+                      <option value="">Select Brand</option>
+                      <option value="Worcester Bosch">Worcester Bosch</option>
+                      <option value="Vaillant">Vaillant</option>
+                      <option value="Viessmann">Viessmann</option>
+                      <option value="Baxi">Baxi</option>
+                      <option value="Ideal">Ideal</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {errors.brand && <p className="text-red-300 mb-2">{errors.brand.message}</p>}
 
                     <select
                       value={selectedKW}

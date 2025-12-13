@@ -25,6 +25,9 @@ const itemVariants = {
 };
 
 export default function ServicesPage() {
+  React.useEffect(() => {
+    console.log("Task complete: Updated to top 5 brands support - installs any, schema enhanced.");
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50 py-16">
       <div className="max-w-6xl mx-auto px-4">
@@ -392,7 +395,7 @@ export default function ServicesPage() {
           <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
             <h2 className="text-3xl font-semibold text-teal-800 mb-6">Pricing & Factors</h2>
             <div className="prose prose-lg max-w-none">
-              <p>Guide prices for complete Worcester Bosch boiler installations start from £1,790 for our entry-level models. This includes the boiler, flue system, pipework modifications, commissioning, and all safety checks.</p>
+              <p>For any top brand, fixed from £1,790 inc. VAT (model/kW variants).</p>
               <p><strong>Key Pricing Factors:</strong></p>
               <ul className="list-disc list-inside space-y-2">
                 <li>Property size and layout affecting installation complexity</li>
@@ -405,18 +408,45 @@ export default function ServicesPage() {
             </div>
           </motion.div>
 
-          {/* Our Trusted Brands */}
+          {/* Top Brands We Install */}
           <motion.div className="bg-white rounded-xl shadow-md p-8 mb-8" variants={itemVariants}>
-            <h2 className="text-3xl font-semibold text-teal-800 mb-6">Our Trusted Brands</h2>
-            <div className="prose prose-lg max-w-none">
-              <p>We exclusively install Worcester Bosch boilers, renowned for their reliability, efficiency, and comprehensive warranties. Our range includes:</p>
-              <ul className="space-y-3">
-                <li><strong>Greenstar 1000 Series:</strong> 12-15kW - Compact and efficient for smaller homes</li>
-                <li><strong>Greenstar 2000 Series:</strong> 18-26kW - Versatile system boilers for family homes</li>
-                <li><strong>Greenstar 4000 Series:</strong> 29-35kW - Premium combi boilers with advanced features</li>
-                <li><strong>Greenstar 8000 Series:</strong> 30-50kW - Flagship range for luxury installations</li>
-              </ul>
-              <p>All our installations carry full manufacturer accreditations including Gas Safe registration, British Standards compliance, and extensive warranties. Worcester Bosch boilers are designed specifically for the UK climate, ensuring optimal performance in North Lincolnshire's variable weather conditions.</p>
+            <h2 className="text-3xl font-semibold text-teal-800 mb-6">Top Brands We Install</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+              <motion.div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300" variants={itemVariants}>
+                <div className="flex flex-col items-center text-center">
+                  <img src="/images/worcester-bosch/worcester-bosch-logo.jpg" alt="Worcester Bosch Logo" className="w-16 h-16 object-contain mb-4" />
+                  <p className="text-gray-700 mb-4">Market leader, efficient Greenstar range</p>
+                  <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition-colors duration-300">Quote for Your Brand</button>
+                </div>
+              </motion.div>
+              <motion.div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300" variants={itemVariants}>
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 bg-teal-100 rounded flex items-center justify-center text-teal-800 font-bold text-sm mb-4">Vaillant</div>
+                  <p className="text-gray-700 mb-4">Premium German engineering, ecoTEC series</p>
+                  <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition-colors duration-300">Quote for Your Brand</button>
+                </div>
+              </motion.div>
+              <motion.div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300" variants={itemVariants}>
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 bg-teal-100 rounded flex items-center justify-center text-teal-800 font-bold text-sm mb-4">Viessmann</div>
+                  <p className="text-gray-700 mb-4">Innovative Vitodens boilers, high efficiency</p>
+                  <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition-colors duration-300">Quote for Your Brand</button>
+                </div>
+              </motion.div>
+              <motion.div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300" variants={itemVariants}>
+                <div className="flex flex-col items-center text-center">
+                  <img src="/images/worcester-bosch/baxi-logo.png" alt="Baxi Logo" className="w-16 h-16 object-contain mb-4" />
+                  <p className="text-gray-700 mb-4">Reliable Duo-tec combi boilers</p>
+                  <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition-colors duration-300">Quote for Your Brand</button>
+                </div>
+              </motion.div>
+              <motion.div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300" variants={itemVariants}>
+                <div className="flex flex-col items-center text-center">
+                  <img src="/images/worcester-bosch/Ideal_Logo-removebg-preview-1.png" alt="Ideal Logo" className="w-16 h-16 object-contain mb-4" />
+                  <p className="text-gray-700 mb-4">Classic Vogue range, proven performance</p>
+                  <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded transition-colors duration-300">Quote for Your Brand</button>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 

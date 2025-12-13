@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, phone, email, postcode, range, message, website } = body;
+    const { name, phone, email, postcode, range, message, brand, website } = body;
 
     if (website && website.trim() !== '') {
       return Response.json({ success: true });
@@ -17,6 +17,7 @@ Phone: ${phone}
 Email: ${email}
 Postcode: ${postcode}
 Range: ${range}
+Brand: ${brand}
 Message: ${message}
 
 Call them on ${phone}`;

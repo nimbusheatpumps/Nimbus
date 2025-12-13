@@ -386,6 +386,86 @@ export default function RootLayout({
                     "target": "https://nimbusheatpumps.co.uk/search?q={search_term_string}",
                     "query-input": "required name=search_term_string"
                   }
+                },
+                {
+                  "@type": "AggregateOffer",
+                  "itemOffered": [
+                    {
+                      "@type": "Product",
+                      "name": "Worcester Bosch",
+                      "brand": "Worcester Bosch",
+                      "offers": {
+                        "@type": "Offer",
+                        "price": "1790",
+                        "priceCurrency": "GBP",
+                        "availability": "https://schema.org/InStock",
+                        "seller": {
+                          "@type": "Organization",
+                          "name": "Nimbus"
+                        }
+                      }
+                    },
+                    {
+                      "@type": "Product",
+                      "name": "Vaillant",
+                      "brand": "Vaillant",
+                      "offers": {
+                        "@type": "Offer",
+                        "price": "1790",
+                        "priceCurrency": "GBP",
+                        "availability": "https://schema.org/InStock",
+                        "seller": {
+                          "@type": "Organization",
+                          "name": "Nimbus"
+                        }
+                      }
+                    },
+                    {
+                      "@type": "Product",
+                      "name": "Viessmann",
+                      "brand": "Viessmann",
+                      "offers": {
+                        "@type": "Offer",
+                        "price": "1790",
+                        "priceCurrency": "GBP",
+                        "availability": "https://schema.org/InStock",
+                        "seller": {
+                          "@type": "Organization",
+                          "name": "Nimbus"
+                        }
+                      }
+                    },
+                    {
+                      "@type": "Product",
+                      "name": "Baxi",
+                      "brand": "Baxi",
+                      "offers": {
+                        "@type": "Offer",
+                        "price": "1790",
+                        "priceCurrency": "GBP",
+                        "availability": "https://schema.org/InStock",
+                        "seller": {
+                          "@type": "Organization",
+                          "name": "Nimbus"
+                        }
+                      }
+                    },
+                    {
+                      "@type": "Product",
+                      "name": "Ideal",
+                      "brand": "Ideal",
+                      "offers": {
+                        "@type": "Offer",
+                        "price": "1790",
+                        "priceCurrency": "GBP",
+                        "availability": "https://schema.org/InStock",
+                        "seller": {
+                          "@type": "Organization",
+                          "name": "Nimbus"
+                        }
+                      }
+                    }
+                  ]
                 }
               ]
             })

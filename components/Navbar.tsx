@@ -55,6 +55,13 @@ const Navbar: React.FC = () => {
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/repairs" className={`${navigationMenuTriggerStyle()} relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full focus:after:w-full hover:underline hover:text-orange-500`} aria-label="Repairs">
+                    Repairs
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
                 <NavigationMenuTrigger onClick={() => router.push('/locations/scunthorpe')} className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:w-full group-focus:after:w-full" aria-label="Locations menu">Locations</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-3 p-4 md:w-[400px]">
@@ -202,6 +209,9 @@ const Navbar: React.FC = () => {
                     </Link>
                     <Link href="/services" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Services">
                       Services
+                    </Link>
+                    <Link href="/repairs" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Repairs">
+                      Repairs
                     </Link>
                     <div>
                       <div className="text-lg font-medium mb-2">Locations</div>

@@ -5,11 +5,6 @@ import { motion } from "framer-motion";
 import Script from 'next/script';
 import BoilerQuoteForm from '../../../components/BoilerQuoteForm';
 
-export const metadata = {
-  title: "Finance - Nimbus Boilers",
-  description: "Nimbus Boiler Finance: 0% plans for £1,790 installs, cover from £15/mo in Scunthorpe/Grimsby/Hull."
-};
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {

@@ -15,7 +15,7 @@ import { getLiveGoogleReviews, type LiveGoogleReviews } from '../lib/live-google
 const faqData = [
   {
     question: 'Why choose Nimbus for Scunthorpe?',
-    answer: 'As Gas Safe Registered – 966812 engineers with over 10 years experience in North Lincolnshire, we provide reliable boiler services and heat pump installations with fixed pricing and next-day availability. Our E-E-A-T credentials include certified technicians, local expertise, and customer testimonials.',
+    answer: 'As Gas Safe Registered – 966812 engineers with over 10 years experience in North Lincolnshire, we provide reliable boiler services with fixed pricing and next-day availability. Our E-E-A-T credentials include certified technicians, local expertise, and customer testimonials.',
   },
   {
     question: 'Is Worcester Bosch the best boiler?',
@@ -42,7 +42,7 @@ const aggregateOfferSchema = {
   "@context": "https://schema.org",
   "@type": "AggregateOffer",
   "name": "Boiler Services Scunthorpe",
-  "description": "Gas Safe Registered – 966812 boiler installation from £1,790, repairs £99, heat pump grants available",
+  "description": "Gas Safe Registered – 966812 boiler installation from £1,790, repairs £99",
   "offers": [
     { "@type": "Offer", "price": "1790", "priceCurrency": "GBP", "description": "New Boiler Install", "brand": "Worcester Bosch" },
     { "@type": "Offer", "price": "99", "priceCurrency": "GBP", "description": "Boiler Repair", "brand": "Worcester Bosch" },

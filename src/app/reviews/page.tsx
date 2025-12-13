@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 export const metadata = {
   title: "Customer Reviews | Worcester Bosch Boilers Scunthorpe North Lincolnshire",
-  description: "Read customer reviews for Nimbus Heat Pumps' Worcester Bosch boiler installations in Scunthorpe and North Lincolnshire."
+  description: "Read customer reviews for Nimbus Boilers' Worcester Bosch boiler installations in Scunthorpe and North Lincolnshire."
 };
 
 const cardVariants = {

@@ -22,7 +22,7 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "LocalBusiness",
-                  "name": "Nimbus Boilers & Heat Pumps",
+                  "name": "Nimbus Boilers",
                   "image": "https://nimbusheatpumps.co.uk/wp-content/uploads/2025/06/iStock-2211126281-scaled.jpg",
                   "telephone": "01724 622069",
                   "email": "info@nimbusheatpumps.co.uk",
@@ -239,13 +239,6 @@ export default function RootLayout({
                     },
                     {
                       "@type": "Offer",
-                      "name": "Heat Pump Installation",
-                      "price": "5000",
-                      "priceCurrency": "GBP",
-                      "description": "Install an air source heat pump."
-                    },
-                    {
-                      "@type": "Offer",
                       "name": "Solar Panel Installation",
                       "price": "6000",
                       "priceCurrency": "GBP",
@@ -386,7 +379,7 @@ export default function RootLayout({
                 },
                 {
                   "@type": "WebSite",
-                  "name": "Nimbus Heat Pumps",
+                  "name": "Nimbus Boilers",
                   "url": "https://nimbusheatpumps.co.uk",
                   "potentialAction": {
                     "@type": "SearchAction",
@@ -404,11 +397,11 @@ export default function RootLayout({
           <MotionConfig reducedMotion="user">
             <DefaultSeo
               title="Gas Boiler Installation North Lincolnshire | £1,790 Fixed Price 2025 | Nimbus"
-              description="Gas Safe Registered – 966812 boiler installation in Scunthorpe, Grimsby, Doncaster, Lincoln. £7,500 grant eligible heat pumps."
+              description="Gas Safe Registered – 966812 boiler installation in Scunthorpe, Grimsby, Doncaster, Lincoln."
               openGraph={{
                 type: 'website',
                 locale: 'en_GB',
-                site_name: 'Nimbus Heat Pumps',
+                site_name: 'Nimbus Boilers',
               }}
               additionalMetaTags={[
                 {

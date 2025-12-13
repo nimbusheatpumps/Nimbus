@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">How We Use Your Information</h2>
               <p className="text-gray-700 mb-4">
-                The information we collect is used solely for the purpose of providing you with quotes for our boiler and heat pump services. We do not use your data for any other purposes.
+                The information we collect is used solely for the purpose of providing you with quotes for our boiler services. We do not use your data for any other purposes.
               </p>
             </div>
 

@@ -35,8 +35,8 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold hover:underline hover:text-orange-500" aria-label="Nimbus Heat Pumps home">
-            Nimbus Heat Pumps
+          <Link href="/" className="text-xl font-bold hover:underline hover:text-orange-500" aria-label="Nimbus Boilers home">
+            Nimbus Boilers
           </Link>
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
@@ -147,6 +147,13 @@ const Navbar: React.FC = () => {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
+                  <Link href="/finance" className={`${navigationMenuTriggerStyle()} relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full focus:after:w-full hover:underline hover:text-orange-500`} aria-label="Finance">
+                    Finance
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
                   <Link href="/faq" className={`${navigationMenuTriggerStyle()} relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full focus:after:w-full hover:underline hover:text-orange-500`} aria-label="FAQ">
                     FAQ
                   </Link>
@@ -234,6 +241,9 @@ const Navbar: React.FC = () => {
                     </div>
                     <Link href="/reviews" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Reviews">
                       Reviews
+                    </Link>
+                    <Link href="/finance" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="Finance">
+                      Finance
                     </Link>
                     <Link href="/faq" onClick={() => setMobileOpen(false)} className="text-lg font-medium hover:underline hover:text-orange-500" aria-label="FAQ">
                       FAQ

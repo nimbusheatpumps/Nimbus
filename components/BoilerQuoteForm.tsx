@@ -27,10 +27,14 @@ type FormData = z.infer<typeof schema>;
 
 interface BoilerQuoteFormProps {
   fullPage?: boolean;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
-const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) => {
-  const [isOpen, setIsOpen] = useState(!fullPage);
+const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false, isOpen: externalIsOpen, onClose: externalOnClose }) => {
+  const [internalIsOpen, setInternalIsOpen] = useState(!fullPage);
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const setIsOpen = externalOnClose || setInternalIsOpen;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -61,7 +65,13 @@ const BoilerQuoteForm: React.FC<BoilerQuoteFormProps> = ({ fullPage = false }) =
     return () => clearInterval(timer);
   }, []);
 
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    if (externalOnClose) {
+      externalOnClose();
+    } else {
+      setInternalIsOpen(false);
+    }
+  };
 
   const nextStep = () => {
     let valid = true;

@@ -23,7 +23,7 @@ const schema = {
   "description": "Professional boiler installation, replacement, repairs, and servicing by Scunthorpe experts",
   "provider": { "@type": "Organization", "name": "Nimbus Heat Pumps" },
   "areaServed": ["Scunthorpe", "Grimsby"],
-  "serviceType": ["New Install", "Replacement", "Repairs", "Servicing", "Heat Pump"],
+  "serviceType": ["New Install", "Replacement", "Repairs", "Servicing"],
   "brand": "Worcester Bosch"
 };
 

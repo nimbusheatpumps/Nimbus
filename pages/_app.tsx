@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <MotionConfig reducedMotion="user">
         <DefaultSeo
           title="Gas Boiler Installation North Lincolnshire | £1,790 Fixed Price 2025 | Nimbus"
-          description="Gas Safe Registered – 966812 boiler installation in Scunthorpe, Grimsby, Doncaster, Lincoln. £7,500 grant eligible heat pumps."
+          description="Gas Safe Registered – 966812 boiler installation in Scunthorpe, Grimsby, Doncaster, Lincoln."
           openGraph={{
             type: 'website',
             locale: 'en_GB',

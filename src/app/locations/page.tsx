@@ -27,7 +27,7 @@ export default function LocationsPage() {
     {
       "@context": "https://schema.org",
       "@type": "Place",
-      "name": "Nimbus Heat Pumps - Scunthorpe",
+      "name": "Nimbus Boilers - Scunthorpe",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Scunthorpe",
@@ -39,12 +39,12 @@ export default function LocationsPage() {
         "latitude": "53.577",
         "longitude": "-0.654"
       },
-      "description": "Professional heat pump installation, repair, and maintenance services in Scunthorpe for efficient and sustainable heating solutions."
+      "description": "Professional boiler installation, repair, and maintenance services in Scunthorpe for efficient and reliable heating solutions."
     },
     {
       "@context": "https://schema.org",
       "@type": "Place",
-      "name": "Nimbus Heat Pumps - Grimsby",
+      "name": "Nimbus Boilers - Grimsby",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Grimsby",
@@ -56,12 +56,12 @@ export default function LocationsPage() {
         "latitude": "53.567",
         "longitude": "-0.087"
       },
-      "description": "Professional heat pump installation, repair, and maintenance services in Grimsby for efficient and sustainable heating solutions."
+      "description": "Professional boiler installation, repair, and maintenance services in Grimsby for efficient and reliable heating solutions."
     },
     {
       "@context": "https://schema.org",
       "@type": "Place",
-      "name": "Nimbus Heat Pumps - Hull",
+      "name": "Nimbus Boilers - Hull",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Hull",
@@ -73,12 +73,12 @@ export default function LocationsPage() {
         "latitude": "53.744",
         "longitude": "-0.333"
       },
-      "description": "Professional heat pump installation, repair, and maintenance services in Hull for efficient and sustainable heating solutions."
+      "description": "Professional boiler installation, repair, and maintenance services in Hull for efficient and reliable heating solutions."
     },
     {
       "@context": "https://schema.org",
       "@type": "Place",
-      "name": "Nimbus Heat Pumps - Brigg",
+      "name": "Nimbus Boilers - Brigg",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Brigg",
@@ -90,12 +90,12 @@ export default function LocationsPage() {
         "latitude": "53.552",
         "longitude": "-0.489"
       },
-      "description": "Professional heat pump installation, repair, and maintenance services in Brigg for efficient and sustainable heating solutions."
+      "description": "Professional boiler installation, repair, and maintenance services in Brigg for efficient and reliable heating solutions."
     },
     {
       "@context": "https://schema.org",
       "@type": "Place",
-      "name": "Nimbus Heat Pumps - Barnetby-le-Wold",
+      "name": "Nimbus Boilers - Barnetby-le-Wold",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Barnetby-le-Wold",
@@ -107,12 +107,12 @@ export default function LocationsPage() {
         "latitude": "53.574",
         "longitude": "-0.409"
       },
-      "description": "Professional heat pump installation, repair, and maintenance services in Barnetby-le-Wold for efficient and sustainable heating solutions."
+      "description": "Professional boiler installation, repair, and maintenance services in Barnetby-le-Wold for efficient and reliable heating solutions."
     },
     {
       "@context": "https://schema.org",
       "@type": "Place",
-      "name": "Nimbus Heat Pumps - Barton-upon-Humber",
+      "name": "Nimbus Boilers - Barton-upon-Humber",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Barton-upon-Humber",
@@ -124,7 +124,7 @@ export default function LocationsPage() {
         "latitude": "53.683",
         "longitude": "-0.438"
       },
-      "description": "Professional heat pump installation, repair, and maintenance services in Barton-upon-Humber for efficient and sustainable heating solutions."
+      "description": "Professional boiler installation, repair, and maintenance services in Barton-upon-Humber for efficient and reliable heating solutions."
     }
   ];
   return (

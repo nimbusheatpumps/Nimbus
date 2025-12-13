@@ -6,8 +6,8 @@ import BoilerQuoteForm from '../../../components/BoilerQuoteForm';
 import { Button } from '../../../components/ui/button';
 
 export const metadata = {
-  title: "Contact Nimbus Boilers & Heat Pumps | Boiler Quotes Scunthorpe North Lincolnshire",
-  description: "Get in touch with Nimbus Boilers & Heat Pumps for Worcester Bosch boiler installation in Scunthorpe. Call 01724 622069 or use our contact form. Serving North Lincolnshire."
+  title: "Contact Nimbus Boilers | Boiler Quotes Scunthorpe North Lincolnshire",
+  description: "Get in touch with Nimbus Boilers for Worcester Bosch boiler installation in Scunthorpe. Call 01724 622069 or use our contact form. Serving North Lincolnshire."
 };
 
 const containerVariants = {
@@ -39,7 +39,7 @@ export default function ContactPage() {
             className="text-4xl md:text-5xl font-bold text-teal-900 mb-8 text-center leading-1.5"
             variants={itemVariants}
           >
-            Contact Nimbus Boilers & Heat Pumps
+            Contact Nimbus Boilers
           </motion.h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 mb-12">

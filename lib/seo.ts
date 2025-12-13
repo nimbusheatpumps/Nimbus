@@ -8,7 +8,7 @@ export const generateSEO = (title: string, description: string, slug?: string): 
     title,
     description,
     url: `https://nimbusheatpumps.co.uk${slug ? `/${slug}` : ''}`,
-    site_name: 'Nimbus Heat Pumps',
+    site_name: 'Nimbus Boilers',
     locale: 'en_GB',
   },
   additionalMetaTags: [
@@ -18,7 +18,7 @@ export const generateSEO = (title: string, description: string, slug?: string): 
     },
     {
       name: 'keywords',
-      content: 'gas boiler installation Scunthorpe, heat pump grants North Lincolnshire, boiler repair Grimsby',
+      content: 'gas boiler installation Scunthorpe, boiler repair Grimsby, North Lincolnshire heating',
     },
   ],
 });
@@ -27,5 +27,5 @@ export const authorBio = {
   name: 'Bryan Whiteley',
   credentials: 'Gas Safe Registered – 966812',
   experience: '15+ years in North Lincolnshire heating systems',
-  expertise: 'Boiler installations, heat pump grants, energy efficiency',
+  expertise: 'Boiler installations, energy efficiency, heating systems',
 };

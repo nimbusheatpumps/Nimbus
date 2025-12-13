@@ -51,7 +51,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-teal-800 mb-4">Services</h2>
               <p className="text-gray-700 mb-4">
-                Nimbus Boilers & Heat Pumps provides gas boiler and heat pump installation, repair, and maintenance services. All work is carried out by
+                Nimbus Boilers provides gas boiler installation, repair, and maintenance services. All work is carried out by
                 qualified Gas Safe registered engineers.
               </p>
             </div>

@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
           <div>
             <Image
               src="/wp-content/uploads/2025/06/Nimbus-Heat-Pumps-Logo.png"
-              alt="Nimbus Heat Pumps Logo"
+              alt="Nimbus Boilers Logo"
               width={128}
               height={128}
               quality={95}
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
               className="w-32 mb-4"
               onError={() => {}}
             />
-            <h2 className="text-xl font-bold">Nimbus Heat Pumps</h2>
+            <h2 className="text-xl font-bold">Nimbus Boilers</h2>
           </div>
           <div>
             <h3 className="font-bold mb-2">Services</h3>
@@ -43,6 +43,7 @@ const Footer: React.FC = () => {
             <h3 className="font-bold mb-2">Links</h3>
             <ul className="space-y-1">
               <li><Link href="/faq" className="hover:underline hover:text-orange-500">FAQ</Link></li>
+              <li><Link href="/finance" className="hover:underline hover:text-orange-500">Finance</Link></li>
               <li><Link href="/privacy-policy" className="hover:underline hover:text-orange-500">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:underline hover:text-orange-500">Terms & Conditions</Link></li>
             </ul>
@@ -73,7 +74,7 @@ const Footer: React.FC = () => {
             <p className="text-orange-400 font-bold">Gas Safe Registered – 966812</p>
           </div>
         </div>
-        <p className="col-span-full text-center text-gray-400 mt-4">&copy; 2025 Nimbus Boilers & Heat Pumps. All rights reserved.</p>
+        <p className="col-span-full text-center text-gray-400 mt-4">&copy; 2025 Nimbus Boilers. All rights reserved.</p>
       </div>
     </footer>
   );
